@@ -68,6 +68,24 @@ class WP_Book_Catalog {
         add_action('plugins_loaded', array($this, 'load_textdomain'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_frontend_assets'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_assets'));
+        add_filter('single_template', array($this, 'load_single_book_template'));
+    }
+
+    /**
+     * Load custom template for single book
+     */
+    public function load_single_book_template($template) {
+        global $post;
+
+        if ('book' === $post->post_type) {
+            $plugin_template = WPBC_PLUGIN_DIR . 'templates/single-book.php';
+
+            if (file_exists($plugin_template)) {
+                return $plugin_template;
+            }
+        }
+
+        return $template;
     }
 
     /**
