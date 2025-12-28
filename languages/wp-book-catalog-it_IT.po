@@ -1,0 +1,347 @@
+# Italian translation for WP Book Catalog
+# Copyright (C) 2024 Mirko Montecchiani
+# This file is distributed under the GPL v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Book Catalog 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/mirkomontecchiani/wp-book-catalog\n"
+"POT-Creation-Date: 2024-01-01 00:00+0000\n"
+"PO-Revision-Date: 2024-01-01 00:00+0000\n"
+"Last-Translator: Mirko Montecchiani\n"
+"Language-Team: Italian\n"
+"Language: it_IT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: includes/class-wpbc-post-type.php
+msgctxt "Post type general name"
+msgid "Books"
+msgstr "Libri"
+
+#: includes/class-wpbc-post-type.php
+msgctxt "Post type singular name"
+msgid "Book"
+msgstr "Libro"
+
+#: includes/class-wpbc-post-type.php
+msgctxt "Admin Menu text"
+msgid "Book Catalog"
+msgstr "Catalogo Libri"
+
+#: includes/class-wpbc-post-type.php
+msgctxt "Add New on Toolbar"
+msgid "Book"
+msgstr "Libro"
+
+#: includes/class-wpbc-post-type.php
+msgid "Add New"
+msgstr "Aggiungi nuovo"
+
+#: includes/class-wpbc-post-type.php
+msgid "Add New Book"
+msgstr "Aggiungi nuovo libro"
+
+#: includes/class-wpbc-post-type.php
+msgid "New Book"
+msgstr "Nuovo libro"
+
+#: includes/class-wpbc-post-type.php
+msgid "Edit Book"
+msgstr "Modifica libro"
+
+#: includes/class-wpbc-post-type.php
+msgid "View Book"
+msgstr "Visualizza libro"
+
+#: includes/class-wpbc-post-type.php
+msgid "All Books"
+msgstr "Tutti i libri"
+
+#: includes/class-wpbc-post-type.php
+msgid "Search Books"
+msgstr "Cerca libri"
+
+#: includes/class-wpbc-post-type.php
+msgid "Parent Books:"
+msgstr "Libri genitore:"
+
+#: includes/class-wpbc-post-type.php
+msgid "No books found."
+msgstr "Nessun libro trovato."
+
+#: includes/class-wpbc-post-type.php
+msgid "No books found in Trash."
+msgstr "Nessun libro trovato nel cestino."
+
+#: includes/class-wpbc-post-type.php
+msgctxt "Overrides the \"Featured Image\" phrase"
+msgid "Book Cover"
+msgstr "Copertina del libro"
+
+#: includes/class-wpbc-post-type.php
+msgctxt "Overrides the \"Set featured image\" phrase"
+msgid "Set book cover"
+msgstr "Imposta copertina del libro"
+
+#: includes/class-wpbc-post-type.php
+msgctxt "Overrides the \"Remove featured image\" phrase"
+msgid "Remove book cover"
+msgstr "Rimuovi copertina del libro"
+
+#: includes/class-wpbc-post-type.php
+msgctxt "Overrides the \"Use as featured image\" phrase"
+msgid "Use as book cover"
+msgstr "Usa come copertina del libro"
+
+#: includes/class-wpbc-post-type.php
+msgctxt "The post type archive label"
+msgid "Book archives"
+msgstr "Archivio libri"
+
+#: includes/class-wpbc-post-type.php
+msgctxt "Overrides the \"Insert into post\" phrase"
+msgid "Insert into book"
+msgstr "Inserisci nel libro"
+
+#: includes/class-wpbc-post-type.php
+msgctxt "Overrides the \"Uploaded to this post\" phrase"
+msgid "Uploaded to this book"
+msgstr "Caricato in questo libro"
+
+#: includes/class-wpbc-post-type.php
+msgctxt "Screen reader text"
+msgid "Filter books list"
+msgstr "Filtra elenco libri"
+
+#: includes/class-wpbc-post-type.php
+msgctxt "Screen reader text"
+msgid "Books list navigation"
+msgstr "Navigazione elenco libri"
+
+#: includes/class-wpbc-post-type.php
+msgctxt "Screen reader text"
+msgid "Books list"
+msgstr "Elenco libri"
+
+#: includes/class-wpbc-post-type.php
+msgctxt "taxonomy general name"
+msgid "Genres"
+msgstr "Generi"
+
+#: includes/class-wpbc-post-type.php
+msgctxt "taxonomy singular name"
+msgid "Genre"
+msgstr "Genere"
+
+#: includes/class-wpbc-post-type.php
+msgid "Search Genres"
+msgstr "Cerca generi"
+
+#: includes/class-wpbc-post-type.php
+msgid "All Genres"
+msgstr "Tutti i generi"
+
+#: includes/class-wpbc-post-type.php
+msgid "Parent Genre"
+msgstr "Genere genitore"
+
+#: includes/class-wpbc-post-type.php
+msgid "Parent Genre:"
+msgstr "Genere genitore:"
+
+#: includes/class-wpbc-post-type.php
+msgid "Edit Genre"
+msgstr "Modifica genere"
+
+#: includes/class-wpbc-post-type.php
+msgid "Update Genre"
+msgstr "Aggiorna genere"
+
+#: includes/class-wpbc-post-type.php
+msgid "Add New Genre"
+msgstr "Aggiungi nuovo genere"
+
+#: includes/class-wpbc-post-type.php
+msgid "New Genre Name"
+msgstr "Nome nuovo genere"
+
+#: includes/class-wpbc-meta-boxes.php
+msgid "Author"
+msgstr "Autore"
+
+#: includes/class-wpbc-meta-boxes.php
+msgid "Enter book author"
+msgstr "Inserisci autore del libro"
+
+#: includes/class-wpbc-meta-boxes.php
+msgid "Publisher"
+msgstr "Casa editrice"
+
+#: includes/class-wpbc-meta-boxes.php
+msgid "Enter publisher name"
+msgstr "Inserisci nome casa editrice"
+
+#: includes/class-wpbc-meta-boxes.php
+msgid "ISBN"
+msgstr "ISBN"
+
+#: includes/class-wpbc-meta-boxes.php
+msgid "Enter ISBN"
+msgstr "Inserisci ISBN"
+
+#: includes/class-wpbc-meta-boxes.php
+msgid "Shop Link"
+msgstr "Link allo shop"
+
+#: includes/class-wpbc-meta-boxes.php
+msgid "Enter shop URL"
+msgstr "Inserisci URL dello shop"
+
+#: includes/class-wpbc-meta-boxes.php
+msgid "Book Details"
+msgstr "Dettagli libro"
+
+#: includes/class-wpbc-meta-boxes.php
+#, php-format
+msgid "Default author from settings: %s"
+msgstr "Autore predefinito dalle impostazioni: %s"
+
+#: includes/class-wpbc-settings.php
+msgid "Book Catalog Settings"
+msgstr "Impostazioni Catalogo Libri"
+
+#: includes/class-wpbc-settings.php
+msgid "Settings"
+msgstr "Impostazioni"
+
+#: includes/class-wpbc-settings.php
+msgid "Settings saved successfully."
+msgstr "Impostazioni salvate con successo."
+
+#: includes/class-wpbc-settings.php
+msgid "General Settings"
+msgstr "Impostazioni generali"
+
+#: includes/class-wpbc-settings.php
+msgid "Configure the default settings for all books."
+msgstr "Configura le impostazioni predefinite per tutti i libri."
+
+#: includes/class-wpbc-settings.php
+msgid "Display Settings"
+msgstr "Impostazioni visualizzazione"
+
+#: includes/class-wpbc-settings.php
+msgid "Configure how books are displayed on the frontend."
+msgstr "Configura come i libri vengono visualizzati nel frontend."
+
+#: includes/class-wpbc-settings.php
+msgid "Default Author"
+msgstr "Autore predefinito"
+
+#: includes/class-wpbc-settings.php
+msgid "If set, this author will be used for all books that don't have an author specified."
+msgstr "Se impostato, questo autore verrà utilizzato per tutti i libri che non hanno un autore specificato."
+
+#: includes/class-wpbc-settings.php
+msgid "Number of Columns"
+msgstr "Numero di colonne"
+
+#: includes/class-wpbc-settings.php
+msgid "column"
+msgid_plural "columns"
+msgstr[0] "colonna"
+msgstr[1] "colonne"
+
+#: includes/class-wpbc-settings.php
+msgid "Number of columns to display books in. The layout will be responsive."
+msgstr "Numero di colonne per visualizzare i libri. Il layout sarà responsive."
+
+#: includes/class-wpbc-settings.php
+msgid "Shortcode Usage"
+msgstr "Utilizzo shortcode"
+
+#: includes/class-wpbc-settings.php
+msgid "Display All Books"
+msgstr "Visualizza tutti i libri"
+
+#: includes/class-wpbc-settings.php
+msgid "Displays all books in the catalog."
+msgstr "Visualizza tutti i libri nel catalogo."
+
+#: includes/class-wpbc-settings.php
+msgid "Display Limited Books"
+msgstr "Visualizza libri limitati"
+
+#: includes/class-wpbc-settings.php
+msgid "Displays 3 books with a \"Show All\" button at the bottom. Replace 3 with any number."
+msgstr "Visualizza 3 libri con un pulsante \"Mostra tutti\" in fondo. Sostituisci 3 con qualsiasi numero."
+
+#: includes/class-wpbc-settings.php
+msgid "Available Attributes"
+msgstr "Attributi disponibili"
+
+#: includes/class-wpbc-settings.php
+msgid "Number of books to display (shows \"Show All\" button)"
+msgstr "Numero di libri da visualizzare (mostra il pulsante \"Mostra tutti\")"
+
+#: includes/class-wpbc-settings.php
+msgid "Override default columns (1-5)"
+msgstr "Sovrascrivi colonne predefinite (1-5)"
+
+#: includes/class-wpbc-settings.php
+msgid "Order by: date, title, rand (default: date)"
+msgstr "Ordina per: date, title, rand (predefinito: date)"
+
+#: includes/class-wpbc-settings.php
+msgid "Order direction: ASC, DESC (default: DESC)"
+msgstr "Direzione ordinamento: ASC, DESC (predefinito: DESC)"
+
+#: includes/class-wpbc-settings.php
+msgid "Example with All Attributes"
+msgstr "Esempio con tutti gli attributi"
+
+#: includes/class-wpbc-settings.php
+msgid "Save Settings"
+msgstr "Salva impostazioni"
+
+#: includes/class-wpbc-shortcode.php
+msgid "Show All Books"
+msgstr "Mostra tutti i libri"
+
+#: includes/class-wpbc-shortcode.php
+msgid "Author:"
+msgstr "Autore:"
+
+#: includes/class-wpbc-shortcode.php
+msgid "Publisher:"
+msgstr "Casa editrice:"
+
+#: includes/class-wpbc-shortcode.php
+msgid "ISBN:"
+msgstr "ISBN:"
+
+#: includes/class-wpbc-shortcode.php
+msgid "Details"
+msgstr "Dettagli"
+
+#: includes/class-wpbc-shortcode.php
+msgid "Buy Now"
+msgstr "Acquista ora"
+
+#: includes/class-wpbc-shortcode.php
+msgid "Security check failed."
+msgstr "Controllo di sicurezza fallito."
+
+#: templates/single-book.php
+msgid "Back"
+msgstr "Indietro"
+
+#: templates/single-book.php
+msgid "Description"
+msgstr "Descrizione"
+
+#: templates/single-book.php
+msgid "Buy This Book"
+msgstr "Acquista questo libro"
