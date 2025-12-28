@@ -1,0 +1,73 @@
+/**
+ * WP Book Catalog - Admin Styles
+ *
+ * @package WP_Book_Catalog
+ */
+
+/* Meta box styling */
+.wpbc-meta-box-wrapper {
+    padding: 10px 0;
+}
+
+.wpbc-field-wrapper {
+    margin-bottom: 15px;
+}
+
+.wpbc-field-wrapper:last-child {
+    margin-bottom: 0;
+}
+
+.wpbc-field-wrapper label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #1d2327;
+}
+
+.wpbc-field-wrapper input[type="text"],
+.wpbc-field-wrapper input[type="url"],
+.wpbc-field-wrapper textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #8c8f94;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.wpbc-field-wrapper input[type="text"]:focus,
+.wpbc-field-wrapper input[type="url"]:focus,
+.wpbc-field-wrapper textarea:focus {
+    border-color: #2271b1;
+    box-shadow: 0 0 0 1px #2271b1;
+    outline: none;
+}
+
+.wpbc-field-wrapper .description {
+    margin-top: 5px;
+    color: #646970;
+    font-size: 13px;
+    font-style: italic;
+}
+
+/* Settings page */
+.wrap h1 {
+    margin-bottom: 20px;
+}
+
+.form-table th {
+    width: 200px;
+    padding: 20px 10px 20px 0;
+}
+
+.form-table td {
+    padding: 15px 10px;
+}
+
+/* Book list table customization */
+.post-type-book .column-taxonomy-book_genre {
+    width: 15%;
+}
+
+.post-type-book .column-date {
+    width: 15%;
+}

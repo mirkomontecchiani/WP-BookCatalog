@@ -1,0 +1,389 @@
+/**
+ * WP Book Catalog - Frontend Styles
+ *
+ * @package WP_Book_Catalog
+ */
+
+/* Container */
+.wpbc-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Grid Layout */
+.wpbc-grid {
+    display: grid;
+    gap: 20px;
+    width: 100%;
+}
+
+/* Column variations */
+.wpbc-columns-1 {
+    grid-template-columns: 1fr;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.wpbc-columns-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.wpbc-columns-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.wpbc-columns-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.wpbc-columns-5 {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+/* Book Item */
+.wpbc-book-item {
+    position: relative;
+    width: 100%;
+}
+
+.wpbc-book-cover {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.wpbc-book-cover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+.wpbc-book-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.wpbc-book-cover:hover img {
+    transform: scale(1.05);
+}
+
+/* Overlay */
+.wpbc-book-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 50%, rgba(0, 0, 0, 0.3) 100%);
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.wpbc-book-cover:hover .wpbc-book-overlay {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Book Info */
+.wpbc-book-info {
+    color: #ffffff;
+    width: 100%;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.wpbc-book-cover:hover .wpbc-book-info {
+    transform: translateY(0);
+}
+
+.wpbc-book-title {
+    font-size: 1.1em;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    line-height: 1.3;
+    color: #ffffff;
+}
+
+.wpbc-book-author,
+.wpbc-book-publisher,
+.wpbc-book-isbn {
+    font-size: 0.85em;
+    margin: 0 0 5px 0;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.wpbc-label {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    margin-right: 5px;
+}
+
+.wpbc-book-description {
+    font-size: 0.8em;
+    margin: 10px 0;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.85);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Actions */
+.wpbc-book-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.wpbc-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 0.85em;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+}
+
+.wpbc-btn-details {
+    background-color: #ffffff;
+    color: #333333;
+}
+
+.wpbc-btn-details:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
+    color: #333333;
+    text-decoration: none;
+}
+
+.wpbc-btn-shop {
+    background-color: #2563eb;
+    color: #ffffff;
+}
+
+.wpbc-btn-shop:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-2px);
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/* Show All Button */
+.wpbc-show-all-wrapper {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.wpbc-show-all-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    font-size: 1em;
+    font-weight: 600;
+    background-color: #1a1a2e;
+    color: #ffffff;
+    border: 2px solid #1a1a2e;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.wpbc-show-all-btn:hover {
+    background-color: transparent;
+    color: #1a1a2e;
+}
+
+.wpbc-show-all-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.wpbc-show-all-btn.loading {
+    position: relative;
+    color: transparent;
+}
+
+.wpbc-show-all-btn.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #ffffff;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: wpbc-spin 0.8s linear infinite;
+}
+
+@keyframes wpbc-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* No Books Message */
+.wpbc-no-books {
+    text-align: center;
+    padding: 40px;
+    color: #666666;
+    font-size: 1.1em;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .wpbc-columns-5 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .wpbc-columns-4,
+    .wpbc-columns-5 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .wpbc-columns-3,
+    .wpbc-columns-4,
+    .wpbc-columns-5 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .wpbc-book-overlay {
+        padding: 15px;
+    }
+
+    .wpbc-book-title {
+        font-size: 1em;
+    }
+
+    .wpbc-book-author,
+    .wpbc-book-publisher,
+    .wpbc-book-isbn {
+        font-size: 0.8em;
+    }
+
+    .wpbc-book-description {
+        display: none;
+    }
+
+    .wpbc-btn {
+        padding: 6px 12px;
+        font-size: 0.8em;
+    }
+}
+
+@media (max-width: 480px) {
+    .wpbc-container {
+        padding: 10px;
+    }
+
+    .wpbc-grid {
+        gap: 15px;
+    }
+
+    .wpbc-columns-2,
+    .wpbc-columns-3,
+    .wpbc-columns-4,
+    .wpbc-columns-5 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .wpbc-book-overlay {
+        padding: 10px;
+    }
+
+    .wpbc-book-title {
+        font-size: 0.9em;
+        margin-bottom: 5px;
+    }
+
+    .wpbc-book-author,
+    .wpbc-book-publisher,
+    .wpbc-book-isbn {
+        font-size: 0.75em;
+        margin-bottom: 3px;
+    }
+
+    .wpbc-book-actions {
+        margin-top: 10px;
+        gap: 5px;
+    }
+
+    .wpbc-btn {
+        padding: 5px 10px;
+        font-size: 0.75em;
+        flex: 1;
+    }
+}
+
+/* Touch devices - always show overlay slightly for discoverability */
+@media (hover: none) {
+    .wpbc-book-overlay {
+        opacity: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
+    }
+
+    .wpbc-book-cover:active .wpbc-book-overlay {
+        opacity: 1;
+    }
+
+    .wpbc-book-info {
+        transform: translateY(0);
+    }
+}
+
+/* Animation for new items loaded via AJAX */
+.wpbc-book-item.wpbc-fade-in {
+    animation: wpbc-fadeIn 0.5s ease forwards;
+}
+
+@keyframes wpbc-fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Print styles */
+@media print {
+    .wpbc-book-overlay {
+        display: none;
+    }
+
+    .wpbc-show-all-wrapper {
+        display: none;
+    }
+
+    .wpbc-book-cover {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}
