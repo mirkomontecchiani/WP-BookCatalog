@@ -114,62 +114,57 @@ class WPBC_Shortcode {
         $thumbnail = get_the_post_thumbnail_url($post_id, 'medium');
         $title = get_the_title($post_id);
         $description = get_the_excerpt($post_id);
-        $permalink = get_permalink($post_id);
+        $shop_link = !empty($meta['shop_link']) ? $meta['shop_link'] : '';
 
         // Fallback image
         if (!$thumbnail) {
             $thumbnail = WPBC_PLUGIN_URL . 'assets/images/no-cover.svg';
         }
 
+        // Determine if book is clickable
+        $has_link = !empty($shop_link);
+        $tag_open = $has_link ? '<a href="' . esc_url($shop_link) . '" class="wpbc-book-link" target="_blank" rel="noopener noreferrer">' : '<div class="wpbc-book-link">';
+        $tag_close = $has_link ? '</a>' : '</div>';
+
         ob_start();
         ?>
         <div class="wpbc-book-item">
-            <div class="wpbc-book-cover">
-                <img src="<?php echo esc_url($thumbnail); ?>" alt="<?php echo esc_attr($title); ?>" loading="lazy" />
+            <?php echo $tag_open; ?>
+                <div class="wpbc-book-cover">
+                    <img src="<?php echo esc_url($thumbnail); ?>" alt="<?php echo esc_attr($title); ?>" loading="lazy" />
 
-                <div class="wpbc-book-overlay">
-                    <div class="wpbc-book-info">
-                        <h3 class="wpbc-book-title"><?php echo esc_html($title); ?></h3>
+                    <div class="wpbc-book-overlay">
+                        <div class="wpbc-book-info">
+                            <h3 class="wpbc-book-title"><?php echo esc_html($title); ?></h3>
 
-                        <?php if (!empty($meta['author'])) : ?>
-                            <p class="wpbc-book-author">
-                                <span class="wpbc-label"><?php _e('Author:', 'wp-book-catalog'); ?></span>
-                                <?php echo esc_html($meta['author']); ?>
-                            </p>
-                        <?php endif; ?>
+                            <?php if (!empty($meta['author'])) : ?>
+                                <p class="wpbc-book-author">
+                                    <span class="wpbc-label"><?php _e('Author:', 'wp-book-catalog'); ?></span>
+                                    <?php echo esc_html($meta['author']); ?>
+                                </p>
+                            <?php endif; ?>
 
-                        <?php if (!empty($meta['publisher'])) : ?>
-                            <p class="wpbc-book-publisher">
-                                <span class="wpbc-label"><?php _e('Publisher:', 'wp-book-catalog'); ?></span>
-                                <?php echo esc_html($meta['publisher']); ?>
-                            </p>
-                        <?php endif; ?>
+                            <?php if (!empty($meta['publisher'])) : ?>
+                                <p class="wpbc-book-publisher">
+                                    <span class="wpbc-label"><?php _e('Publisher:', 'wp-book-catalog'); ?></span>
+                                    <?php echo esc_html($meta['publisher']); ?>
+                                </p>
+                            <?php endif; ?>
 
-                        <?php if (!empty($meta['isbn'])) : ?>
-                            <p class="wpbc-book-isbn">
-                                <span class="wpbc-label"><?php _e('ISBN:', 'wp-book-catalog'); ?></span>
-                                <?php echo esc_html($meta['isbn']); ?>
-                            </p>
-                        <?php endif; ?>
+                            <?php if (!empty($meta['isbn'])) : ?>
+                                <p class="wpbc-book-isbn">
+                                    <span class="wpbc-label"><?php _e('ISBN:', 'wp-book-catalog'); ?></span>
+                                    <?php echo esc_html($meta['isbn']); ?>
+                                </p>
+                            <?php endif; ?>
 
-                        <?php if (!empty($description)) : ?>
-                            <p class="wpbc-book-description"><?php echo esc_html(wp_trim_words($description, 15)); ?></p>
-                        <?php endif; ?>
-
-                        <div class="wpbc-book-actions">
-                            <a href="<?php echo esc_url($permalink); ?>" class="wpbc-btn wpbc-btn-details">
-                                <?php _e('Details', 'wp-book-catalog'); ?>
-                            </a>
-
-                            <?php if (!empty($meta['shop_link'])) : ?>
-                                <a href="<?php echo esc_url($meta['shop_link']); ?>" class="wpbc-btn wpbc-btn-shop" target="_blank" rel="noopener noreferrer">
-                                    <?php _e('Buy Now', 'wp-book-catalog'); ?>
-                                </a>
+                            <?php if (!empty($description)) : ?>
+                                <p class="wpbc-book-description"><?php echo esc_html(wp_trim_words($description, 15)); ?></p>
                             <?php endif; ?>
                         </div>
                     </div>
                 </div>
-            </div>
+            <?php echo $tag_close; ?>
         </div>
         <?php
 
