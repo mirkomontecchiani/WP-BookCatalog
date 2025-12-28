@@ -98,7 +98,7 @@ a.wpbc-book-link:hover {
     background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 50%, rgba(0, 0, 0, 0.3) 100%);
     display: flex;
     align-items: flex-end;
-    padding: 20px;
+    padding: 20px !important;
     box-sizing: border-box;
     opacity: 0;
     visibility: hidden;
@@ -114,8 +114,16 @@ a.wpbc-book-link:hover {
 .wpbc-book-info {
     color: #ffffff;
     width: 100%;
+    max-width: calc(100% - 0px);
     transform: translateY(20px);
     transition: transform 0.3s ease;
+}
+
+/* Separator */
+.wpbc-separator {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    margin: 10px 0;
 }
 
 .wpbc-book-cover:hover .wpbc-book-info {
@@ -148,7 +156,7 @@ a.wpbc-book-link:hover {
 
 .wpbc-book-description {
     font-size: 0.8em;
-    margin: 10px 0 0 0;
+    margin: 8px 0 0 0;
     line-height: 1.5;
     color: rgba(255, 255, 255, 0.85);
     display: -webkit-box;

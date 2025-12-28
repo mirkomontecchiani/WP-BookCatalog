@@ -141,6 +141,12 @@ class WPBC_Shortcode {
                         <div class="wpbc-book-info">
                             <h3 class="wpbc-book-title"><?php echo esc_html($title); ?></h3>
 
+                            <?php if (!empty($description)) : ?>
+                                <p class="wpbc-book-description"><?php echo esc_html(wp_trim_words($description, 15)); ?></p>
+                            <?php endif; ?>
+
+                            <hr class="wpbc-separator" />
+
                             <?php if (!empty($meta['author'])) : ?>
                                 <p class="wpbc-book-author">
                                     <span class="wpbc-label"><?php echo esc_html($author_label); ?></span>
@@ -167,10 +173,6 @@ class WPBC_Shortcode {
                                     <span class="wpbc-label"><?php _e('ISBN:', 'wp-book-catalog'); ?></span>
                                     <?php echo esc_html($meta['isbn']); ?>
                                 </p>
-                            <?php endif; ?>
-
-                            <?php if (!empty($description)) : ?>
-                                <p class="wpbc-book-description"><?php echo esc_html(wp_trim_words($description, 15)); ?></p>
                             <?php endif; ?>
                         </div>
                     </div>
