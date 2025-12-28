@@ -181,6 +181,14 @@ msgid "Enter publisher name"
 msgstr ""
 
 #: includes/class-wpbc-meta-boxes.php
+msgid "Publication Year"
+msgstr ""
+
+#: includes/class-wpbc-meta-boxes.php
+msgid "Enter publication year"
+msgstr ""
+
+#: includes/class-wpbc-meta-boxes.php
 msgid "ISBN"
 msgstr ""
 
@@ -313,6 +321,10 @@ msgstr ""
 
 #: includes/class-wpbc-shortcode.php
 msgid "Publisher:"
+msgstr ""
+
+#: includes/class-wpbc-shortcode.php
+msgid "Year:"
 msgstr ""
 
 #: includes/class-wpbc-shortcode.php

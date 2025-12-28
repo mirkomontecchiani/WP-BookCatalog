@@ -59,6 +59,11 @@ class WPBC_Meta_Boxes {
                 'type'        => 'text',
                 'placeholder' => __('Enter publisher name', 'wp-book-catalog'),
             ),
+            'wpbc_year' => array(
+                'label'       => __('Publication Year', 'wp-book-catalog'),
+                'type'        => 'number',
+                'placeholder' => __('Enter publication year', 'wp-book-catalog'),
+            ),
             'wpbc_isbn' => array(
                 'label'       => __('ISBN', 'wp-book-catalog'),
                 'type'        => 'text',
@@ -113,6 +118,10 @@ class WPBC_Meta_Boxes {
             switch ($field['type']) {
                 case 'url':
                     echo '<input type="url" id="' . esc_attr($key) . '" name="' . esc_attr($key) . '" value="' . esc_url($value) . '" placeholder="' . esc_attr($field['placeholder']) . '" class="widefat" />';
+                    break;
+
+                case 'number':
+                    echo '<input type="number" id="' . esc_attr($key) . '" name="' . esc_attr($key) . '" value="' . esc_attr($value) . '" placeholder="' . esc_attr($field['placeholder']) . '" class="widefat" min="1000" max="2100" />';
                     break;
 
                 case 'textarea':
@@ -190,6 +199,10 @@ class WPBC_Meta_Boxes {
                         $value = esc_url_raw($value);
                         break;
 
+                    case 'number':
+                        $value = absint($value);
+                        break;
+
                     case 'textarea':
                         $value = sanitize_textarea_field($value);
                         break;
@@ -221,6 +234,7 @@ class WPBC_Meta_Boxes {
         return array(
             'author'    => $author,
             'publisher' => get_post_meta($post_id, 'wpbc_publisher', true),
+            'year'      => get_post_meta($post_id, 'wpbc_year', true),
             'isbn'      => get_post_meta($post_id, 'wpbc_isbn', true),
             'shop_link' => get_post_meta($post_id, 'wpbc_shop_link', true),
         );

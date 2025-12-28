@@ -132,6 +132,7 @@ a.wpbc-book-link:hover {
 
 .wpbc-book-author,
 .wpbc-book-publisher,
+.wpbc-book-year,
 .wpbc-book-isbn {
     font-size: 0.85em;
     margin: 0 0 5px 0;
@@ -245,6 +246,7 @@ a.wpbc-book-link:hover {
 
     .wpbc-book-author,
     .wpbc-book-publisher,
+    .wpbc-book-year,
     .wpbc-book-isbn {
         font-size: 0.8em;
     }
@@ -277,6 +279,7 @@ a.wpbc-book-link:hover {
 
     .wpbc-book-author,
     .wpbc-book-publisher,
+    .wpbc-book-year,
     .wpbc-book-isbn {
         font-size: 0.75em;
         margin-bottom: 3px;

@@ -151,6 +151,13 @@ class WPBC_Shortcode {
                                 </p>
                             <?php endif; ?>
 
+                            <?php if (!empty($meta['year'])) : ?>
+                                <p class="wpbc-book-year">
+                                    <span class="wpbc-label"><?php _e('Year:', 'wp-book-catalog'); ?></span>
+                                    <?php echo esc_html($meta['year']); ?>
+                                </p>
+                            <?php endif; ?>
+
                             <?php if (!empty($meta['isbn'])) : ?>
                                 <p class="wpbc-book-isbn">
                                     <span class="wpbc-label"><?php _e('ISBN:', 'wp-book-catalog'); ?></span>

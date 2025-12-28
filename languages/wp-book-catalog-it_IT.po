@@ -184,6 +184,14 @@ msgid "Enter publisher name"
 msgstr "Inserisci nome casa editrice"
 
 #: includes/class-wpbc-meta-boxes.php
+msgid "Publication Year"
+msgstr "Anno di pubblicazione"
+
+#: includes/class-wpbc-meta-boxes.php
+msgid "Enter publication year"
+msgstr "Inserisci anno di pubblicazione"
+
+#: includes/class-wpbc-meta-boxes.php
 msgid "ISBN"
 msgstr "ISBN"
 
@@ -317,6 +325,10 @@ msgstr "Autore:"
 #: includes/class-wpbc-shortcode.php
 msgid "Publisher:"
 msgstr "Casa editrice:"
+
+#: includes/class-wpbc-shortcode.php
+msgid "Year:"
+msgstr "Anno:"
 
 #: includes/class-wpbc-shortcode.php
 msgid "ISBN:"
