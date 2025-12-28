@@ -84,6 +84,15 @@ class WPBC_Settings {
             'wpbc_general_section'
         );
 
+        // Author Gender Field
+        add_settings_field(
+            'author_gender',
+            __('Author Gender', 'wp-book-catalog'),
+            array($this, 'render_author_gender_field'),
+            'wpbc-settings',
+            'wpbc_general_section'
+        );
+
         // Display Settings Section
         add_settings_section(
             'wpbc_display_section',
@@ -111,6 +120,11 @@ class WPBC_Settings {
         // Sanitize default author
         if (isset($input['default_author'])) {
             $sanitized['default_author'] = sanitize_text_field($input['default_author']);
+        }
+
+        // Sanitize author gender
+        if (isset($input['author_gender'])) {
+            $sanitized['author_gender'] = in_array($input['author_gender'], array('male', 'female')) ? $input['author_gender'] : 'male';
         }
 
         // Sanitize columns (1-5)
@@ -228,6 +242,20 @@ class WPBC_Settings {
 
         echo '<input type="text" id="wpbc_default_author" name="' . $this->option_name . '[default_author]" value="' . esc_attr($value) . '" class="regular-text" />';
         echo '<p class="description">' . __('If set, this author will be used for all books that don\'t have an author specified.', 'wp-book-catalog') . '</p>';
+    }
+
+    /**
+     * Render author gender field
+     */
+    public function render_author_gender_field() {
+        $options = get_option($this->option_name, array());
+        $value = isset($options['author_gender']) ? $options['author_gender'] : 'male';
+
+        echo '<select id="wpbc_author_gender" name="' . $this->option_name . '[author_gender]">';
+        echo '<option value="male"' . selected($value, 'male', false) . '>' . __('Male (Author)', 'wp-book-catalog') . '</option>';
+        echo '<option value="female"' . selected($value, 'female', false) . '>' . __('Female (Authoress)', 'wp-book-catalog') . '</option>';
+        echo '</select>';
+        echo '<p class="description">' . __('Select the gender to display the correct label (Author/Authoress).', 'wp-book-catalog') . '</p>';
     }
 
     /**

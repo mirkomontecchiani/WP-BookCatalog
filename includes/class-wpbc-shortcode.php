@@ -116,6 +116,10 @@ class WPBC_Shortcode {
         $description = get_the_excerpt($post_id);
         $shop_link = !empty($meta['shop_link']) ? $meta['shop_link'] : '';
 
+        // Get author gender from settings
+        $author_gender = WPBC_Settings::get_setting('author_gender', 'male');
+        $author_label = ($author_gender === 'female') ? __('Authoress:', 'wp-book-catalog') : __('Author:', 'wp-book-catalog');
+
         // Fallback image
         if (!$thumbnail) {
             $thumbnail = WPBC_PLUGIN_URL . 'assets/images/no-cover.svg';
@@ -139,7 +143,7 @@ class WPBC_Shortcode {
 
                             <?php if (!empty($meta['author'])) : ?>
                                 <p class="wpbc-book-author">
-                                    <span class="wpbc-label"><?php _e('Author:', 'wp-book-catalog'); ?></span>
+                                    <span class="wpbc-label"><?php echo esc_html($author_label); ?></span>
                                     <?php echo esc_html($meta['author']); ?>
                                 </p>
                             <?php endif; ?>

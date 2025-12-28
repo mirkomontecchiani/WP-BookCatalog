@@ -253,6 +253,22 @@ msgid "If set, this author will be used for all books that don't have an author 
 msgstr "Se impostato, questo autore verrà utilizzato per tutti i libri che non hanno un autore specificato."
 
 #: includes/class-wpbc-settings.php
+msgid "Author Gender"
+msgstr "Genere autore"
+
+#: includes/class-wpbc-settings.php
+msgid "Male (Author)"
+msgstr "Maschio (Autore)"
+
+#: includes/class-wpbc-settings.php
+msgid "Female (Authoress)"
+msgstr "Femmina (Autrice)"
+
+#: includes/class-wpbc-settings.php
+msgid "Select the gender to display the correct label (Author/Authoress)."
+msgstr "Seleziona il genere per visualizzare l'etichetta corretta (Autore/Autrice)."
+
+#: includes/class-wpbc-settings.php
 msgid "Number of Columns"
 msgstr "Numero di colonne"
 
@@ -321,6 +337,10 @@ msgstr "Mostra tutti i libri"
 #: includes/class-wpbc-shortcode.php
 msgid "Author:"
 msgstr "Autore:"
+
+#: includes/class-wpbc-shortcode.php
+msgid "Authoress:"
+msgstr "Autrice:"
 
 #: includes/class-wpbc-shortcode.php
 msgid "Publisher:"
