@@ -60,6 +60,12 @@ a.wpbc-book-link:hover {
     text-decoration: none;
 }
 
+.wpbc-book-link:focus-visible {
+    outline: 3px solid #2271b1;
+    outline-offset: 3px;
+    border-radius: 8px;
+}
+
 .wpbc-book-cover {
     position: relative;
     width: 100%;
@@ -105,7 +111,9 @@ a.wpbc-book-link:hover {
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.wpbc-book-cover:hover .wpbc-book-overlay {
+.wpbc-book-cover:hover .wpbc-book-overlay,
+.wpbc-book-link:focus-within .wpbc-book-overlay,
+.wpbc-book-overlay.wpbc-visible {
     opacity: 1;
     visibility: visible;
 }
@@ -114,7 +122,6 @@ a.wpbc-book-link:hover {
 .wpbc-book-info {
     color: #ffffff;
     width: 100%;
-    max-width: calc(100% - 0px);
     transform: translateY(20px);
     transition: transform 0.3s ease;
 }
@@ -126,7 +133,9 @@ a.wpbc-book-link:hover {
     margin: 15px 0;
 }
 
-.wpbc-book-cover:hover .wpbc-book-info {
+.wpbc-book-cover:hover .wpbc-book-info,
+.wpbc-book-link:focus-within .wpbc-book-info,
+.wpbc-book-overlay.wpbc-visible .wpbc-book-info {
     transform: translateY(0);
 }
 
@@ -141,6 +150,8 @@ a.wpbc-book-link:hover {
 .wpbc-book-author,
 .wpbc-book-publisher,
 .wpbc-book-year,
+.wpbc-book-pages,
+.wpbc-book-genre,
 .wpbc-book-isbn {
     font-size: 0.85em;
     margin: 0 0 5px 0;
@@ -219,6 +230,13 @@ a.wpbc-book-link:hover {
     }
 }
 
+/* AJAX load error */
+.wpbc-load-error {
+    margin-top: 10px;
+    color: #b32d2e;
+    font-size: 0.9em;
+}
+
 /* No Books Message */
 .wpbc-no-books {
     text-align: center;
@@ -255,6 +273,8 @@ a.wpbc-book-link:hover {
     .wpbc-book-author,
     .wpbc-book-publisher,
     .wpbc-book-year,
+    .wpbc-book-pages,
+    .wpbc-book-genre,
     .wpbc-book-isbn {
         font-size: 0.8em;
     }
@@ -288,21 +308,18 @@ a.wpbc-book-link:hover {
     .wpbc-book-author,
     .wpbc-book-publisher,
     .wpbc-book-year,
+    .wpbc-book-pages,
+    .wpbc-book-genre,
     .wpbc-book-isbn {
         font-size: 0.75em;
         margin-bottom: 3px;
     }
 }
 
-/* Touch devices - always show overlay slightly for discoverability */
+/* Touch devices - lighter gradient, info revealed by tap */
 @media (hover: none) {
     .wpbc-book-overlay {
-        opacity: 0;
         background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
-    }
-
-    .wpbc-book-cover:active .wpbc-book-overlay {
-        opacity: 1;
     }
 
     .wpbc-book-info {
@@ -326,18 +343,74 @@ a.wpbc-book-link:hover {
     }
 }
 
-/* Print styles */
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .wpbc-book-cover,
+    .wpbc-book-cover img,
+    .wpbc-book-info,
+    .wpbc-book-overlay,
+    .wpbc-book-item.wpbc-fade-in {
+        transition: none;
+        animation: none;
+    }
+}
+
+/* Print styles: show cover and book details stacked, readable in black on white */
 @media print {
-    .wpbc-book-overlay {
+    .wpbc-show-all-wrapper,
+    .wpbc-load-error {
         display: none;
     }
 
-    .wpbc-show-all-wrapper {
-        display: none;
+    .wpbc-grid {
+        gap: 15px;
     }
 
     .wpbc-book-cover {
+        aspect-ratio: auto;
+        height: auto;
+        overflow: visible;
         box-shadow: none;
+        border: none;
+    }
+
+    .wpbc-book-cover img {
+        max-height: 240px;
+        width: auto;
         border: 1px solid #ddd;
+    }
+
+    /* Render the overlay as static content below the cover instead of hiding it */
+    .wpbc-book-overlay {
+        position: static;
+        opacity: 1 !important;
+        visibility: visible !important;
+        background: none;
+        padding: 5px 0 !important;
+        display: block;
+    }
+
+    .wpbc-book-info {
+        transform: none;
+        color: #000;
+    }
+
+    .wpbc-book-title,
+    .wpbc-book-author,
+    .wpbc-book-publisher,
+    .wpbc-book-year,
+    .wpbc-book-pages,
+    .wpbc-book-genre,
+    .wpbc-book-isbn,
+    .wpbc-book-description {
+        color: #000;
+    }
+
+    .wpbc-label {
+        color: #333;
+    }
+
+    .wpbc-separator {
+        border-top-color: #ccc;
     }
 }

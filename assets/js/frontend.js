@@ -34,6 +34,8 @@
 
             // Add loading state
             $button.addClass('loading').prop('disabled', true);
+            $grid.attr('aria-busy', 'true');
+            $container.find('.wpbc-load-error').remove();
 
             // AJAX request to load all books
             $.ajax({
@@ -42,14 +44,14 @@
                 data: {
                     action: 'wpbc_load_all_books',
                     nonce: wpbc_ajax.nonce,
-                    columns: $button.data('columns'),
                     orderby: $button.data('orderby'),
-                    order: $button.data('order')
+                    order: $button.data('order'),
+                    genre: $button.data('genre')
                 },
                 success: function(response) {
                     if (response.success) {
                         // Replace grid content with all books
-                        $grid.html(response.data.html);
+                        $grid.html(response.data.html).attr('aria-busy', 'false');
 
                         // Add fade-in animation to new items
                         $grid.find('.wpbc-book-item').each(function(index) {
@@ -59,83 +61,79 @@
                             }, index * 50);
                         });
 
+                        // Move keyboard focus to the first newly revealed book.
+                        // Both <a> and <div tabindex="0"> cards are already focusable,
+                        // so focus without overriding tabindex (which would drop the
+                        // element from the Tab order).
+                        $grid.find('.wpbc-book-link').first().trigger('focus');
+
                         // Remove the button wrapper
                         $button.closest('.wpbc-show-all-wrapper').fadeOut(300, function() {
                             $(this).remove();
                         });
                     } else {
-                        console.error('WPBC Error:', response.data);
-                        $button.removeClass('loading').prop('disabled', false);
+                        showLoadError($button);
                     }
                 },
-                error: function(xhr, status, error) {
-                    console.error('WPBC AJAX Error:', error);
-                    $button.removeClass('loading').prop('disabled', false);
+                error: function() {
+                    showLoadError($button);
                 }
             });
         });
     }
 
     /**
-     * Initialize touch support for mobile devices
+     * Show an error message under the Show All button and reset it
      */
-    function initTouchSupport() {
-        // Detect touch device
-        var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-
-        if (isTouchDevice) {
-            // Add touch class to body
-            $('body').addClass('wpbc-touch-device');
-
-            // Handle tap to show overlay
-            $(document).on('click', '.wpbc-book-cover', function(e) {
-                var $cover = $(this);
-                var $overlay = $cover.find('.wpbc-book-overlay');
-
-                // If clicking on a button/link inside overlay, let it proceed
-                if ($(e.target).closest('a, button').length) {
-                    return;
-                }
-
-                // Toggle overlay visibility
-                if ($overlay.hasClass('wpbc-visible')) {
-                    $overlay.removeClass('wpbc-visible');
-                } else {
-                    // Hide all other overlays first
-                    $('.wpbc-book-overlay.wpbc-visible').removeClass('wpbc-visible');
-                    $overlay.addClass('wpbc-visible');
-                }
-            });
-
-            // Close overlay when clicking outside
-            $(document).on('click', function(e) {
-                if (!$(e.target).closest('.wpbc-book-item').length) {
-                    $('.wpbc-book-overlay.wpbc-visible').removeClass('wpbc-visible');
-                }
-            });
-        }
+    function showLoadError($button) {
+        $button.removeClass('loading').prop('disabled', false);
+        $button.closest('.wpbc-container').find('.wpbc-grid').attr('aria-busy', 'false');
+        $('<p class="wpbc-load-error" role="alert"></p>')
+            .text((window.wpbc_ajax && wpbc_ajax.error_text) || 'Error loading books.')
+            .insertAfter($button);
     }
 
     /**
-     * Handle keyboard navigation for accessibility
+     * Initialize touch support for mobile devices
      */
-    $(document).on('keydown', '.wpbc-book-cover', function(e) {
-        // Enter or Space key
-        if (e.keyCode === 13 || e.keyCode === 32) {
-            e.preventDefault();
-            $(this).trigger('click');
+    function initTouchSupport() {
+        // Use the same signal the CSS uses (@media (hover: none)) so hover-capable
+        // touch laptops keep the single-click + :hover path instead of needing two taps.
+        var noHover = window.matchMedia && window.matchMedia('(hover: none)').matches;
+
+        if (!noHover) {
+            return;
         }
-    });
 
-    /**
-     * Make book covers focusable for keyboard navigation
-     */
-    $(document).on('focus', '.wpbc-book-cover', function() {
-        $(this).find('.wpbc-book-overlay').css('opacity', '1').css('visibility', 'visible');
-    });
+        // Add touch class to body
+        $('body').addClass('wpbc-touch-device');
 
-    $(document).on('blur', '.wpbc-book-cover', function() {
-        $(this).find('.wpbc-book-overlay').css('opacity', '').css('visibility', '');
-    });
+        // First tap reveals the overlay; the second tap follows the link.
+        $(document).on('click', '.wpbc-book-link', function(e) {
+            var $link = $(this);
+            var $overlay = $link.find('.wpbc-book-overlay');
+
+            if ($overlay.hasClass('wpbc-visible')) {
+                // Overlay already open: links navigate, plain cards close it.
+                if (!$link.is('a')) {
+                    $overlay.removeClass('wpbc-visible');
+                }
+                return;
+            }
+
+            e.preventDefault();
+
+            // Hide all other overlays first
+            $('.wpbc-book-overlay.wpbc-visible').removeClass('wpbc-visible');
+            $overlay.addClass('wpbc-visible');
+        });
+
+        // Close overlay when tapping outside
+        $(document).on('click', function(e) {
+            if (!$(e.target).closest('.wpbc-book-item').length) {
+                $('.wpbc-book-overlay.wpbc-visible').removeClass('wpbc-visible');
+            }
+        });
+    }
 
 })(jQuery);

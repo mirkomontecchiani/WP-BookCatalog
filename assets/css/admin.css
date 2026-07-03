@@ -6,26 +6,26 @@
 
 /* Meta box styling */
 .wpbc-meta-box-wrapper {
+    display: grid;
+    gap: 15px;
     padding: 10px 0;
 }
 
 .wpbc-field-wrapper {
-    margin-bottom: 15px;
-}
-
-.wpbc-field-wrapper:last-child {
-    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .wpbc-field-wrapper label {
     display: block;
-    margin-bottom: 5px;
     font-weight: 600;
     color: #1d2327;
 }
 
 .wpbc-field-wrapper input[type="text"],
 .wpbc-field-wrapper input[type="url"],
+.wpbc-field-wrapper input[type="number"],
 .wpbc-field-wrapper textarea {
     width: 100%;
     padding: 8px 10px;
@@ -36,6 +36,7 @@
 
 .wpbc-field-wrapper input[type="text"]:focus,
 .wpbc-field-wrapper input[type="url"]:focus,
+.wpbc-field-wrapper input[type="number"]:focus,
 .wpbc-field-wrapper textarea:focus {
     border-color: #2271b1;
     box-shadow: 0 0 0 1px #2271b1;
@@ -43,10 +44,60 @@
 }
 
 .wpbc-field-wrapper .description {
-    margin-top: 5px;
+    margin: 5px 0 0;
     color: #646970;
     font-size: 13px;
     font-style: italic;
+}
+
+/* ISBN lookup row */
+.wpbc-isbn-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.wpbc-isbn-row input[type="text"] {
+    flex: 1;
+}
+
+.wpbc-isbn-row .button {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+}
+
+.wpbc-isbn-row .button .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    line-height: 1.2;
+}
+
+.wpbc-isbn-row .spinner {
+    float: none;
+    margin: 0;
+}
+
+#wpbc-isbn-lookup-result {
+    margin: 10px 0 0;
+    padding: 1px 12px;
+}
+
+#wpbc-cover-preview {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+#wpbc-cover-preview img {
+    max-width: 90px;
+    height: auto;
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 /* Settings page */
@@ -63,11 +114,65 @@
     padding: 15px 10px;
 }
 
+/* Shortcode documentation box on the settings page */
+.wpbc-shortcode-info {
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    max-width: 600px;
+}
+
+.wpbc-shortcode-info code {
+    display: inline-block;
+    background: #f0f0f1;
+    padding: 5px 10px;
+    margin: 5px 0;
+    border-radius: 3px;
+}
+
+.wpbc-shortcode-info ul {
+    list-style: disc;
+    margin-left: 20px;
+}
+
+.wpbc-shortcode-info li {
+    margin: 5px 0;
+}
+
 /* Book list table customization */
+.post-type-book .column-wpbc_cover {
+    width: 60px;
+}
+
+.post-type-book .wpbc-admin-cover {
+    display: block;
+    width: 40px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 3px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.post-type-book .wpbc-admin-no-cover {
+    color: #c3c4c7;
+    font-size: 28px;
+    width: 28px;
+    height: 28px;
+}
+
+.post-type-book .column-wpbc_year {
+    width: 8%;
+}
+
+.post-type-book .column-wpbc_isbn {
+    width: 12%;
+}
+
 .post-type-book .column-taxonomy-book_genre {
-    width: 15%;
+    width: 12%;
 }
 
 .post-type-book .column-date {
-    width: 15%;
+    width: 12%;
 }

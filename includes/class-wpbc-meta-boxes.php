@@ -39,16 +39,24 @@ class WPBC_Meta_Boxes {
      * Constructor
      */
     private function __construct() {
-        $this->setup_fields();
         add_action('add_meta_boxes', array($this, 'add_meta_boxes'));
         add_action('save_post_book', array($this, 'save_meta_boxes'), 10, 2);
     }
 
     /**
-     * Setup meta fields
+     * Setup meta fields (lazily, so labels are translated after init)
      */
-    private function setup_fields() {
+    private function get_fields() {
+        if (!empty($this->meta_fields)) {
+            return $this->meta_fields;
+        }
+
         $this->meta_fields = array(
+            'wpbc_isbn' => array(
+                'label'       => __('ISBN', 'wp-book-catalog'),
+                'type'        => 'isbn',
+                'placeholder' => __('Enter ISBN (10 or 13 digits)', 'wp-book-catalog'),
+            ),
             'wpbc_author' => array(
                 'label'       => __('Author', 'wp-book-catalog'),
                 'type'        => 'text',
@@ -63,11 +71,20 @@ class WPBC_Meta_Boxes {
                 'label'       => __('Publication Year', 'wp-book-catalog'),
                 'type'        => 'number',
                 'placeholder' => __('Enter publication year', 'wp-book-catalog'),
+                'min'         => 0,
+                'max'         => 2100,
             ),
-            'wpbc_isbn' => array(
-                'label'       => __('ISBN', 'wp-book-catalog'),
+            'wpbc_pages' => array(
+                'label'       => __('Number of Pages', 'wp-book-catalog'),
+                'type'        => 'number',
+                'placeholder' => __('Enter number of pages', 'wp-book-catalog'),
+                'min'         => 0,
+                'max'         => 100000,
+            ),
+            'wpbc_language' => array(
+                'label'       => __('Language', 'wp-book-catalog'),
                 'type'        => 'text',
-                'placeholder' => __('Enter ISBN', 'wp-book-catalog'),
+                'placeholder' => __('Enter book language (e.g. it, en)', 'wp-book-catalog'),
             ),
             'wpbc_shop_link' => array(
                 'label'       => __('Shop Link', 'wp-book-catalog'),
@@ -75,6 +92,8 @@ class WPBC_Meta_Boxes {
                 'placeholder' => __('Enter shop URL', 'wp-book-catalog'),
             ),
         );
+
+        return $this->meta_fields;
     }
 
     /**
@@ -99,16 +118,15 @@ class WPBC_Meta_Boxes {
         wp_nonce_field('wpbc_save_meta_boxes', 'wpbc_meta_nonce');
 
         // Get plugin settings
-        $settings = get_option('wpbc_settings', array());
-        $default_author = isset($settings['default_author']) ? $settings['default_author'] : '';
+        $default_author = WPBC_Settings::get_setting('default_author', '');
 
         echo '<div class="wpbc-meta-box-wrapper">';
 
-        foreach ($this->meta_fields as $key => $field) {
+        foreach ($this->get_fields() as $key => $field) {
             $value = get_post_meta($post->ID, $key, true);
 
             // For author field, show default if set and field is empty
-            if ('wpbc_author' === $key && empty($value) && !empty($default_author)) {
+            if ('wpbc_author' === $key && '' === $value && !empty($default_author)) {
                 $value = $default_author;
             }
 
@@ -116,16 +134,28 @@ class WPBC_Meta_Boxes {
             echo '<label for="' . esc_attr($key) . '">' . esc_html($field['label']) . '</label>';
 
             switch ($field['type']) {
+                case 'isbn':
+                    echo '<div class="wpbc-isbn-row">';
+                    echo '<input type="text" id="' . esc_attr($key) . '" name="' . esc_attr($key) . '" value="' . esc_attr($value) . '" placeholder="' . esc_attr($field['placeholder']) . '" class="widefat" />';
+                    echo '<button type="button" class="button button-secondary" id="wpbc-isbn-lookup-btn">';
+                    echo '<span class="dashicons dashicons-search" aria-hidden="true"></span> ';
+                    echo esc_html__('Autofill from ISBN', 'wp-book-catalog');
+                    echo '</button>';
+                    echo '<span class="spinner" id="wpbc-isbn-spinner"></span>';
+                    echo '</div>';
+                    echo '<p class="description">' . esc_html__('Fetches title, author, publisher, year, pages, description and cover from Google Books / Open Library.', 'wp-book-catalog') . '</p>';
+                    echo '<div id="wpbc-isbn-lookup-result" style="display:none;"></div>';
+                    echo '<div id="wpbc-cover-preview" style="display:none;"></div>';
+                    break;
+
                 case 'url':
-                    echo '<input type="url" id="' . esc_attr($key) . '" name="' . esc_attr($key) . '" value="' . esc_url($value) . '" placeholder="' . esc_attr($field['placeholder']) . '" class="widefat" />';
+                    echo '<input type="url" id="' . esc_attr($key) . '" name="' . esc_attr($key) . '" value="' . esc_attr($value) . '" placeholder="' . esc_attr($field['placeholder']) . '" class="widefat" />';
                     break;
 
                 case 'number':
-                    echo '<input type="number" id="' . esc_attr($key) . '" name="' . esc_attr($key) . '" value="' . esc_attr($value) . '" placeholder="' . esc_attr($field['placeholder']) . '" class="widefat" min="1000" max="2100" />';
-                    break;
-
-                case 'textarea':
-                    echo '<textarea id="' . esc_attr($key) . '" name="' . esc_attr($key) . '" placeholder="' . esc_attr($field['placeholder']) . '" class="widefat" rows="4">' . esc_textarea($value) . '</textarea>';
+                    $min = isset($field['min']) ? (int) $field['min'] : 0;
+                    $max = isset($field['max']) ? (int) $field['max'] : 9999;
+                    echo '<input type="number" id="' . esc_attr($key) . '" name="' . esc_attr($key) . '" value="' . esc_attr($value) . '" placeholder="' . esc_attr($field['placeholder']) . '" class="widefat" min="' . esc_attr($min) . '" max="' . esc_attr($max) . '" />';
                     break;
 
                 default:
@@ -135,38 +165,17 @@ class WPBC_Meta_Boxes {
 
             // Show note for author field if default is set
             if ('wpbc_author' === $key && !empty($default_author)) {
-                echo '<p class="description">' . sprintf(
+                echo '<p class="description">' . esc_html(sprintf(
                     /* translators: %s: default author name */
                     __('Default author from settings: %s', 'wp-book-catalog'),
-                    esc_html($default_author)
-                ) . '</p>';
+                    $default_author
+                )) . '</p>';
             }
 
             echo '</div>';
         }
 
         echo '</div>';
-
-        // Add inline styles for meta box
-        echo '<style>
-            .wpbc-meta-box-wrapper {
-                display: grid;
-                gap: 15px;
-            }
-            .wpbc-field-wrapper {
-                display: flex;
-                flex-direction: column;
-                gap: 5px;
-            }
-            .wpbc-field-wrapper label {
-                font-weight: 600;
-            }
-            .wpbc-field-wrapper .description {
-                color: #666;
-                font-style: italic;
-                margin: 5px 0 0;
-            }
-        </style>';
     }
 
     /**
@@ -174,7 +183,7 @@ class WPBC_Meta_Boxes {
      */
     public function save_meta_boxes($post_id, $post) {
         // Verify nonce
-        if (!isset($_POST['wpbc_meta_nonce']) || !wp_verify_nonce($_POST['wpbc_meta_nonce'], 'wpbc_save_meta_boxes')) {
+        if (!isset($_POST['wpbc_meta_nonce']) || !wp_verify_nonce(sanitize_key(wp_unslash($_POST['wpbc_meta_nonce'])), 'wpbc_save_meta_boxes')) {
             return;
         }
 
@@ -188,30 +197,41 @@ class WPBC_Meta_Boxes {
             return;
         }
 
-        // Save each field
-        foreach ($this->meta_fields as $key => $field) {
-            if (isset($_POST[$key])) {
-                $value = $_POST[$key];
+        // Save each field; delete the meta row when the field is emptied.
+        foreach ($this->get_fields() as $key => $field) {
+            if (!isset($_POST[$key])) {
+                continue;
+            }
 
-                // Sanitize based on field type
-                switch ($field['type']) {
-                    case 'url':
-                        $value = esc_url_raw($value);
-                        break;
+            $raw = wp_unslash($_POST[$key]);
 
-                    case 'number':
-                        $value = absint($value);
-                        break;
+            // Sanitize based on field type
+            switch ($field['type']) {
+                case 'url':
+                    $value = esc_url_raw($raw);
+                    break;
 
-                    case 'textarea':
-                        $value = sanitize_textarea_field($value);
-                        break;
+                case 'number':
+                    $value = ('' === trim((string) $raw)) ? '' : absint($raw);
+                    if ('' !== $value) {
+                        $min = isset($field['min']) ? (int) $field['min'] : 0;
+                        $max = isset($field['max']) ? (int) $field['max'] : PHP_INT_MAX;
+                        $value = max($min, min($max, $value));
+                    }
+                    break;
 
-                    default:
-                        $value = sanitize_text_field($value);
-                        break;
-                }
+                case 'isbn':
+                    $value = sanitize_text_field($raw);
+                    break;
 
+                default:
+                    $value = sanitize_text_field($raw);
+                    break;
+            }
+
+            if ('' === $value || 0 === $value) {
+                delete_post_meta($post_id, $key);
+            } else {
                 update_post_meta($post_id, $key, $value);
             }
         }
@@ -221,8 +241,7 @@ class WPBC_Meta_Boxes {
      * Get book meta data
      */
     public static function get_book_meta($post_id) {
-        $settings = get_option('wpbc_settings', array());
-        $default_author = isset($settings['default_author']) ? $settings['default_author'] : '';
+        $default_author = WPBC_Settings::get_setting('default_author', '');
 
         $author = get_post_meta($post_id, 'wpbc_author', true);
 
@@ -236,6 +255,8 @@ class WPBC_Meta_Boxes {
             'publisher' => get_post_meta($post_id, 'wpbc_publisher', true),
             'year'      => get_post_meta($post_id, 'wpbc_year', true),
             'isbn'      => get_post_meta($post_id, 'wpbc_isbn', true),
+            'pages'     => get_post_meta($post_id, 'wpbc_pages', true),
+            'language'  => get_post_meta($post_id, 'wpbc_language', true),
             'shop_link' => get_post_meta($post_id, 'wpbc_shop_link', true),
         );
     }
