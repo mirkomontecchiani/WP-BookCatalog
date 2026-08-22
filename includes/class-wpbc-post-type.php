@@ -169,8 +169,10 @@ class WPBC_Post_Type {
                 break;
 
             case 'wpbc_author':
-                $author = get_post_meta($post_id, 'wpbc_author', true);
-                echo $author ? esc_html($author) : '&#8212;';
+                // Resolve through get_book_meta() so the list matches the front
+                // end when the "Default Author" setting is used.
+                $meta = WPBC_Meta_Boxes::get_book_meta($post_id);
+                echo $meta['author'] ? esc_html($meta['author']) : '&#8212;';
                 break;
 
             case 'wpbc_year':
@@ -208,39 +210,16 @@ class WPBC_Post_Type {
         }
 
         $orderby = $query->get('orderby');
-        $dir     = $query->get('order') ? $query->get('order') : 'ASC';
 
-        // Use an OR EXISTS/NOT EXISTS meta_query (LEFT JOIN) so sorting by these
-        // columns does not hide books that have no such meta value.
-        if ('wpbc_year' === $orderby) {
-            $query->set('meta_query', $this->meta_order_clause('wpbc_year', 'NUMERIC'));
-            $query->set('orderby', array('wpbc_meta_order' => $dir));
-        } elseif ('wpbc_author' === $orderby) {
-            $query->set('meta_query', $this->meta_order_clause('wpbc_author', 'CHAR'));
-            $query->set('orderby', array('wpbc_meta_order' => $dir));
+        if (!is_string($orderby) || !array_key_exists($orderby, WPBC_Meta_Order::get_supported_keys())) {
+            return;
         }
-    }
 
-    /**
-     * OR EXISTS/NOT EXISTS meta_query so meta ordering keeps posts without the key.
-     *
-     * @param string $key  Meta key.
-     * @param string $type 'NUMERIC' or 'CHAR'.
-     * @return array
-     */
-    private function meta_order_clause($key, $type = 'CHAR') {
-        return array(
-            'relation' => 'OR',
-            'wpbc_meta_order' => array(
-                'key'     => $key,
-                'type'    => $type,
-                'compare' => 'EXISTS',
-            ),
-            array(
-                'key'     => $key,
-                'compare' => 'NOT EXISTS',
-            ),
-        );
+        $dir = $query->get('order') ? $query->get('order') : 'ASC';
+
+        // A keyed LEFT JOIN, so sorting by these columns does not hide books
+        // that have no value for the meta key.
+        WPBC_Meta_Order::add_to_query($query, $orderby, $dir);
     }
 }
 

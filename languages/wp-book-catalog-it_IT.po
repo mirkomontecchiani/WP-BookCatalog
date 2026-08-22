@@ -1,12 +1,12 @@
 # Italian translation for WP Book Catalog
 # Copyright (C) 2026 Mirko Montecchiani
-# This file is distributed under the GPL v2 or later.
+# This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Book Catalog 1.1.0\n"
-"Report-Msgid-Bugs-To: https://github.com/mirkomontecchiani/wp-book-catalog\n"
-"POT-Creation-Date: 2026-07-03 00:00+0000\n"
-"PO-Revision-Date: 2026-07-03 00:00+0000\n"
+"Project-Id-Version: WP Book Catalog 1.2.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-book-catalog\n"
+"POT-Creation-Date: 2026-08-22T12:58:49+00:00\n"
+"PO-Revision-Date: 2026-08-22 13:00+0000\n"
 "Last-Translator: Mirko Montecchiani\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
@@ -14,74 +14,143 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: wp-book-catalog\n"
 
-#: wp-book-catalog.php:113
-msgid "Could not load the books. Please try again."
-msgstr "Impossibile caricare i libri. Riprova."
+#. Plugin Name of the plugin
+#: wp-book-catalog.php
+msgid "WP Book Catalog"
+msgstr ""
 
-#: wp-book-catalog.php:154
-msgid "Please enter an ISBN first."
-msgstr "Inserisci prima un ISBN."
+#. Plugin URI of the plugin
+#: wp-book-catalog.php
+msgid "https://github.com/mirkomontecchiani/WP-BookCatalog"
+msgstr ""
 
-#: wp-book-catalog.php:155
-msgid "Lookup failed. Please try again."
-msgstr "Ricerca non riuscita. Riprova."
+#. Description of the plugin
+#: wp-book-catalog.php
+msgid ""
+"Book catalog with a Book post type, genres, a responsive shortcode grid and "
+"one-click ISBN autofill from Google Books and Open Library."
+msgstr ""
+"Catalogo di libri con un tipo di contenuto Libro, generi, una griglia "
+"shortcode responsive e la compilazione automatica da ISBN con un clic "
+"tramite Google Books e Open Library."
 
-#: wp-book-catalog.php:156
-msgid "Cover import failed. Please try again."
-msgstr "Importazione della copertina non riuscita. Riprova."
+#. Author of the plugin
+#: wp-book-catalog.php
+msgid "Mirko Montecchiani"
+msgstr ""
 
-#: wp-book-catalog.php:157
-msgid "Importing…"
-msgstr "Importazione…"
+#. Author URI of the plugin
+#: wp-book-catalog.php
+msgid "https://github.com/mirkomontecchiani"
+msgstr ""
 
-#: wp-book-catalog.php:158
-msgid "Use as cover"
-msgstr "Usa come copertina"
+#: includes/class-wpbc-isbn-lookup.php:61
+#: includes/class-wpbc-isbn-lookup.php:94
+msgid "You are not allowed to do this."
+msgstr "Non sei autorizzato a eseguire questa operazione."
 
-#: wp-book-catalog.php:159
-msgid "Cover imported."
-msgstr "Copertina importata."
+#: includes/class-wpbc-isbn-lookup.php:68
+msgid "Invalid ISBN. Please enter a 10 or 13 digit ISBN."
+msgstr "ISBN non valido. Inserisci un ISBN di 10 o 13 cifre."
 
-#: wp-book-catalog.php:160
-msgid "Fields filled:"
-msgstr "Campi compilati:"
+#: includes/class-wpbc-isbn-lookup.php:74
+msgid ""
+"No book found for this ISBN. Try the other data source or check the number."
+msgstr ""
+"Nessun libro trovato per questo ISBN. Prova l'altra fonte dati o controlla "
+"il numero."
 
-#: wp-book-catalog.php:161
-msgid "No empty fields to fill. Existing values were kept."
-msgstr "Nessun campo vuoto da compilare. I valori esistenti sono stati mantenuti."
+#: includes/class-wpbc-isbn-lookup.php:98
+msgid "Cover URL is not from an allowed source."
+msgstr "L'URL della copertina non proviene da una fonte consentita."
 
-#: wp-book-catalog.php:162
-msgid "Source:"
-msgstr "Fonte:"
+#: includes/class-wpbc-isbn-lookup.php:116
+msgid "Cover imported and set as featured image."
+msgstr "Copertina importata e impostata come immagine in evidenza."
 
-#: wp-book-catalog.php:163
-msgid "author"
-msgstr "autore"
+#: includes/class-wpbc-isbn-lookup.php:185
+msgid "The downloaded file is not a supported image."
+msgstr "Il file scaricato non è un'immagine supportata."
 
-#: wp-book-catalog.php:164
-msgid "publisher"
-msgstr "editore"
+#: includes/class-wpbc-meta-boxes.php:56 includes/class-wpbc-post-type.php:144
+msgid "ISBN"
+msgstr "ISBN"
 
-#: wp-book-catalog.php:165
-msgid "year"
-msgstr "anno"
+#: includes/class-wpbc-meta-boxes.php:58
+msgid "Enter ISBN (10 or 13 digits)"
+msgstr "Inserisci ISBN (10 o 13 cifre)"
 
-#: wp-book-catalog.php:166
-msgid "pages"
-msgstr "pagine"
+#: includes/class-wpbc-meta-boxes.php:61 includes/class-wpbc-post-type.php:142
+msgid "Author"
+msgstr "Autore"
 
-#: wp-book-catalog.php:167
-msgid "language"
-msgstr "lingua"
+#: includes/class-wpbc-meta-boxes.php:63
+msgid "Enter book author"
+msgstr "Inserisci l'autore del libro"
 
-#: wp-book-catalog.php:168
-msgid "title"
-msgstr "titolo"
+#: includes/class-wpbc-meta-boxes.php:66
+msgid "Publisher"
+msgstr "Editore"
 
-#: wp-book-catalog.php:169
-msgid "description"
-msgstr "descrizione"
+#: includes/class-wpbc-meta-boxes.php:68
+msgid "Enter publisher name"
+msgstr "Inserisci il nome dell'editore"
+
+#: includes/class-wpbc-meta-boxes.php:71
+msgid "Publication Year"
+msgstr "Anno di pubblicazione"
+
+#: includes/class-wpbc-meta-boxes.php:73
+msgid "Enter publication year"
+msgstr "Inserisci l'anno di pubblicazione"
+
+#: includes/class-wpbc-meta-boxes.php:78
+msgid "Number of Pages"
+msgstr "Numero di pagine"
+
+#: includes/class-wpbc-meta-boxes.php:80
+msgid "Enter number of pages"
+msgstr "Inserisci il numero di pagine"
+
+#: includes/class-wpbc-meta-boxes.php:85
+msgid "Language"
+msgstr "Lingua"
+
+#: includes/class-wpbc-meta-boxes.php:87
+msgid "Enter book language (e.g. it, en)"
+msgstr "Inserisci la lingua del libro (es. it, en)"
+
+#: includes/class-wpbc-meta-boxes.php:90
+msgid "Shop Link"
+msgstr "Link al negozio"
+
+#: includes/class-wpbc-meta-boxes.php:92
+msgid "Enter shop URL"
+msgstr "Inserisci l'URL del negozio"
+
+#: includes/class-wpbc-meta-boxes.php:105
+msgid "Book Details"
+msgstr "Dettagli del libro"
+
+#: includes/class-wpbc-meta-boxes.php:145
+msgid "Autofill from ISBN"
+msgstr "Compila da ISBN"
+
+#: includes/class-wpbc-meta-boxes.php:149
+msgid ""
+"Fetches title, author, publisher, year, pages, description and cover from "
+"Google Books / Open Library."
+msgstr ""
+"Recupera titolo, autore, editore, anno, pagine, descrizione e copertina da "
+"Google Books / Open Library."
+
+#. translators: %s: default author name
+#: includes/class-wpbc-meta-boxes.php:173
+#, php-format
+msgid "Leave empty to use the default author from the settings: %s"
+msgstr "Lascia vuoto per usare l'autore predefinito delle impostazioni: %s"
 
 #: includes/class-wpbc-post-type.php:52
 msgctxt "Post type general name"
@@ -135,7 +204,8 @@ msgstr "Cerca libri"
 msgid "Parent Books:"
 msgstr "Libri genitore:"
 
-#: includes/class-wpbc-post-type.php:64 includes/class-wpbc-shortcode.php:71 includes/class-wpbc-shortcode.php:381
+#: includes/class-wpbc-post-type.php:64 includes/class-wpbc-shortcode.php:96
+#: includes/class-wpbc-shortcode.php:462
 msgid "No books found."
 msgstr "Nessun libro trovato."
 
@@ -243,81 +313,9 @@ msgstr "Generi"
 msgid "Cover"
 msgstr "Copertina"
 
-#: includes/class-wpbc-post-type.php:142 includes/class-wpbc-meta-boxes.php:61
-msgid "Author"
-msgstr "Autore"
-
 #: includes/class-wpbc-post-type.php:143
 msgid "Year"
 msgstr "Anno"
-
-#: includes/class-wpbc-post-type.php:144 includes/class-wpbc-meta-boxes.php:56
-msgid "ISBN"
-msgstr "ISBN"
-
-#: includes/class-wpbc-meta-boxes.php:58
-msgid "Enter ISBN (10 or 13 digits)"
-msgstr "Inserisci ISBN (10 o 13 cifre)"
-
-#: includes/class-wpbc-meta-boxes.php:63
-msgid "Enter book author"
-msgstr "Inserisci l'autore del libro"
-
-#: includes/class-wpbc-meta-boxes.php:66
-msgid "Publisher"
-msgstr "Editore"
-
-#: includes/class-wpbc-meta-boxes.php:68
-msgid "Enter publisher name"
-msgstr "Inserisci il nome dell'editore"
-
-#: includes/class-wpbc-meta-boxes.php:71
-msgid "Publication Year"
-msgstr "Anno di pubblicazione"
-
-#: includes/class-wpbc-meta-boxes.php:73
-msgid "Enter publication year"
-msgstr "Inserisci l'anno di pubblicazione"
-
-#: includes/class-wpbc-meta-boxes.php:78
-msgid "Number of Pages"
-msgstr "Numero di pagine"
-
-#: includes/class-wpbc-meta-boxes.php:80
-msgid "Enter number of pages"
-msgstr "Inserisci il numero di pagine"
-
-#: includes/class-wpbc-meta-boxes.php:85
-msgid "Language"
-msgstr "Lingua"
-
-#: includes/class-wpbc-meta-boxes.php:87
-msgid "Enter book language (e.g. it, en)"
-msgstr "Inserisci la lingua del libro (es. it, en)"
-
-#: includes/class-wpbc-meta-boxes.php:90
-msgid "Shop Link"
-msgstr "Link al negozio"
-
-#: includes/class-wpbc-meta-boxes.php:92
-msgid "Enter shop URL"
-msgstr "Inserisci l'URL del negozio"
-
-#: includes/class-wpbc-meta-boxes.php:105
-msgid "Book Details"
-msgstr "Dettagli del libro"
-
-#: includes/class-wpbc-meta-boxes.php:142
-msgid "Autofill from ISBN"
-msgstr "Compila da ISBN"
-
-#: includes/class-wpbc-meta-boxes.php:146
-msgid "Fetches title, author, publisher, year, pages, description and cover from Google Books / Open Library."
-msgstr "Recupera titolo, autore, editore, anno, pagine, descrizione e copertina da Google Books / Open Library."
-
-#: includes/class-wpbc-meta-boxes.php:170
-msgid "Default author from settings: %s"
-msgstr "Autore predefinito dalle impostazioni: %s"
 
 #: includes/class-wpbc-settings.php:52
 msgid "Book Catalog Settings"
@@ -367,180 +365,303 @@ msgstr "Avanzate"
 msgid "Delete Data on Uninstall"
 msgstr "Elimina i dati alla disinstallazione"
 
-#: includes/class-wpbc-settings.php:216
+#: includes/class-wpbc-settings.php:221
 msgid "Settings saved successfully."
 msgstr "Impostazioni salvate con successo."
 
-#: includes/class-wpbc-settings.php:231
+#: includes/class-wpbc-settings.php:236
 msgid "Save Settings"
 msgstr "Salva impostazioni"
 
-#: includes/class-wpbc-settings.php:237
+#: includes/class-wpbc-settings.php:242
 msgid "Shortcode Usage"
 msgstr "Uso dello shortcode"
 
-#: includes/class-wpbc-settings.php:239
+#: includes/class-wpbc-settings.php:244
 msgid "Display All Books"
 msgstr "Mostra tutti i libri"
 
-#: includes/class-wpbc-settings.php:241
+#: includes/class-wpbc-settings.php:246
 msgid "Displays all books in the catalog."
 msgstr "Mostra tutti i libri del catalogo."
 
-#: includes/class-wpbc-settings.php:243
+#: includes/class-wpbc-settings.php:247
+msgid ""
+"[wpbc_books] does exactly the same and is the recommended form when another "
+"plugin also registers [books]."
+msgstr ""
+"[wpbc_books] fa esattamente lo stesso ed è la forma consigliata quando un "
+"altro plugin registra a sua volta [books]."
+
+#: includes/class-wpbc-settings.php:249
 msgid "Display Limited Books"
 msgstr "Mostra libri limitati"
 
-#: includes/class-wpbc-settings.php:245
-msgid "Displays 3 books with a \"Show All\" button at the bottom. Replace 3 with any number."
-msgstr "Mostra 3 libri con un pulsante \"Mostra tutti\" in fondo. Sostituisci 3 con qualsiasi numero."
+#: includes/class-wpbc-settings.php:251
+msgid ""
+"Displays 3 books with a \"Show All\" button at the bottom. Replace 3 with "
+"any number."
+msgstr ""
+"Mostra 3 libri con un pulsante \"Mostra tutti\" in fondo. Sostituisci 3 con "
+"qualsiasi numero."
 
-#: includes/class-wpbc-settings.php:247
+#: includes/class-wpbc-settings.php:253
 msgid "Available Attributes"
 msgstr "Attributi disponibili"
 
-#: includes/class-wpbc-settings.php:249
+#: includes/class-wpbc-settings.php:255
 msgid "Number of books to display (shows \"Show All\" button)"
 msgstr "Numero di libri da mostrare (mostra il pulsante \"Mostra tutti\")"
 
-#: includes/class-wpbc-settings.php:250
+#: includes/class-wpbc-settings.php:256
 msgid "Override default columns (1-5)"
 msgstr "Sovrascrivi le colonne predefinite (1-5)"
 
-#: includes/class-wpbc-settings.php:251
-msgid "Order by: date, title, year, author, rand (default: date)"
-msgstr "Ordina per: date, title, year, author, rand (predefinito: date)"
+#: includes/class-wpbc-settings.php:257
+msgid ""
+"Order by: date, title, year, author, rand, menu_order, modified (default: "
+"date)"
+msgstr ""
+"Ordina per: date, title, year, author, rand, menu_order, modified "
+"(predefinito: date)"
 
-#: includes/class-wpbc-settings.php:252
+#: includes/class-wpbc-settings.php:258
 msgid "Order direction: ASC, DESC (default: DESC)"
 msgstr "Direzione ordinamento: ASC, DESC (predefinito: DESC)"
 
-#: includes/class-wpbc-settings.php:253
+#: includes/class-wpbc-settings.php:259
 msgid "Filter by genre slug(s), comma separated"
 msgstr "Filtra per slug di genere, separati da virgola"
 
-#: includes/class-wpbc-settings.php:256
+#: includes/class-wpbc-settings.php:262
 msgid "Example with All Attributes"
 msgstr "Esempio con tutti gli attributi"
 
-#: includes/class-wpbc-settings.php:267
+#: includes/class-wpbc-settings.php:273
 msgid "Configure the default settings for all books."
 msgstr "Configura le impostazioni predefinite per tutti i libri."
 
-#: includes/class-wpbc-settings.php:274
+#: includes/class-wpbc-settings.php:280
 msgid "Configure how books are displayed on the frontend."
 msgstr "Configura come i libri vengono mostrati nel frontend."
 
-#: includes/class-wpbc-settings.php:281
-msgid "Configure the external book databases used to autofill book details from an ISBN."
-msgstr "Configura le banche dati esterne usate per compilare automaticamente i dettagli del libro da un ISBN."
+#: includes/class-wpbc-settings.php:287
+msgid ""
+"Configure the external book databases used to autofill book details from an "
+"ISBN."
+msgstr ""
+"Configura le banche dati esterne usate per compilare automaticamente i "
+"dettagli del libro da un ISBN."
 
-#: includes/class-wpbc-settings.php:288
+#: includes/class-wpbc-settings.php:294
 msgid "Advanced options."
 msgstr "Opzioni avanzate."
 
-#: includes/class-wpbc-settings.php:298
-msgid "If set, this author will be used for all books that don't have an author specified."
-msgstr "Se impostato, questo autore verrà usato per tutti i libri che non hanno un autore specificato."
+#: includes/class-wpbc-settings.php:304
+msgid ""
+"If set, this author will be used for all books that don't have an author "
+"specified."
+msgstr ""
+"Se impostato, questo autore verrà usato per tutti i libri che non hanno un "
+"autore specificato."
 
-#: includes/class-wpbc-settings.php:308
+#: includes/class-wpbc-settings.php:314
 msgid "Male (Author)"
 msgstr "Maschile (Autore)"
 
-#: includes/class-wpbc-settings.php:309
+#: includes/class-wpbc-settings.php:315
 msgid "Female (Authoress)"
 msgstr "Femminile (Autrice)"
 
-#: includes/class-wpbc-settings.php:311
+#: includes/class-wpbc-settings.php:317
 msgid "Select the gender to display the correct label (Author/Authoress)."
-msgstr "Seleziona il genere per mostrare l'etichetta corretta (Autore/Autrice)."
+msgstr ""
+"Seleziona il genere per mostrare l'etichetta corretta (Autore/Autrice)."
 
-#: includes/class-wpbc-settings.php:324
+#. translators: %d: number of columns
+#: includes/class-wpbc-settings.php:330
+#, php-format
 msgid "%d column"
 msgid_plural "%d columns"
 msgstr[0] "%d colonna"
 msgstr[1] "%d colonne"
 
-#: includes/class-wpbc-settings.php:327
+#: includes/class-wpbc-settings.php:334
 msgid "Number of columns to display books in. The layout will be responsive."
 msgstr "Numero di colonne in cui mostrare i libri. Il layout sarà responsive."
 
-#: includes/class-wpbc-settings.php:337
+#: includes/class-wpbc-settings.php:344
 msgid "Google Books + Open Library (recommended)"
 msgstr "Google Books + Open Library (consigliato)"
 
-#: includes/class-wpbc-settings.php:338
+#: includes/class-wpbc-settings.php:345
 msgid "Google Books only"
 msgstr "Solo Google Books"
 
-#: includes/class-wpbc-settings.php:339
+#: includes/class-wpbc-settings.php:346
 msgid "Open Library only"
 msgstr "Solo Open Library"
 
-#: includes/class-wpbc-settings.php:341
-msgid "Which database to query when autofilling book data from an ISBN. Using both merges the best data from each source."
-msgstr "Quale banca dati interrogare per compilare i dati del libro da un ISBN. Usando entrambe si combinano i dati migliori di ciascuna fonte."
+#: includes/class-wpbc-settings.php:348
+msgid ""
+"Which database to query when autofilling book data from an ISBN. Using both "
+"merges the best data from each source."
+msgstr ""
+"Quale banca dati interrogare per compilare i dati del libro da un ISBN. "
+"Usando entrambe si combinano i dati migliori di ciascuna fonte."
 
-#: includes/class-wpbc-settings.php:351
-msgid "Optional. Google Books works without a key, but a key raises the request quota. Create one in the Google Cloud Console."
-msgstr "Facoltativo. Google Books funziona senza chiave, ma una chiave aumenta la quota di richieste. Creane una nella Google Cloud Console."
+#: includes/class-wpbc-settings.php:360
+msgid "A key is saved. Leave empty to keep it."
+msgstr "Una chiave è salvata. Lascia vuoto per mantenerla."
 
-#: includes/class-wpbc-settings.php:362
-msgid "Permanently delete all books, genres and settings when the plugin is uninstalled."
-msgstr "Elimina definitivamente tutti i libri, i generi e le impostazioni quando il plugin viene disinstallato."
+#: includes/class-wpbc-settings.php:360
+msgid "No key saved"
+msgstr "Nessuna chiave salvata"
 
-#: includes/class-wpbc-shortcode.php:104
+#: includes/class-wpbc-settings.php:364
+msgid "Remove the saved key"
+msgstr "Rimuovi la chiave salvata"
+
+#: includes/class-wpbc-settings.php:367
+msgid ""
+"Optional. Google Books works without a key, but a key raises the request "
+"quota. Create one in the Google Cloud Console."
+msgstr ""
+"Facoltativo. Google Books funziona senza chiave, ma una chiave aumenta la "
+"quota di richieste. Creane una nella Google Cloud Console."
+
+#: includes/class-wpbc-settings.php:378
+msgid ""
+"Permanently delete all books, genres and settings when the plugin is "
+"uninstalled."
+msgstr ""
+"Elimina definitivamente tutti i libri, i generi e le impostazioni quando il "
+"plugin viene disinstallato."
+
+#: includes/class-wpbc-shortcode.php:130
 msgid "Show All Books"
 msgstr "Mostra tutti i libri"
 
-#: includes/class-wpbc-shortcode.php:190
+#: includes/class-wpbc-shortcode.php:242
 msgid "Authoress:"
 msgstr "Autrice:"
 
-#: includes/class-wpbc-shortcode.php:190
+#: includes/class-wpbc-shortcode.php:242
 msgid "Author:"
 msgstr "Autore:"
 
-#: includes/class-wpbc-shortcode.php:230
+#. translators: %s: book title
+#: includes/class-wpbc-shortcode.php:266
+#, php-format
+msgid "%s (opens in a new tab)"
+msgstr "%s (si apre in una nuova scheda)"
+
+#: includes/class-wpbc-shortcode.php:297
 msgid "Publisher:"
 msgstr "Editore:"
 
-#: includes/class-wpbc-shortcode.php:237
+#: includes/class-wpbc-shortcode.php:304
 msgid "Year:"
 msgstr "Anno:"
 
-#: includes/class-wpbc-shortcode.php:244
+#: includes/class-wpbc-shortcode.php:311
 msgid "Pages:"
 msgstr "Pagine:"
 
-#: includes/class-wpbc-shortcode.php:251
+#: includes/class-wpbc-shortcode.php:318
 msgid "Genre:"
 msgstr "Genere:"
 
-#: includes/class-wpbc-shortcode.php:258
+#: includes/class-wpbc-shortcode.php:325
 msgid "ISBN:"
 msgstr "ISBN:"
 
-#: includes/class-wpbc-shortcode.php:368
-msgid "Security check failed."
-msgstr "Controllo di sicurezza non riuscito."
+#: wp-book-catalog.php:132
+msgid "Could not load the books. Please try again."
+msgstr "Impossibile caricare i libri. Riprova."
 
-#: includes/class-wpbc-isbn-lookup.php:61 includes/class-wpbc-isbn-lookup.php:90
-msgid "You are not allowed to do this."
-msgstr "Non sei autorizzato a eseguire questa operazione."
+#: wp-book-catalog.php:133
+msgid "All books are now shown."
+msgstr "Ora sono mostrati tutti i libri."
 
-#: includes/class-wpbc-isbn-lookup.php:68
-msgid "Invalid ISBN. Please enter a 10 or 13 digit ISBN."
-msgstr "ISBN non valido. Inserisci un ISBN di 10 o 13 cifre."
+#: wp-book-catalog.php:202
+msgid "Please enter an ISBN first."
+msgstr "Inserisci prima un ISBN."
 
-#: includes/class-wpbc-isbn-lookup.php:74
-msgid "No book found for this ISBN. Try the other data source or check the number."
-msgstr "Nessun libro trovato per questo ISBN. Prova l'altra fonte dati o controlla il numero."
+#: wp-book-catalog.php:203
+msgid "Lookup failed. Please try again."
+msgstr "Ricerca non riuscita. Riprova."
 
-#: includes/class-wpbc-isbn-lookup.php:95
-msgid "Cover URL is not from an allowed source."
-msgstr "L'URL della copertina non proviene da una fonte consentita."
+#: wp-book-catalog.php:204
+msgid "Cover import failed. Please try again."
+msgstr "Importazione della copertina non riuscita. Riprova."
 
-#: includes/class-wpbc-isbn-lookup.php:113
-msgid "Cover imported and set as featured image."
-msgstr "Copertina importata e impostata come immagine in evidenza."
+#: wp-book-catalog.php:205
+msgid "Importing…"
+msgstr "Importazione…"
+
+#: wp-book-catalog.php:206
+msgid "Use as cover"
+msgstr "Usa come copertina"
+
+#: wp-book-catalog.php:207
+msgid "Cover imported."
+msgstr "Copertina importata."
+
+#. translators: %s: comma separated list of field names
+#: wp-book-catalog.php:209
+#, php-format
+msgid "Fields filled: %s"
+msgstr "Campi compilati: %s"
+
+#: wp-book-catalog.php:210
+msgid "No empty fields to fill. Existing values were kept."
+msgstr ""
+"Nessun campo vuoto da compilare. I valori esistenti sono stati mantenuti."
+
+#. translators: %s: comma separated list of data sources, e.g. "Google Books, Open Library"
+#: wp-book-catalog.php:212
+#, php-format
+msgid "Source: %s"
+msgstr "Fonte: %s"
+
+#. translators: separator between the field names listed in the "Fields filled" notice
+#: wp-book-catalog.php:214
+msgctxt "list item separator"
+msgid ", "
+msgstr ", "
+
+#: wp-book-catalog.php:216
+msgctxt "book field name"
+msgid "author"
+msgstr "autore"
+
+#: wp-book-catalog.php:217
+msgctxt "book field name"
+msgid "publisher"
+msgstr "editore"
+
+#: wp-book-catalog.php:218
+msgctxt "book field name"
+msgid "year"
+msgstr "anno"
+
+#: wp-book-catalog.php:219
+msgctxt "book field name"
+msgid "pages"
+msgstr "pagine"
+
+#: wp-book-catalog.php:220
+msgctxt "book field name"
+msgid "language"
+msgstr "lingua"
+
+#: wp-book-catalog.php:221
+msgctxt "book field name"
+msgid "title"
+msgstr "titolo"
+
+#: wp-book-catalog.php:222
+msgctxt "book field name"
+msgid "description"
+msgstr "descrizione"

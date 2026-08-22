@@ -188,10 +188,15 @@ class WPBC_Settings {
             $sanitized['isbn_source'] = in_array($input['isbn_source'], array('both', 'google', 'openlibrary'), true) ? $input['isbn_source'] : 'both';
         }
 
-        // Sanitize Google API key
-        if (isset($input['google_api_key'])) {
+        // Sanitize Google API key. An empty submission keeps the stored key, so
+        // the secret never has to be rendered back into the settings page.
+        if (!empty($input['google_api_key_clear'])) {
+            $sanitized['google_api_key'] = '';
+        } elseif (isset($input['google_api_key']) && '' !== trim((string) $input['google_api_key'])) {
             $sanitized['google_api_key'] = sanitize_text_field($input['google_api_key']);
         }
+
+        unset($sanitized['google_api_key_clear']);
 
         // Checkboxes are absent from the POST when unchecked, so always set them
         // explicitly when the settings form is submitted.
@@ -219,7 +224,7 @@ class WPBC_Settings {
         }
 
         ?>
-        <div class="wrap">
+        <div class="wrap wpbc-settings-page">
             <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
 
             <?php settings_errors('wpbc_messages'); ?>
@@ -239,6 +244,7 @@ class WPBC_Settings {
                 <h3><?php esc_html_e('Display All Books', 'wp-book-catalog'); ?></h3>
                 <code>[books]</code>
                 <p><?php esc_html_e('Displays all books in the catalog.', 'wp-book-catalog'); ?></p>
+                <p class="description"><?php esc_html_e('[wpbc_books] does exactly the same and is the recommended form when another plugin also registers [books].', 'wp-book-catalog'); ?></p>
 
                 <h3><?php esc_html_e('Display Limited Books', 'wp-book-catalog'); ?></h3>
                 <code>[books hitem="3"]</code>
@@ -248,7 +254,7 @@ class WPBC_Settings {
                 <ul>
                     <li><code>hitem</code> - <?php esc_html_e('Number of books to display (shows "Show All" button)', 'wp-book-catalog'); ?></li>
                     <li><code>columns</code> - <?php esc_html_e('Override default columns (1-5)', 'wp-book-catalog'); ?></li>
-                    <li><code>orderby</code> - <?php esc_html_e('Order by: date, title, year, author, rand (default: date)', 'wp-book-catalog'); ?></li>
+                    <li><code>orderby</code> - <?php esc_html_e('Order by: date, title, year, author, rand, menu_order, modified (default: date)', 'wp-book-catalog'); ?></li>
                     <li><code>order</code> - <?php esc_html_e('Order direction: ASC, DESC (default: DESC)', 'wp-book-catalog'); ?></li>
                     <li><code>genre</code> - <?php esc_html_e('Filter by genre slug(s), comma separated', 'wp-book-catalog'); ?></li>
                 </ul>
@@ -319,9 +325,10 @@ class WPBC_Settings {
 
         echo '<select id="wpbc_columns" name="' . esc_attr($this->option_name) . '[columns]">';
         for ($i = 1; $i <= 5; $i++) {
-            $selected = selected($value, $i, false);
-            /* translators: %d: number of columns */
-            echo '<option value="' . esc_attr($i) . '"' . $selected . '>' . esc_html(sprintf(_n('%d column', '%d columns', $i, 'wp-book-catalog'), $i)) . '</option>';
+            echo '<option value="' . esc_attr($i) . '"' . selected($value, $i, false) . '>'
+                /* translators: %d: number of columns */
+                . esc_html(sprintf(_n('%d column', '%d columns', $i, 'wp-book-catalog'), $i))
+                . '</option>';
         }
         echo '</select>';
         echo '<p class="description">' . esc_html__('Number of columns to display books in. The layout will be responsive.', 'wp-book-catalog') . '</p>';
@@ -345,9 +352,18 @@ class WPBC_Settings {
      * Render Google API key field
      */
     public function render_google_api_key_field() {
-        $value = self::get_setting('google_api_key', '');
+        $has_key = '' !== (string) self::get_setting('google_api_key', '');
 
-        echo '<input type="text" id="wpbc_google_api_key" name="' . esc_attr($this->option_name) . '[google_api_key]" value="' . esc_attr($value) . '" class="regular-text" autocomplete="off" />';
+        // The stored key is never printed back into the page. Submitting the
+        // field empty keeps the saved key; see sanitize_settings().
+        echo '<input type="password" id="wpbc_google_api_key" name="' . esc_attr($this->option_name) . '[google_api_key]" value="" class="regular-text" autocomplete="off" ';
+        echo 'placeholder="' . esc_attr($has_key ? __('A key is saved. Leave empty to keep it.', 'wp-book-catalog') : __('No key saved', 'wp-book-catalog')) . '" />';
+
+        if ($has_key) {
+            echo ' <label for="wpbc_google_api_key_clear"><input type="checkbox" id="wpbc_google_api_key_clear" name="' . esc_attr($this->option_name) . '[google_api_key_clear]" value="1" /> ';
+            echo esc_html__('Remove the saved key', 'wp-book-catalog') . '</label>';
+        }
+
         echo '<p class="description">' . esc_html__('Optional. Google Books works without a key, but a key raises the request quota. Create one in the Google Cloud Console.', 'wp-book-catalog') . '</p>';
     }
 
@@ -364,11 +380,42 @@ class WPBC_Settings {
     }
 
     /**
-     * Get setting value
+     * Default value for every setting
+     *
+     * @return array
      */
-    public static function get_setting($key, $default = '') {
+    public static function get_defaults() {
+        return array(
+            'default_author'           => '',
+            'author_gender'            => 'male',
+            'columns'                  => 3,
+            'isbn_source'              => 'both',
+            'google_api_key'           => '',
+            'delete_data_on_uninstall' => 0,
+        );
+    }
+
+    /**
+     * Get setting value
+     *
+     * @param string $key           Setting key.
+     * @param mixed  $fallback_value Value returned when the setting is not stored.
+     * @return mixed
+     */
+    public static function get_setting($key, $fallback_value = '') {
         $options = get_option('wpbc_settings', array());
-        return isset($options[$key]) ? $options[$key] : $default;
+
+        if (is_array($options) && isset($options[$key])) {
+            return $options[$key];
+        }
+
+        $defaults = self::get_defaults();
+
+        if (array_key_exists($key, $defaults)) {
+            return $defaults[$key];
+        }
+
+        return $fallback_value;
     }
 }
 

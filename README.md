@@ -1,6 +1,10 @@
 # WP Book Catalog
 
-A WordPress plugin to display a book catalog with custom post type, shortcodes, hover effects and ISBN autofill from external book databases.
+A WordPress plugin to display a book catalog with a custom post type, shortcodes, hover
+effects and ISBN autofill from external book databases.
+
+> The canonical, user-facing documentation is [`readme.txt`](readme.txt), which is also what
+> the WordPress.org plugin directory renders. This file is the developer README.
 
 ## Author
 
@@ -23,19 +27,25 @@ Mirko Montecchiani
   - ISBN
   - Shop link
 - **Genres Taxonomy**: Organize books by genre and filter the shortcode by genre
-- **Shortcode Support**: Display books anywhere with `[books]`
+- **Shortcode Support**: Display books anywhere with `[books]` (or `[wpbc_books]`)
 - **Responsive Grid**: 1-5 columns with automatic responsive adjustments
-- **Hover Effect**: Beautiful overlay with book details on hover (tap-friendly on touch devices, keyboard accessible)
-- **AJAX Loading**: "Show All" button loads remaining books without page reload
+- **Hover Effect**: Overlay with book details on hover (tap-friendly on touch devices, keyboard accessible)
+- **AJAX Loading**: "Show All" button loads remaining books without a page reload
 - **SEO**: Automatic Schema.org `Book` structured data (JSON-LD) for rich results in search engines
 - **Admin Columns**: Cover, author, year and ISBN columns in the book list, sortable by author and year
 - **Settings Page**: Configure default author, columns, ISBN data source and uninstall cleanup
 - **i18n Ready**: Fully translatable, Italian translation included
 
+## Requirements
+
+- WordPress 5.8 or later
+- PHP 7.2 or later
+
 ## Installation
 
 1. Download or clone this repository
-2. Upload the `wp-book-catalog` folder to `/wp-content/plugins/`
+2. Copy the plugin files into a folder named `wp-book-catalog` inside `/wp-content/plugins/`
+   (the folder name must match the text domain)
 3. Activate the plugin through the 'Plugins' menu in WordPress
 
 ## Usage
@@ -47,7 +57,9 @@ Mirko Montecchiani
 3. Click **Autofill from ISBN**: empty fields (author, publisher, year, pages, language), the title and the description are filled automatically
 4. If a cover is found, click **Use as cover** to import it as the featured image
 
-Data sources can be configured in **Book Catalog > Settings** (Google Books, Open Library, or both merged). An optional Google Books API key can be set to raise the request quota. Lookups are cached for 12 hours.
+Data sources can be configured in **Book Catalog > Settings** (Google Books, Open Library, or
+both merged). An optional Google Books API key can be set to raise the request quota. Lookups
+are cached for 12 hours.
 
 ### Shortcodes
 
@@ -56,13 +68,16 @@ Data sources can be configured in **Book Catalog > Settings** (Google Books, Ope
 [books]
 ```
 
-**Display limited books with "Show All" button:**
+`[wpbc_books]` is an identical, prefixed alias; use it if another plugin also registers
+`[books]`.
+
+**Display limited books with a "Show All" button:**
 ```
 [books hitem="3"]
 ```
 
 **Available attributes:**
-- `hitem` - Number of books to display (shows "Show All" button when more exist)
+- `hitem` - Number of books to display (shows the "Show All" button when more exist)
 - `columns` - Override default columns (1-5)
 - `orderby` - Order by: date, title, year, author, rand, menu_order, modified (default: date)
 - `order` - Order direction: ASC, DESC (default: DESC)
@@ -73,21 +88,56 @@ Data sources can be configured in **Book Catalog > Settings** (Google Books, Ope
 [books hitem="6" columns="3" orderby="title" order="ASC" genre="fantasy,thriller"]
 ```
 
+At most 500 books are rendered per request; raise it with the
+`wpbc_max_books_per_request` filter.
+
 ### Settings
 
 Go to **Book Catalog > Settings** in the WordPress admin to configure:
 
-1. **Default Author**: If set, this author will be used for all books that don't have an author specified
-2. **Author Gender**: Controls the Author/Authoress label on the frontend
-3. **Number of Columns**: Choose 1-5 columns for the grid layout (responsive)
+1. **Default Author**: shown as a placeholder in the book editor and used at render time for every book that has no author of its own
+2. **Author Gender**: controls the Author/Authoress label on the frontend
+3. **Number of Columns**: choose 1-5 columns for the grid layout (responsive)
 4. **ISBN Data Source**: Google Books, Open Library, or both merged (recommended)
 5. **Google Books API Key** (optional): raises the API request quota
 6. **Delete Data on Uninstall**: permanently remove books, genres and settings when the plugin is deleted
 
+## Filters
+
+| Filter | Description |
+| --- | --- |
+| `wpbc_shortcode_query_args` | The `WP_Query` arguments used to list books |
+| `wpbc_max_books_per_request` | Maximum books rendered in one request (default 500) |
+| `wpbc_author_label` | The label printed before the author name, per book |
+| `wpbc_allowed_cover_hosts` | Hosts a cover image may be downloaded from |
+| `wpbc_lookup_data` | The normalized record returned by an ISBN lookup |
+
 ## Privacy
 
-The ISBN autofill feature sends the ISBN you type to the Google Books API (`googleapis.com`) and/or the Open Library API (`openlibrary.org`) from your server. No other data is transmitted. Nothing is sent on the public frontend.
+The ISBN autofill feature sends the ISBN you type — and, if you configured one, your Google
+Books API key — from your server to the Google Books API (`googleapis.com`) and/or the Open
+Library API (`openlibrary.org`). Each request carries a `User-Agent` header naming the plugin
+and its version; your site URL is not sent. Importing a cover downloads the image file from
+`books.google.com`, `books.googleusercontent.com` or `covers.openlibrary.org` and stores it
+in your Media Library. Nothing is requested from the public frontend, and no personal data
+about you or your visitors is transmitted. See the "External services" section of
+[`readme.txt`](readme.txt) for the full disclosure and the providers' terms.
+
+## Development
+
+```bash
+# Regenerate the translation template and the Italian catalog
+wp i18n make-pot . languages/wp-book-catalog.pot --slug=wp-book-catalog
+msgmerge --update --backup=none languages/wp-book-catalog-it_IT.po languages/wp-book-catalog.pot
+msgfmt -o languages/wp-book-catalog-it_IT.mo languages/wp-book-catalog-it_IT.po
+
+# Coding standards
+phpcs --standard=WordPress-Extra --extensions=php .
+
+# Build a release archive with the folder name WordPress.org expects
+git archive --format=zip --prefix=wp-book-catalog/ -o wp-book-catalog.zip HEAD
+```
 
 ## License
 
-GPL v2 or later
+GPLv2 or later. See [LICENSE](LICENSE).

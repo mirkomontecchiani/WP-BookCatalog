@@ -1,0 +1,5 @@
+# Keep development files out of `git archive` exports.
+/.distignore     export-ignore
+/.gitattributes  export-ignore
+/.github         export-ignore
+/README.md       export-ignore

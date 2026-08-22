@@ -8,6 +8,14 @@
     'use strict';
 
     var strings = (window.wpbc_admin && wpbc_admin.strings) || {};
+    var fieldNames = strings.fields || {};
+
+    /**
+     * Substitute the single %s placeholder of a translated string
+     */
+    function format(template, value) {
+        return String(template).replace('%s', value);
+    }
 
     /**
      * Show a notice inside the meta box result area
@@ -110,7 +118,9 @@
             .replace(/&/g, '&amp;')
             .replace(/</g, '&lt;')
             .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;');
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;')
+            .replace(/`/g, '&#096;');
     }
 
     /**
@@ -159,23 +169,25 @@
             var data = response.data;
             var filled = [];
 
-            if (fillIfEmpty('#wpbc_author', data.authors)) { filled.push(strings.field_author || 'author'); }
-            if (fillIfEmpty('#wpbc_publisher', data.publisher)) { filled.push(strings.field_publisher || 'publisher'); }
-            if (fillIfEmpty('#wpbc_year', data.year)) { filled.push(strings.field_year || 'year'); }
-            if (fillIfEmpty('#wpbc_pages', data.pages)) { filled.push(strings.field_pages || 'pages'); }
-            if (fillIfEmpty('#wpbc_language', data.language)) { filled.push(strings.field_language || 'language'); }
-            if (maybeSetTitle(data.title)) { filled.push(strings.field_title || 'title'); }
-            if (maybeSetDescription(data.description)) { filled.push(strings.field_description || 'description'); }
+            if (fillIfEmpty('#wpbc_author', data.authors)) { filled.push(fieldNames.author || 'author'); }
+            if (fillIfEmpty('#wpbc_publisher', data.publisher)) { filled.push(fieldNames.publisher || 'publisher'); }
+            if (fillIfEmpty('#wpbc_year', data.year)) { filled.push(fieldNames.year || 'year'); }
+            if (fillIfEmpty('#wpbc_pages', data.pages)) { filled.push(fieldNames.pages || 'pages'); }
+            if (fillIfEmpty('#wpbc_language', data.language)) { filled.push(fieldNames.language || 'language'); }
+            if (maybeSetTitle(data.title)) { filled.push(fieldNames.title || 'title'); }
+            if (maybeSetDescription(data.description)) { filled.push(fieldNames.description || 'description'); }
 
-            var sources = (data.sources || []).join(', ');
+            var separator = strings.separator || ', ';
             var message;
             if (filled.length) {
-                message = escapeHtml((strings.filled_fields || 'Fields filled:') + ' ' + filled.join(', ') + '.');
+                message = escapeHtml(format(strings.filled_fields || 'Fields filled: %s', filled.join(separator)));
             } else {
                 message = escapeHtml(strings.nothing_filled || 'No empty fields to fill. Existing values were kept.');
             }
+
+            var sources = (data.sources || []).join(separator);
             if (sources) {
-                message += ' <em>(' + escapeHtml((strings.source || 'Source:') + ' ' + sources) + ')</em>';
+                message += ' <em>(' + escapeHtml(format(strings.source || 'Source: %s', sources)) + ')</em>';
             }
             showNotice('success', message);
 
