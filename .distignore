@@ -3,6 +3,7 @@
 .github
 .gitignore
 .distignore
+.gitattributes
 .editorconfig
 README.md
 composer.json

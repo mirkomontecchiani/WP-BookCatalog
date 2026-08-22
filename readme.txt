@@ -148,13 +148,6 @@ memory limit. Developers can raise the limit with the `wpbc_max_books_per_reques
 
 Yes. It is fully internationalised and ships with an Italian translation.
 
-== Screenshots ==
-
-1. The book catalog rendered by the `[books]` shortcode, with the details overlay.
-2. The Book Details meta box with the ISBN autofill button and the cover preview.
-3. The Book Catalog settings page.
-4. The books admin list with cover, author, year and ISBN columns.
-
 == Changelog ==
 
 = 1.2.0 =
