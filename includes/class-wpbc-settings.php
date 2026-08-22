@@ -2,7 +2,7 @@
 /**
  * Plugin Settings Page
  *
- * @package WP_Book_Catalog
+ * @package MM_Book_Catalog
  */
 
 // Prevent direct access
@@ -49,8 +49,8 @@ class WPBC_Settings {
     public function add_settings_page() {
         add_submenu_page(
             'edit.php?post_type=book',
-            __('Book Catalog Settings', 'wp-book-catalog'),
-            __('Settings', 'wp-book-catalog'),
+            __('Book Catalog Settings', 'mm-book-catalog'),
+            __('Settings', 'mm-book-catalog'),
             'manage_options',
             'wpbc-settings',
             array($this, 'render_settings_page')
@@ -70,7 +70,7 @@ class WPBC_Settings {
         // General Settings Section
         add_settings_section(
             'wpbc_general_section',
-            __('General Settings', 'wp-book-catalog'),
+            __('General Settings', 'mm-book-catalog'),
             array($this, 'render_general_section'),
             'wpbc-settings'
         );
@@ -78,7 +78,7 @@ class WPBC_Settings {
         // Default Author Field
         add_settings_field(
             'default_author',
-            __('Default Author', 'wp-book-catalog'),
+            __('Default Author', 'mm-book-catalog'),
             array($this, 'render_default_author_field'),
             'wpbc-settings',
             'wpbc_general_section'
@@ -87,7 +87,7 @@ class WPBC_Settings {
         // Author Gender Field
         add_settings_field(
             'author_gender',
-            __('Author Gender', 'wp-book-catalog'),
+            __('Author Gender', 'mm-book-catalog'),
             array($this, 'render_author_gender_field'),
             'wpbc-settings',
             'wpbc_general_section'
@@ -96,7 +96,7 @@ class WPBC_Settings {
         // Display Settings Section
         add_settings_section(
             'wpbc_display_section',
-            __('Display Settings', 'wp-book-catalog'),
+            __('Display Settings', 'mm-book-catalog'),
             array($this, 'render_display_section'),
             'wpbc-settings'
         );
@@ -104,7 +104,7 @@ class WPBC_Settings {
         // Columns Field
         add_settings_field(
             'columns',
-            __('Number of Columns', 'wp-book-catalog'),
+            __('Number of Columns', 'mm-book-catalog'),
             array($this, 'render_columns_field'),
             'wpbc-settings',
             'wpbc_display_section'
@@ -113,7 +113,7 @@ class WPBC_Settings {
         // ISBN Lookup Section
         add_settings_section(
             'wpbc_isbn_section',
-            __('ISBN Autofill', 'wp-book-catalog'),
+            __('ISBN Autofill', 'mm-book-catalog'),
             array($this, 'render_isbn_section'),
             'wpbc-settings'
         );
@@ -121,7 +121,7 @@ class WPBC_Settings {
         // Data Source Field
         add_settings_field(
             'isbn_source',
-            __('Data Source', 'wp-book-catalog'),
+            __('Data Source', 'mm-book-catalog'),
             array($this, 'render_isbn_source_field'),
             'wpbc-settings',
             'wpbc_isbn_section'
@@ -130,7 +130,7 @@ class WPBC_Settings {
         // Google API Key Field
         add_settings_field(
             'google_api_key',
-            __('Google Books API Key', 'wp-book-catalog'),
+            __('Google Books API Key', 'mm-book-catalog'),
             array($this, 'render_google_api_key_field'),
             'wpbc-settings',
             'wpbc_isbn_section'
@@ -139,7 +139,7 @@ class WPBC_Settings {
         // Advanced Section
         add_settings_section(
             'wpbc_advanced_section',
-            __('Advanced', 'wp-book-catalog'),
+            __('Advanced', 'mm-book-catalog'),
             array($this, 'render_advanced_section'),
             'wpbc-settings'
         );
@@ -147,7 +147,7 @@ class WPBC_Settings {
         // Delete data on uninstall
         add_settings_field(
             'delete_data_on_uninstall',
-            __('Delete Data on Uninstall', 'wp-book-catalog'),
+            __('Delete Data on Uninstall', 'mm-book-catalog'),
             array($this, 'render_delete_data_field'),
             'wpbc-settings',
             'wpbc_advanced_section'
@@ -218,7 +218,7 @@ class WPBC_Settings {
             add_settings_error(
                 'wpbc_messages',
                 'wpbc_message',
-                __('Settings saved successfully.', 'wp-book-catalog'),
+                __('Settings saved successfully.', 'mm-book-catalog'),
                 'updated'
             );
         }
@@ -233,33 +233,33 @@ class WPBC_Settings {
                 <?php
                 settings_fields('wpbc_settings_group');
                 do_settings_sections('wpbc-settings');
-                submit_button(__('Save Settings', 'wp-book-catalog'));
+                submit_button(__('Save Settings', 'mm-book-catalog'));
                 ?>
             </form>
 
             <hr>
 
-            <h2><?php esc_html_e('Shortcode Usage', 'wp-book-catalog'); ?></h2>
+            <h2><?php esc_html_e('Shortcode Usage', 'mm-book-catalog'); ?></h2>
             <div class="wpbc-shortcode-info">
-                <h3><?php esc_html_e('Display All Books', 'wp-book-catalog'); ?></h3>
+                <h3><?php esc_html_e('Display All Books', 'mm-book-catalog'); ?></h3>
                 <code>[books]</code>
-                <p><?php esc_html_e('Displays all books in the catalog.', 'wp-book-catalog'); ?></p>
-                <p class="description"><?php esc_html_e('[wpbc_books] does exactly the same and is the recommended form when another plugin also registers [books].', 'wp-book-catalog'); ?></p>
+                <p><?php esc_html_e('Displays all books in the catalog.', 'mm-book-catalog'); ?></p>
+                <p class="description"><?php esc_html_e('[wpbc_books] does exactly the same and is the recommended form when another plugin also registers [books].', 'mm-book-catalog'); ?></p>
 
-                <h3><?php esc_html_e('Display Limited Books', 'wp-book-catalog'); ?></h3>
+                <h3><?php esc_html_e('Display Limited Books', 'mm-book-catalog'); ?></h3>
                 <code>[books hitem="3"]</code>
-                <p><?php esc_html_e('Displays 3 books with a "Show All" button at the bottom. Replace 3 with any number.', 'wp-book-catalog'); ?></p>
+                <p><?php esc_html_e('Displays 3 books with a "Show All" button at the bottom. Replace 3 with any number.', 'mm-book-catalog'); ?></p>
 
-                <h3><?php esc_html_e('Available Attributes', 'wp-book-catalog'); ?></h3>
+                <h3><?php esc_html_e('Available Attributes', 'mm-book-catalog'); ?></h3>
                 <ul>
-                    <li><code>hitem</code> - <?php esc_html_e('Number of books to display (shows "Show All" button)', 'wp-book-catalog'); ?></li>
-                    <li><code>columns</code> - <?php esc_html_e('Override default columns (1-5)', 'wp-book-catalog'); ?></li>
-                    <li><code>orderby</code> - <?php esc_html_e('Order by: date, title, year, author, rand, menu_order, modified (default: date)', 'wp-book-catalog'); ?></li>
-                    <li><code>order</code> - <?php esc_html_e('Order direction: ASC, DESC (default: DESC)', 'wp-book-catalog'); ?></li>
-                    <li><code>genre</code> - <?php esc_html_e('Filter by genre slug(s), comma separated', 'wp-book-catalog'); ?></li>
+                    <li><code>hitem</code> - <?php esc_html_e('Number of books to display (shows "Show All" button)', 'mm-book-catalog'); ?></li>
+                    <li><code>columns</code> - <?php esc_html_e('Override default columns (1-5)', 'mm-book-catalog'); ?></li>
+                    <li><code>orderby</code> - <?php esc_html_e('Order by: date, title, year, author, rand, menu_order, modified (default: date)', 'mm-book-catalog'); ?></li>
+                    <li><code>order</code> - <?php esc_html_e('Order direction: ASC, DESC (default: DESC)', 'mm-book-catalog'); ?></li>
+                    <li><code>genre</code> - <?php esc_html_e('Filter by genre slug(s), comma separated', 'mm-book-catalog'); ?></li>
                 </ul>
 
-                <h3><?php esc_html_e('Example with All Attributes', 'wp-book-catalog'); ?></h3>
+                <h3><?php esc_html_e('Example with All Attributes', 'mm-book-catalog'); ?></h3>
                 <code>[books hitem="6" columns="3" orderby="title" order="ASC" genre="fantasy,thriller"]</code>
             </div>
         </div>
@@ -270,28 +270,28 @@ class WPBC_Settings {
      * Render general section description
      */
     public function render_general_section() {
-        echo '<p>' . esc_html__('Configure the default settings for all books.', 'wp-book-catalog') . '</p>';
+        echo '<p>' . esc_html__('Configure the default settings for all books.', 'mm-book-catalog') . '</p>';
     }
 
     /**
      * Render display section description
      */
     public function render_display_section() {
-        echo '<p>' . esc_html__('Configure how books are displayed on the frontend.', 'wp-book-catalog') . '</p>';
+        echo '<p>' . esc_html__('Configure how books are displayed on the frontend.', 'mm-book-catalog') . '</p>';
     }
 
     /**
      * Render ISBN section description
      */
     public function render_isbn_section() {
-        echo '<p>' . esc_html__('Configure the external book databases used to autofill book details from an ISBN.', 'wp-book-catalog') . '</p>';
+        echo '<p>' . esc_html__('Configure the external book databases used to autofill book details from an ISBN.', 'mm-book-catalog') . '</p>';
     }
 
     /**
      * Render advanced section description
      */
     public function render_advanced_section() {
-        echo '<p>' . esc_html__('Advanced options.', 'wp-book-catalog') . '</p>';
+        echo '<p>' . esc_html__('Advanced options.', 'mm-book-catalog') . '</p>';
     }
 
     /**
@@ -301,7 +301,7 @@ class WPBC_Settings {
         $value = self::get_setting('default_author', '');
 
         echo '<input type="text" id="wpbc_default_author" name="' . esc_attr($this->option_name) . '[default_author]" value="' . esc_attr($value) . '" class="regular-text" />';
-        echo '<p class="description">' . esc_html__('If set, this author will be used for all books that don\'t have an author specified.', 'wp-book-catalog') . '</p>';
+        echo '<p class="description">' . esc_html__('If set, this author will be used for all books that don\'t have an author specified.', 'mm-book-catalog') . '</p>';
     }
 
     /**
@@ -311,10 +311,10 @@ class WPBC_Settings {
         $value = self::get_setting('author_gender', 'male');
 
         echo '<select id="wpbc_author_gender" name="' . esc_attr($this->option_name) . '[author_gender]">';
-        echo '<option value="male"' . selected($value, 'male', false) . '>' . esc_html__('Male (Author)', 'wp-book-catalog') . '</option>';
-        echo '<option value="female"' . selected($value, 'female', false) . '>' . esc_html__('Female (Authoress)', 'wp-book-catalog') . '</option>';
+        echo '<option value="male"' . selected($value, 'male', false) . '>' . esc_html__('Male (Author)', 'mm-book-catalog') . '</option>';
+        echo '<option value="female"' . selected($value, 'female', false) . '>' . esc_html__('Female (Authoress)', 'mm-book-catalog') . '</option>';
         echo '</select>';
-        echo '<p class="description">' . esc_html__('Select the gender to display the correct label (Author/Authoress).', 'wp-book-catalog') . '</p>';
+        echo '<p class="description">' . esc_html__('Select the gender to display the correct label (Author/Authoress).', 'mm-book-catalog') . '</p>';
     }
 
     /**
@@ -327,11 +327,11 @@ class WPBC_Settings {
         for ($i = 1; $i <= 5; $i++) {
             echo '<option value="' . esc_attr($i) . '"' . selected($value, $i, false) . '>'
                 /* translators: %d: number of columns */
-                . esc_html(sprintf(_n('%d column', '%d columns', $i, 'wp-book-catalog'), $i))
+                . esc_html(sprintf(_n('%d column', '%d columns', $i, 'mm-book-catalog'), $i))
                 . '</option>';
         }
         echo '</select>';
-        echo '<p class="description">' . esc_html__('Number of columns to display books in. The layout will be responsive.', 'wp-book-catalog') . '</p>';
+        echo '<p class="description">' . esc_html__('Number of columns to display books in. The layout will be responsive.', 'mm-book-catalog') . '</p>';
     }
 
     /**
@@ -341,11 +341,11 @@ class WPBC_Settings {
         $value = self::get_setting('isbn_source', 'both');
 
         echo '<select id="wpbc_isbn_source" name="' . esc_attr($this->option_name) . '[isbn_source]">';
-        echo '<option value="both"' . selected($value, 'both', false) . '>' . esc_html__('Google Books + Open Library (recommended)', 'wp-book-catalog') . '</option>';
-        echo '<option value="google"' . selected($value, 'google', false) . '>' . esc_html__('Google Books only', 'wp-book-catalog') . '</option>';
-        echo '<option value="openlibrary"' . selected($value, 'openlibrary', false) . '>' . esc_html__('Open Library only', 'wp-book-catalog') . '</option>';
+        echo '<option value="both"' . selected($value, 'both', false) . '>' . esc_html__('Google Books + Open Library (recommended)', 'mm-book-catalog') . '</option>';
+        echo '<option value="google"' . selected($value, 'google', false) . '>' . esc_html__('Google Books only', 'mm-book-catalog') . '</option>';
+        echo '<option value="openlibrary"' . selected($value, 'openlibrary', false) . '>' . esc_html__('Open Library only', 'mm-book-catalog') . '</option>';
         echo '</select>';
-        echo '<p class="description">' . esc_html__('Which database to query when autofilling book data from an ISBN. Using both merges the best data from each source.', 'wp-book-catalog') . '</p>';
+        echo '<p class="description">' . esc_html__('Which database to query when autofilling book data from an ISBN. Using both merges the best data from each source.', 'mm-book-catalog') . '</p>';
     }
 
     /**
@@ -357,14 +357,14 @@ class WPBC_Settings {
         // The stored key is never printed back into the page. Submitting the
         // field empty keeps the saved key; see sanitize_settings().
         echo '<input type="password" id="wpbc_google_api_key" name="' . esc_attr($this->option_name) . '[google_api_key]" value="" class="regular-text" autocomplete="off" ';
-        echo 'placeholder="' . esc_attr($has_key ? __('A key is saved. Leave empty to keep it.', 'wp-book-catalog') : __('No key saved', 'wp-book-catalog')) . '" />';
+        echo 'placeholder="' . esc_attr($has_key ? __('A key is saved. Leave empty to keep it.', 'mm-book-catalog') : __('No key saved', 'mm-book-catalog')) . '" />';
 
         if ($has_key) {
             echo ' <label for="wpbc_google_api_key_clear"><input type="checkbox" id="wpbc_google_api_key_clear" name="' . esc_attr($this->option_name) . '[google_api_key_clear]" value="1" /> ';
-            echo esc_html__('Remove the saved key', 'wp-book-catalog') . '</label>';
+            echo esc_html__('Remove the saved key', 'mm-book-catalog') . '</label>';
         }
 
-        echo '<p class="description">' . esc_html__('Optional. Google Books works without a key, but a key raises the request quota. Create one in the Google Cloud Console.', 'wp-book-catalog') . '</p>';
+        echo '<p class="description">' . esc_html__('Optional. Google Books works without a key, but a key raises the request quota. Create one in the Google Cloud Console.', 'mm-book-catalog') . '</p>';
     }
 
     /**
@@ -375,7 +375,7 @@ class WPBC_Settings {
 
         echo '<label for="wpbc_delete_data">';
         echo '<input type="checkbox" id="wpbc_delete_data" name="' . esc_attr($this->option_name) . '[delete_data_on_uninstall]" value="1"' . checked($value, 1, false) . ' /> ';
-        echo esc_html__('Permanently delete all books, genres and settings when the plugin is uninstalled.', 'wp-book-catalog');
+        echo esc_html__('Permanently delete all books, genres and settings when the plugin is uninstalled.', 'mm-book-catalog');
         echo '</label>';
     }
 

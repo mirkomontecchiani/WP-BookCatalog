@@ -2,7 +2,7 @@
 /**
  * Uninstall handler - cleans up plugin data when the plugin is deleted
  *
- * @package WP_Book_Catalog
+ * @package MM_Book_Catalog
  */
 
 // Exit if uninstall is not called from WordPress

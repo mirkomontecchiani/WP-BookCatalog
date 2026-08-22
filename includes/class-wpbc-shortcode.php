@@ -2,7 +2,7 @@
 /**
  * Shortcode functionality for displaying books
  *
- * @package WP_Book_Catalog
+ * @package MM_Book_Catalog
  */
 
 // Prevent direct access
@@ -93,7 +93,7 @@ class WPBC_Shortcode {
         $books = new WP_Query($query_args);
 
         if (!$books->have_posts()) {
-            return '<p class="wpbc-no-books">' . esc_html__('No books found.', 'wp-book-catalog') . '</p>';
+            return '<p class="wpbc-no-books">' . esc_html__('No books found.', 'mm-book-catalog') . '</p>';
         }
 
         // Load every cover attachment in one query instead of one per book.
@@ -144,7 +144,7 @@ class WPBC_Shortcode {
                             data-orderby="<?php echo esc_attr($atts['orderby']); ?>"
                             data-order="<?php echo esc_attr($atts['order']); ?>"
                             data-genre="<?php echo esc_attr($atts['genre']); ?>">
-                        <?php esc_html_e('Show All Books', 'wp-book-catalog'); ?>
+                        <?php esc_html_e('Show All Books', 'mm-book-catalog'); ?>
                     </button>
                 </div>
             <?php endif; ?>
@@ -259,7 +259,7 @@ class WPBC_Shortcode {
 
         // Get author gender from settings
         $author_gender = WPBC_Settings::get_setting('author_gender', 'male');
-        $author_label  = ('female' === $author_gender) ? __('Authoress:', 'wp-book-catalog') : __('Author:', 'wp-book-catalog');
+        $author_label  = ('female' === $author_gender) ? __('Authoress:', 'mm-book-catalog') : __('Author:', 'mm-book-catalog');
 
         /**
          * Filters the label shown before the author name.
@@ -283,7 +283,7 @@ class WPBC_Shortcode {
         $has_link = !empty($shop_link);
 
         /* translators: %s: book title */
-        $link_label = sprintf(__('%s (opens in a new tab)', 'wp-book-catalog'), $title);
+        $link_label = sprintf(__('%s (opens in a new tab)', 'mm-book-catalog'), $title);
         ?>
         <div class="wpbc-book-item">
             <?php if ($has_link) : ?>
@@ -314,35 +314,35 @@ class WPBC_Shortcode {
 
                             <?php if (!empty($meta['publisher'])) : ?>
                                 <p class="wpbc-book-publisher">
-                                    <span class="wpbc-label"><?php esc_html_e('Publisher:', 'wp-book-catalog'); ?></span>
+                                    <span class="wpbc-label"><?php esc_html_e('Publisher:', 'mm-book-catalog'); ?></span>
                                     <?php echo esc_html($meta['publisher']); ?>
                                 </p>
                             <?php endif; ?>
 
                             <?php if (!empty($meta['year'])) : ?>
                                 <p class="wpbc-book-year">
-                                    <span class="wpbc-label"><?php esc_html_e('Year:', 'wp-book-catalog'); ?></span>
+                                    <span class="wpbc-label"><?php esc_html_e('Year:', 'mm-book-catalog'); ?></span>
                                     <?php echo esc_html($meta['year']); ?>
                                 </p>
                             <?php endif; ?>
 
                             <?php if (!empty($meta['pages'])) : ?>
                                 <p class="wpbc-book-pages">
-                                    <span class="wpbc-label"><?php esc_html_e('Pages:', 'wp-book-catalog'); ?></span>
+                                    <span class="wpbc-label"><?php esc_html_e('Pages:', 'mm-book-catalog'); ?></span>
                                     <?php echo esc_html($meta['pages']); ?>
                                 </p>
                             <?php endif; ?>
 
                             <?php if (!empty($genre_names)) : ?>
                                 <p class="wpbc-book-genre">
-                                    <span class="wpbc-label"><?php esc_html_e('Genre:', 'wp-book-catalog'); ?></span>
+                                    <span class="wpbc-label"><?php esc_html_e('Genre:', 'mm-book-catalog'); ?></span>
                                     <?php echo esc_html($genre_names); ?>
                                 </p>
                             <?php endif; ?>
 
                             <?php if (!empty($meta['isbn'])) : ?>
                                 <p class="wpbc-book-isbn">
-                                    <span class="wpbc-label"><?php esc_html_e('ISBN:', 'wp-book-catalog'); ?></span>
+                                    <span class="wpbc-label"><?php esc_html_e('ISBN:', 'mm-book-catalog'); ?></span>
                                     <?php echo esc_html($meta['isbn']); ?>
                                 </p>
                             <?php endif; ?>
@@ -481,7 +481,7 @@ class WPBC_Shortcode {
         $books = new WP_Query($query_args);
 
         if (!$books->have_posts()) {
-            wp_send_json_error(array('message' => __('No books found.', 'wp-book-catalog')));
+            wp_send_json_error(array('message' => __('No books found.', 'mm-book-catalog')));
         }
 
         update_post_thumbnail_cache($books);

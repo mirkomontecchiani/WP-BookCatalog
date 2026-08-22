@@ -1,4 +1,4 @@
-# WP Book Catalog
+# MM Book Catalog
 
 A WordPress plugin to display a book catalog with a custom post type, shortcodes, hover
 effects and ISBN autofill from external book databases.
@@ -44,7 +44,7 @@ Mirko Montecchiani
 ## Installation
 
 1. Download or clone this repository
-2. Copy the plugin files into a folder named `wp-book-catalog` inside `/wp-content/plugins/`
+2. Copy the plugin files into a folder named `mm-book-catalog` inside `/wp-content/plugins/`
    (the folder name must match the text domain)
 3. Activate the plugin through the 'Plugins' menu in WordPress
 
@@ -127,15 +127,15 @@ about you or your visitors is transmitted. See the "External services" section o
 
 ```bash
 # Regenerate the translation template and the Italian catalog
-wp i18n make-pot . languages/wp-book-catalog.pot --slug=wp-book-catalog
-msgmerge --update --backup=none languages/wp-book-catalog-it_IT.po languages/wp-book-catalog.pot
-msgfmt -o languages/wp-book-catalog-it_IT.mo languages/wp-book-catalog-it_IT.po
+wp i18n make-pot . languages/mm-book-catalog.pot --slug=mm-book-catalog
+msgmerge --update --backup=none languages/mm-book-catalog-it_IT.po languages/mm-book-catalog.pot
+msgfmt -o languages/mm-book-catalog-it_IT.mo languages/mm-book-catalog-it_IT.po
 
 # Coding standards
 phpcs --standard=WordPress-Extra --extensions=php .
 
 # Build a release archive with the folder name WordPress.org expects
-git archive --format=zip --prefix=wp-book-catalog/ -o wp-book-catalog.zip HEAD
+git archive --format=zip --prefix=mm-book-catalog/ -o mm-book-catalog.zip HEAD
 ```
 
 ## License
