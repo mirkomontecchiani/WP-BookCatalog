@@ -84,21 +84,8 @@ class WPBC_Plugin {
      * Initialize hooks
      */
     private function init_hooks() {
-        // Since WP 6.7 translations must not be loaded before the 'init' hook.
-        add_action('init', array($this, 'load_textdomain'), 1);
         add_action('wp_enqueue_scripts', array($this, 'register_frontend_assets'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_assets'));
-    }
-
-    /**
-     * Load plugin text domain
-     */
-    public function load_textdomain() {
-        load_plugin_textdomain(
-            'mm-book-catalog',
-            false,
-            dirname(WPBC_PLUGIN_BASENAME) . '/languages'
-        );
     }
 
     /**
