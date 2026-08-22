@@ -100,17 +100,17 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* Settings page */
-.wrap h1 {
+/* Settings page (scoped: these rules must not touch other admin screens) */
+.wpbc-settings-page h1 {
     margin-bottom: 20px;
 }
 
-.form-table th {
+.wpbc-settings-page .form-table th {
     width: 200px;
     padding: 20px 10px 20px 0;
 }
 
-.form-table td {
+.wpbc-settings-page .form-table td {
     padding: 15px 10px;
 }
 

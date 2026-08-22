@@ -73,8 +73,12 @@ a.wpbc-book-link:hover {
     overflow: hidden;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-    cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Only cards that link somewhere get the hand cursor. */
+a.wpbc-book-link .wpbc-book-cover {
+    cursor: pointer;
 }
 
 .wpbc-book-cover:hover {
@@ -106,16 +110,16 @@ a.wpbc-book-link:hover {
     align-items: flex-end;
     padding: 20px !important;
     box-sizing: border-box;
+    /* Only the opacity is animated: visibility:hidden would also remove the book
+       details from the accessibility tree, hiding them from screen readers. */
     opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition: opacity 0.3s ease;
 }
 
 .wpbc-book-cover:hover .wpbc-book-overlay,
 .wpbc-book-link:focus-within .wpbc-book-overlay,
 .wpbc-book-overlay.wpbc-visible {
     opacity: 1;
-    visibility: visible;
 }
 
 /* Book Info */
@@ -172,6 +176,7 @@ a.wpbc-book-link:hover {
     color: rgba(255, 255, 255, 0.85);
     display: -webkit-box;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
@@ -246,20 +251,20 @@ a.wpbc-book-link:hover {
 }
 
 /* Responsive Design */
-@media (max-width: 1200px) {
+@media screen and (max-width: 1200px) {
     .wpbc-columns-5 {
         grid-template-columns: repeat(4, 1fr);
     }
 }
 
-@media (max-width: 992px) {
+@media screen and (max-width: 992px) {
     .wpbc-columns-4,
     .wpbc-columns-5 {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .wpbc-columns-3,
     .wpbc-columns-4,
     .wpbc-columns-5 {
@@ -284,7 +289,7 @@ a.wpbc-book-link:hover {
     }
 }
 
-@media (max-width: 480px) {
+@media screen and (max-width: 480px) {
     .wpbc-container {
         padding: 10px;
     }
@@ -317,7 +322,7 @@ a.wpbc-book-link:hover {
 }
 
 /* Touch devices - lighter gradient, info revealed by tap */
-@media (hover: none) {
+@media screen and (hover: none) {
     .wpbc-book-overlay {
         background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
     }
@@ -329,6 +334,7 @@ a.wpbc-book-link:hover {
 
 /* Animation for new items loaded via AJAX */
 .wpbc-book-item.wpbc-fade-in {
+    opacity: 0;
     animation: wpbc-fadeIn 0.5s ease forwards;
 }
 
@@ -352,6 +358,11 @@ a.wpbc-book-link:hover {
     .wpbc-book-item.wpbc-fade-in {
         transition: none;
         animation: none;
+    }
+
+    /* No animation means nothing would ever raise the opacity again. */
+    .wpbc-book-item.wpbc-fade-in {
+        opacity: 1;
     }
 }
 
@@ -384,7 +395,6 @@ a.wpbc-book-link:hover {
     .wpbc-book-overlay {
         position: static;
         opacity: 1 !important;
-        visibility: visible !important;
         background: none;
         padding: 5px 0 !important;
         display: block;
@@ -410,7 +420,27 @@ a.wpbc-book-link:hover {
         color: #333;
     }
 
+    .wpbc-book-description {
+        display: block;
+        -webkit-line-clamp: none;
+        line-clamp: none;
+        overflow: visible;
+    }
+
     .wpbc-separator {
         border-top-color: #ccc;
     }
+}
+
+/* Screen-reader-only status region for the "Show All Books" announcement */
+.wpbc-status {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }

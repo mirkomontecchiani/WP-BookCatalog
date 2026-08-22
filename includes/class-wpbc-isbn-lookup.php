@@ -86,12 +86,15 @@ class WPBC_ISBN_Lookup {
         $post_id = isset($_POST['post_id']) ? absint($_POST['post_id']) : 0;
         $url     = isset($_POST['url']) ? esc_url_raw(wp_unslash($_POST['url'])) : '';
 
-        if (!$post_id || 'book' !== get_post_type($post_id) || !current_user_can('edit_post', $post_id)) {
+        // The cover is stored in the Media Library, so uploading must be allowed
+        // too: 'edit_post' alone is satisfied by a Contributor on their own draft.
+        if (!$post_id || 'book' !== get_post_type($post_id)
+            || !current_user_can('edit_post', $post_id)
+            || !current_user_can('upload_files')) {
             wp_send_json_error(array('message' => __('You are not allowed to do this.', 'wp-book-catalog')), 403);
         }
 
-        $host = wp_parse_url($url, PHP_URL_HOST);
-        if (!$url || !in_array($host, self::$allowed_cover_hosts, true)) {
+        if (!self::is_allowed_cover_url($url)) {
             wp_send_json_error(array('message' => __('Cover URL is not from an allowed source.', 'wp-book-catalog')), 400);
         }
 
@@ -99,7 +102,7 @@ class WPBC_ISBN_Lookup {
         require_once ABSPATH . 'wp-admin/includes/file.php';
         require_once ABSPATH . 'wp-admin/includes/image.php';
 
-        $attachment_id = media_sideload_image($url, $post_id, get_the_title($post_id), 'id');
+        $attachment_id = self::sideload_cover($url, $post_id);
 
         if (is_wp_error($attachment_id)) {
             wp_send_json_error(array('message' => $attachment_id->get_error_message()), 500);
@@ -112,6 +115,92 @@ class WPBC_ISBN_Lookup {
             'thumbnail_url' => wp_get_attachment_image_url($attachment_id, 'medium'),
             'message'       => __('Cover imported and set as featured image.', 'wp-book-catalog'),
         ));
+    }
+
+    /**
+     * Whether a cover URL points at one of the allowed cover hosts
+     *
+     * @param string $url Cover URL.
+     * @return bool
+     */
+    public static function is_allowed_cover_url($url) {
+        if (empty($url)) {
+            return false;
+        }
+
+        $host = wp_parse_url($url, PHP_URL_HOST);
+
+        if (!is_string($host) || '' === $host) {
+            return false;
+        }
+
+        /**
+         * Filters the hosts a book cover may be downloaded from.
+         *
+         * @since 1.2.0
+         *
+         * @param string[] $hosts Allowed host names.
+         */
+        $allowed = apply_filters('wpbc_allowed_cover_hosts', self::$allowed_cover_hosts);
+        $allowed = array_map('strtolower', array_map('strval', (array) $allowed));
+
+        return in_array(strtolower($host), $allowed, true);
+    }
+
+    /**
+     * Download a cover image and attach it to the book
+     *
+     * media_sideload_image() cannot be used here: it requires the URL itself to
+     * end with an image extension, while Google Books serves its covers from
+     * extension-less endpoints such as /books/content?id=…. The file type is
+     * therefore taken from the downloaded bytes instead of from the URL.
+     *
+     * @param string $url     Cover URL (already validated against the host allowlist).
+     * @param int    $post_id Book post ID.
+     * @return int|WP_Error Attachment ID or error.
+     */
+    private static function sideload_cover($url, $post_id) {
+        // download_url() uses wp_safe_remote_get(), which rejects private and
+        // loopback addresses, including on redirects.
+        $tmp_file = download_url($url, 30);
+
+        if (is_wp_error($tmp_file)) {
+            return $tmp_file;
+        }
+
+        $image_size = wp_getimagesize($tmp_file);
+        $mime       = (is_array($image_size) && !empty($image_size['mime'])) ? $image_size['mime'] : '';
+
+        $extensions = array(
+            'image/jpeg' => 'jpg',
+            'image/png'  => 'png',
+            'image/gif'  => 'gif',
+            'image/webp' => 'webp',
+        );
+
+        if (!isset($extensions[$mime])) {
+            wp_delete_file($tmp_file);
+            return new WP_Error(
+                'wpbc_invalid_cover',
+                __('The downloaded file is not a supported image.', 'wp-book-catalog')
+            );
+        }
+
+        $isbn      = get_post_meta($post_id, 'wpbc_isbn', true);
+        $base_name = $isbn ? $isbn : 'book-' . $post_id;
+
+        $file_array = array(
+            'name'     => sanitize_file_name($base_name . '-cover.' . $extensions[$mime]),
+            'tmp_name' => $tmp_file,
+        );
+
+        $attachment_id = media_handle_sideload($file_array, $post_id, get_the_title($post_id));
+
+        if (is_wp_error($attachment_id)) {
+            wp_delete_file($tmp_file);
+        }
+
+        return $attachment_id;
     }
 
     /**
@@ -163,6 +252,16 @@ class WPBC_ISBN_Lookup {
         $data = self::merge_results($google, $open_library);
         $data['isbn'] = $isbn;
 
+        /**
+         * Filters the normalized book record returned by an ISBN lookup.
+         *
+         * @since 1.2.0
+         *
+         * @param array  $data Normalized record.
+         * @param string $isbn Normalized ISBN that was looked up.
+         */
+        $data = apply_filters('wpbc_lookup_data', $data, $isbn);
+
         // Cache also negative results, but for a shorter time.
         $ttl = !empty($data['found']) ? 12 * HOUR_IN_SECONDS : HOUR_IN_SECONDS;
         set_transient($cache_key, $data, $ttl);
@@ -200,11 +299,14 @@ class WPBC_ISBN_Lookup {
         };
 
         // Prefer the Open Library cover (higher resolution scans), fall back to Google.
+        // Only covers served by an allowed host are kept, so the URL handed back
+        // to the browser is always one the import endpoint would accept.
         $cover = '';
-        if (!empty($open_library['cover'])) {
-            $cover = $open_library['cover'];
-        } elseif (!empty($google['cover'])) {
-            $cover = $google['cover'];
+        foreach (array($open_library, $google) as $candidate) {
+            if (!empty($candidate['cover']) && self::is_allowed_cover_url($candidate['cover'])) {
+                $cover = $candidate['cover'];
+                break;
+            }
         }
 
         return array(
@@ -249,6 +351,26 @@ class WPBC_ISBN_Lookup {
     }
 
     /**
+     * Turn an HTML description from a remote catalog into plain text
+     *
+     * Line breaks and paragraph ends become newlines first, so that stripping
+     * the tags does not run the surrounding sentences together.
+     *
+     * @param string $html Raw description.
+     * @return string
+     */
+    public static function normalize_description($html) {
+        $text = preg_replace('#<br\s*/?>#i', "\n", (string) $html);
+        $text = preg_replace('#</?(p|div|li|ul|ol|h[1-6])(\s[^>]*)?>#i', "\n\n", $text);
+        $text = sanitize_textarea_field($text);
+        $text = preg_replace("#\n{3,}#", "\n\n", $text);
+
+        // sanitize_textarea_field() strips the tags but leaves the entities, so
+        // they are decoded once here and never escaped twice downstream.
+        return trim(wp_specialchars_decode($text, ENT_QUOTES));
+    }
+
+    /**
      * Normalize a Google Books volumeInfo structure
      *
      * @param array $info volumeInfo array.
@@ -265,7 +387,7 @@ class WPBC_ISBN_Lookup {
             // Prefer larger sizes when available.
             foreach (array('extraLarge', 'large', 'medium', 'small', 'thumbnail', 'smallThumbnail') as $size) {
                 if (!empty($info['imageLinks'][$size])) {
-                    $cover = set_url_scheme($info['imageLinks'][$size], 'https');
+                    $cover = esc_url_raw(set_url_scheme($info['imageLinks'][$size], 'https'));
                     break;
                 }
             }
@@ -276,7 +398,7 @@ class WPBC_ISBN_Lookup {
             'authors'     => !empty($info['authors']) && is_array($info['authors']) ? sanitize_text_field(implode(', ', $info['authors'])) : '',
             'publisher'   => isset($info['publisher']) ? sanitize_text_field($info['publisher']) : '',
             'year'        => $year,
-            'description' => isset($info['description']) ? sanitize_textarea_field($info['description']) : '',
+            'description' => isset($info['description']) ? self::normalize_description($info['description']) : '',
             'pages'       => !empty($info['pageCount']) ? absint($info['pageCount']) : '',
             'language'    => isset($info['language']) ? sanitize_text_field($info['language']) : '',
             'cover'       => $cover,
@@ -339,7 +461,7 @@ class WPBC_ISBN_Lookup {
         if (!empty($record['cover'])) {
             foreach (array('large', 'medium', 'small') as $size) {
                 if (!empty($record['cover'][$size])) {
-                    $cover = set_url_scheme($record['cover'][$size], 'https');
+                    $cover = esc_url_raw(set_url_scheme($record['cover'][$size], 'https'));
                     break;
                 }
             }
@@ -348,7 +470,7 @@ class WPBC_ISBN_Lookup {
         // The "data" endpoint may include excerpts; use the first one as a description fallback.
         $description = '';
         if (!empty($record['excerpts'][0]['text'])) {
-            $description = sanitize_textarea_field($record['excerpts'][0]['text']);
+            $description = self::normalize_description($record['excerpts'][0]['text']);
         }
 
         return array(
@@ -370,11 +492,15 @@ class WPBC_ISBN_Lookup {
      * @return array|null Decoded body or null on failure.
      */
     private static function remote_get_json($url) {
+        // The User-Agent deliberately carries no site URL: nothing that identifies
+        // this site is sent to the external services (see readme.txt).
+        // The timeout is kept short because with the "both" data source two of
+        // these run back to back inside one admin request.
         $response = wp_remote_get(
             $url,
             array(
-                'timeout'    => 15,
-                'user-agent' => 'WP-Book-Catalog/' . WPBC_VERSION . '; ' . home_url('/'),
+                'timeout'    => 8,
+                'user-agent' => 'WP-Book-Catalog/' . WPBC_VERSION,
             )
         );
 

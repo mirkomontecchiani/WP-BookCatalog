@@ -1,0 +1,14 @@
+# Files and folders that must not end up in the WordPress.org package.
+.git
+.github
+.gitignore
+.distignore
+.editorconfig
+README.md
+composer.json
+composer.lock
+phpcs.xml
+phpcs.xml.dist
+node_modules
+vendor
+tests

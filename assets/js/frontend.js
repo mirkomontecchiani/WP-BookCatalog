@@ -26,6 +26,10 @@
             var instanceId = $button.data('instance');
             var $container = $('#' + instanceId);
             var $grid = $container.find('.wpbc-grid');
+            var $status = $container.find('.wpbc-status');
+            // Remember how many books were already on screen, so focus can be
+            // moved to the first genuinely new one.
+            var alreadyShown = $grid.find('.wpbc-book-item').length;
 
             // Prevent multiple clicks
             if ($button.hasClass('loading')) {
@@ -43,36 +47,48 @@
                 type: 'POST',
                 data: {
                     action: 'wpbc_load_all_books',
-                    nonce: wpbc_ajax.nonce,
                     orderby: $button.data('orderby'),
                     order: $button.data('order'),
                     genre: $button.data('genre')
                 },
                 success: function(response) {
-                    if (response.success) {
+                    if (response && response.success && response.data && response.data.html) {
                         // Replace grid content with all books
                         $grid.html(response.data.html).attr('aria-busy', 'false');
 
-                        // Add fade-in animation to new items
-                        $grid.find('.wpbc-book-item').each(function(index) {
-                            var $item = $(this);
-                            setTimeout(function() {
-                                $item.addClass('wpbc-fade-in');
-                            }, index * 50);
+                        // Keep the JSON-LD in step with what is now on the page
+                        if (response.data.schema && $container.length) {
+                            $container.find('script[type="application/ld+json"]').remove();
+                            // insertAdjacentHTML keeps the <script type="application/ld+json">
+                            // element intact, which jQuery's .append() is not guaranteed to do.
+                            $container[0].insertAdjacentHTML('beforeend', response.data.schema);
+                        }
+
+                        // Stagger the fade-in with a CSS animation delay. The class
+                        // is added before the browser paints, so the cards never
+                        // flash at full opacity first.
+                        var $items = $grid.find('.wpbc-book-item');
+                        $items.each(function(index) {
+                            this.style.animationDelay = (Math.min(index, 20) * 50) + 'ms';
+                            this.className += ' wpbc-fade-in';
                         });
 
-                        // Move keyboard focus to the first newly revealed book.
+                        // Announce the result in a small status region instead of
+                        // making the whole grid a live region.
+                        $status.text((window.wpbc_ajax && wpbc_ajax.loaded_text) || '');
+
+                        // Move keyboard focus to the first genuinely new book.
                         // Both <a> and <div tabindex="0"> cards are already focusable,
                         // so focus without overriding tabindex (which would drop the
                         // element from the Tab order).
-                        $grid.find('.wpbc-book-link').first().trigger('focus');
+                        $items.eq(alreadyShown).find('.wpbc-book-link').trigger('focus');
 
                         // Remove the button wrapper
                         $button.closest('.wpbc-show-all-wrapper').fadeOut(300, function() {
                             $(this).remove();
                         });
                     } else {
-                        showLoadError($button);
+                        showLoadError($button, response && response.data && response.data.message);
                     }
                 },
                 error: function() {
@@ -84,12 +100,15 @@
 
     /**
      * Show an error message under the Show All button and reset it
+     *
+     * @param {jQuery} $button  The button that was clicked.
+     * @param {string} [message] Message returned by the server, when there is one.
      */
-    function showLoadError($button) {
+    function showLoadError($button, message) {
         $button.removeClass('loading').prop('disabled', false);
         $button.closest('.wpbc-container').find('.wpbc-grid').attr('aria-busy', 'false');
         $('<p class="wpbc-load-error" role="alert"></p>')
-            .text((window.wpbc_ajax && wpbc_ajax.error_text) || 'Error loading books.')
+            .text(message || (window.wpbc_ajax && wpbc_ajax.error_text) || 'Error loading books.')
             .insertAfter($button);
     }
 
