@@ -42,7 +42,7 @@ featured image with one click.
 * Schema.org `Book` JSON-LD structured data for SEO
 * Admin list columns for cover, author, year and ISBN, sortable by author and year
 * Settings page: default author, author label, columns, ISBN data source, uninstall cleanup
-* Fully translatable, Italian translation included
+* Available in English, French, Spanish and Italian, and fully translatable into any language
 * Assets are only loaded on the pages that actually use the shortcode
 
 = External services =
@@ -144,9 +144,14 @@ deleting the plugin.
 A single request renders at most 500 books, so a very large catalog cannot exhaust the PHP
 memory limit. Developers can raise the limit with the `wpbc_max_books_per_request` filter.
 
-= Is the plugin translatable? =
+= Which languages is the plugin available in? =
 
-Yes. It is fully internationalised and ships with an Italian translation.
+English (the original), French, Spanish and Italian. The plugin switches automatically
+to your site's language, with no configuration.
+
+It is fully internationalised, so any other language can be added: the translation
+template is included as `languages/mm-book-catalog.pot`, and translations can also be
+contributed at https://translate.wordpress.org/projects/wp-plugins/mm-book-catalog/.
 
 == Changelog ==
 
@@ -183,6 +188,9 @@ Yes. It is fully internationalised and ships with an Italian translation.
 * Added: readme.txt, a bundled copy of the GPLv2 licence and a `.distignore`.
 * Improved: the JSON-LD block is refreshed when "Show All Books" expands the catalog, and
   the books admin list now shows the default author like the front end does.
+* Added: French and Spanish translations, alongside the existing Italian one.
+* Removed: the manual `load_plugin_textdomain()` call, which WordPress has not needed
+  since 4.6. The bundled catalogues still load, from the `Domain Path` header.
 
 = 1.1.0 =
 * Added ISBN autofill from Google Books and Open Library, with cover import.
