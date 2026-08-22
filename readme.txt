@@ -1,4 +1,4 @@
-=== WP Book Catalog ===
+=== MM Book Catalog ===
 Contributors: mirkomontecchiani
 Tags: books, book catalog, isbn, library, bookshelf
 Requires at least: 5.8
@@ -12,7 +12,7 @@ Build a book catalog with a Book post type, genres, a responsive shortcode grid 
 
 == Description ==
 
-WP Book Catalog adds a dedicated **Book** content type to WordPress and displays your books
+MM Book Catalog adds a dedicated **Book** content type to WordPress and displays your books
 anywhere on your site with the `[books]` shortcode: a responsive 1–5 column grid of covers
 with an overlay that reveals the book details on hover, on focus or on tap.
 
@@ -58,7 +58,7 @@ transmitted.
 What is sent, and when: the ISBN you typed, each time you click "Autofill from ISBN" (unless
 you disabled this source in the settings). If you entered an optional Google Books API key in
 the plugin settings, that key is sent with the request too. Every request also carries a
-`User-Agent` header identifying the plugin and its version (`WP-Book-Catalog/1.2.0`); your
+`User-Agent` header identifying the plugin and its version (`MM-Book-Catalog/1.2.0`); your
 site URL is not sent.
 If you then click "Use as cover", the cover image file is downloaded from
 `books.google.com` or `books.googleusercontent.com` and stored permanently in your site's
@@ -70,7 +70,7 @@ Privacy Policy: https://policies.google.com/privacy
 **Open Library API (Internet Archive)** — endpoint: `https://openlibrary.org/api/books`
 What is sent, and when: the ISBN you typed, each time you click "Autofill from ISBN" (unless
 you disabled this source in the settings). Every request also carries a `User-Agent` header
-identifying the plugin and its version (`WP-Book-Catalog/1.2.0`); your site URL is not sent.
+identifying the plugin and its version (`MM-Book-Catalog/1.2.0`); your site URL is not sent.
 If you then click "Use as cover", the cover image file is downloaded from
 `covers.openlibrary.org` and stored permanently in your site's Media Library.
 Terms of Use: https://archive.org/about/terms.php
@@ -85,7 +85,7 @@ You can choose which of the two services is used — or use only one of them —
 
 == Installation ==
 
-1. Upload the `wp-book-catalog` folder to `/wp-content/plugins/`, or install the plugin
+1. Upload the `mm-book-catalog` folder to `/wp-content/plugins/`, or install the plugin
    through the **Plugins → Add New** screen in WordPress.
 2. Activate the plugin through the **Plugins** menu.
 3. Go to **Book Catalog → Add New Book** to create your first book.

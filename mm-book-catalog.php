@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: WP Book Catalog
+ * Plugin Name: MM Book Catalog
  * Plugin URI: https://github.com/mirkomontecchiani/WP-BookCatalog
  * Description: Book catalog with a Book post type, genres, a responsive shortcode grid and one-click ISBN autofill from Google Books and Open Library.
  * Version: 1.2.0
@@ -8,19 +8,19 @@
  * Author URI: https://github.com/mirkomontecchiani
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: wp-book-catalog
+ * Text Domain: mm-book-catalog
  * Domain Path: /languages
  * Requires at least: 5.8
  * Requires PHP: 7.2
  *
- * @package WP_Book_Catalog
+ * @package MM_Book_Catalog
  *
- * WP Book Catalog is free software: you can redistribute it and/or modify it
+ * MM Book Catalog is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
  * Software Foundation, either version 2 of the License, or (at your option)
  * any later version.
  *
- * WP Book Catalog is distributed in the hope that it will be useful, but
+ * MM Book Catalog is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
@@ -95,7 +95,7 @@ class WPBC_Plugin {
      */
     public function load_textdomain() {
         load_plugin_textdomain(
-            'wp-book-catalog',
+            'mm-book-catalog',
             false,
             dirname(WPBC_PLUGIN_BASENAME) . '/languages'
         );
@@ -129,8 +129,8 @@ class WPBC_Plugin {
         // the button for anonymous visitors. See WPBC_Shortcode::ajax_load_all_books().
         wp_localize_script('wpbc-frontend', 'wpbc_ajax', array(
             'ajax_url'    => admin_url('admin-ajax.php'),
-            'error_text'  => __('Could not load the books. Please try again.', 'wp-book-catalog'),
-            'loaded_text' => __('All books are now shown.', 'wp-book-catalog'),
+            'error_text'  => __('Could not load the books. Please try again.', 'mm-book-catalog'),
+            'loaded_text' => __('All books are now shown.', 'mm-book-catalog'),
         ));
 
         // Enqueue here when the shortcode can be found in the content, so the
@@ -199,27 +199,27 @@ class WPBC_Plugin {
                 'ajax_url' => admin_url('admin-ajax.php'),
                 'nonce'    => wp_create_nonce('wpbc_admin_nonce'),
                 'strings'  => array(
-                    'enter_isbn'     => __('Please enter an ISBN first.', 'wp-book-catalog'),
-                    'lookup_failed'  => __('Lookup failed. Please try again.', 'wp-book-catalog'),
-                    'import_failed'  => __('Cover import failed. Please try again.', 'wp-book-catalog'),
-                    'importing'      => __('Importing…', 'wp-book-catalog'),
-                    'use_as_cover'   => __('Use as cover', 'wp-book-catalog'),
-                    'cover_imported' => __('Cover imported.', 'wp-book-catalog'),
+                    'enter_isbn'     => __('Please enter an ISBN first.', 'mm-book-catalog'),
+                    'lookup_failed'  => __('Lookup failed. Please try again.', 'mm-book-catalog'),
+                    'import_failed'  => __('Cover import failed. Please try again.', 'mm-book-catalog'),
+                    'importing'      => __('Importing…', 'mm-book-catalog'),
+                    'use_as_cover'   => __('Use as cover', 'mm-book-catalog'),
+                    'cover_imported' => __('Cover imported.', 'mm-book-catalog'),
                     /* translators: %s: comma separated list of field names */
-                    'filled_fields'  => __('Fields filled: %s', 'wp-book-catalog'),
-                    'nothing_filled' => __('No empty fields to fill. Existing values were kept.', 'wp-book-catalog'),
+                    'filled_fields'  => __('Fields filled: %s', 'mm-book-catalog'),
+                    'nothing_filled' => __('No empty fields to fill. Existing values were kept.', 'mm-book-catalog'),
                     /* translators: %s: comma separated list of data sources, e.g. "Google Books, Open Library" */
-                    'source'         => __('Source: %s', 'wp-book-catalog'),
+                    'source'         => __('Source: %s', 'mm-book-catalog'),
                     /* translators: separator between the field names listed in the "Fields filled" notice */
-                    'separator'      => _x(', ', 'list item separator', 'wp-book-catalog'),
+                    'separator'      => _x(', ', 'list item separator', 'mm-book-catalog'),
                     'fields'         => array(
-                        'author'      => _x('author', 'book field name', 'wp-book-catalog'),
-                        'publisher'   => _x('publisher', 'book field name', 'wp-book-catalog'),
-                        'year'        => _x('year', 'book field name', 'wp-book-catalog'),
-                        'pages'       => _x('pages', 'book field name', 'wp-book-catalog'),
-                        'language'    => _x('language', 'book field name', 'wp-book-catalog'),
-                        'title'       => _x('title', 'book field name', 'wp-book-catalog'),
-                        'description' => _x('description', 'book field name', 'wp-book-catalog'),
+                        'author'      => _x('author', 'book field name', 'mm-book-catalog'),
+                        'publisher'   => _x('publisher', 'book field name', 'mm-book-catalog'),
+                        'year'        => _x('year', 'book field name', 'mm-book-catalog'),
+                        'pages'       => _x('pages', 'book field name', 'mm-book-catalog'),
+                        'language'    => _x('language', 'book field name', 'mm-book-catalog'),
+                        'title'       => _x('title', 'book field name', 'mm-book-catalog'),
+                        'description' => _x('description', 'book field name', 'mm-book-catalog'),
                     ),
                 ),
             ));

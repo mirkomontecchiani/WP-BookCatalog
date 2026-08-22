@@ -3,9 +3,9 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Book Catalog 1.2.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-book-catalog\n"
-"POT-Creation-Date: 2026-08-22T12:58:49+00:00\n"
+"Project-Id-Version: MM Book Catalog 1.2.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/mm-book-catalog\n"
+"POT-Creation-Date: 2026-08-22T14:20:47+00:00\n"
 "PO-Revision-Date: 2026-08-22 13:00+0000\n"
 "Last-Translator: Mirko Montecchiani\n"
 "Language-Team: Italian\n"
@@ -14,20 +14,20 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Domain: wp-book-catalog\n"
+"X-Domain: mm-book-catalog\n"
 
 #. Plugin Name of the plugin
-#: wp-book-catalog.php
-msgid "WP Book Catalog"
+#: mm-book-catalog.php
+msgid "MM Book Catalog"
 msgstr ""
 
 #. Plugin URI of the plugin
-#: wp-book-catalog.php
+#: mm-book-catalog.php
 msgid "https://github.com/mirkomontecchiani/WP-BookCatalog"
 msgstr ""
 
 #. Description of the plugin
-#: wp-book-catalog.php
+#: mm-book-catalog.php
 msgid ""
 "Book catalog with a Book post type, genres, a responsive shortcode grid and "
 "one-click ISBN autofill from Google Books and Open Library."
@@ -37,12 +37,12 @@ msgstr ""
 "tramite Google Books e Open Library."
 
 #. Author of the plugin
-#: wp-book-catalog.php
+#: mm-book-catalog.php
 msgid "Mirko Montecchiani"
 msgstr ""
 
 #. Author URI of the plugin
-#: wp-book-catalog.php
+#: mm-book-catalog.php
 msgid "https://github.com/mirkomontecchiani"
 msgstr ""
 
@@ -205,7 +205,7 @@ msgid "Parent Books:"
 msgstr "Libri genitore:"
 
 #: includes/class-wpbc-post-type.php:64 includes/class-wpbc-shortcode.php:96
-#: includes/class-wpbc-shortcode.php:462
+#: includes/class-wpbc-shortcode.php:484
 msgid "No books found."
 msgstr "Nessun libro trovato."
 
@@ -538,130 +538,130 @@ msgstr ""
 "Elimina definitivamente tutti i libri, i generi e le impostazioni quando il "
 "plugin viene disinstallato."
 
-#: includes/class-wpbc-shortcode.php:130
+#: includes/class-wpbc-shortcode.php:147
 msgid "Show All Books"
 msgstr "Mostra tutti i libri"
 
-#: includes/class-wpbc-shortcode.php:242
+#: includes/class-wpbc-shortcode.php:262
 msgid "Authoress:"
 msgstr "Autrice:"
 
-#: includes/class-wpbc-shortcode.php:242
+#: includes/class-wpbc-shortcode.php:262
 msgid "Author:"
 msgstr "Autore:"
 
 #. translators: %s: book title
-#: includes/class-wpbc-shortcode.php:266
+#: includes/class-wpbc-shortcode.php:286
 #, php-format
 msgid "%s (opens in a new tab)"
 msgstr "%s (si apre in una nuova scheda)"
 
-#: includes/class-wpbc-shortcode.php:297
+#: includes/class-wpbc-shortcode.php:317
 msgid "Publisher:"
 msgstr "Editore:"
 
-#: includes/class-wpbc-shortcode.php:304
+#: includes/class-wpbc-shortcode.php:324
 msgid "Year:"
 msgstr "Anno:"
 
-#: includes/class-wpbc-shortcode.php:311
+#: includes/class-wpbc-shortcode.php:331
 msgid "Pages:"
 msgstr "Pagine:"
 
-#: includes/class-wpbc-shortcode.php:318
+#: includes/class-wpbc-shortcode.php:338
 msgid "Genre:"
 msgstr "Genere:"
 
-#: includes/class-wpbc-shortcode.php:325
+#: includes/class-wpbc-shortcode.php:345
 msgid "ISBN:"
 msgstr "ISBN:"
 
-#: wp-book-catalog.php:132
+#: mm-book-catalog.php:132
 msgid "Could not load the books. Please try again."
 msgstr "Impossibile caricare i libri. Riprova."
 
-#: wp-book-catalog.php:133
+#: mm-book-catalog.php:133
 msgid "All books are now shown."
 msgstr "Ora sono mostrati tutti i libri."
 
-#: wp-book-catalog.php:202
+#: mm-book-catalog.php:202
 msgid "Please enter an ISBN first."
 msgstr "Inserisci prima un ISBN."
 
-#: wp-book-catalog.php:203
+#: mm-book-catalog.php:203
 msgid "Lookup failed. Please try again."
 msgstr "Ricerca non riuscita. Riprova."
 
-#: wp-book-catalog.php:204
+#: mm-book-catalog.php:204
 msgid "Cover import failed. Please try again."
 msgstr "Importazione della copertina non riuscita. Riprova."
 
-#: wp-book-catalog.php:205
+#: mm-book-catalog.php:205
 msgid "Importing…"
 msgstr "Importazione…"
 
-#: wp-book-catalog.php:206
+#: mm-book-catalog.php:206
 msgid "Use as cover"
 msgstr "Usa come copertina"
 
-#: wp-book-catalog.php:207
+#: mm-book-catalog.php:207
 msgid "Cover imported."
 msgstr "Copertina importata."
 
 #. translators: %s: comma separated list of field names
-#: wp-book-catalog.php:209
+#: mm-book-catalog.php:209
 #, php-format
 msgid "Fields filled: %s"
 msgstr "Campi compilati: %s"
 
-#: wp-book-catalog.php:210
+#: mm-book-catalog.php:210
 msgid "No empty fields to fill. Existing values were kept."
 msgstr ""
 "Nessun campo vuoto da compilare. I valori esistenti sono stati mantenuti."
 
 #. translators: %s: comma separated list of data sources, e.g. "Google Books, Open Library"
-#: wp-book-catalog.php:212
+#: mm-book-catalog.php:212
 #, php-format
 msgid "Source: %s"
 msgstr "Fonte: %s"
 
 #. translators: separator between the field names listed in the "Fields filled" notice
-#: wp-book-catalog.php:214
+#: mm-book-catalog.php:214
 msgctxt "list item separator"
 msgid ", "
 msgstr ", "
 
-#: wp-book-catalog.php:216
+#: mm-book-catalog.php:216
 msgctxt "book field name"
 msgid "author"
 msgstr "autore"
 
-#: wp-book-catalog.php:217
+#: mm-book-catalog.php:217
 msgctxt "book field name"
 msgid "publisher"
 msgstr "editore"
 
-#: wp-book-catalog.php:218
+#: mm-book-catalog.php:218
 msgctxt "book field name"
 msgid "year"
 msgstr "anno"
 
-#: wp-book-catalog.php:219
+#: mm-book-catalog.php:219
 msgctxt "book field name"
 msgid "pages"
 msgstr "pagine"
 
-#: wp-book-catalog.php:220
+#: mm-book-catalog.php:220
 msgctxt "book field name"
 msgid "language"
 msgstr "lingua"
 
-#: wp-book-catalog.php:221
+#: mm-book-catalog.php:221
 msgctxt "book field name"
 msgid "title"
 msgstr "titolo"
 
-#: wp-book-catalog.php:222
+#: mm-book-catalog.php:222
 msgctxt "book field name"
 msgid "description"
 msgstr "descrizione"

@@ -2,7 +2,7 @@
 /**
  * Meta Boxes for Book custom fields
  *
- * @package WP_Book_Catalog
+ * @package MM_Book_Catalog
  */
 
 // Prevent direct access
@@ -53,43 +53,43 @@ class WPBC_Meta_Boxes {
 
         $this->meta_fields = array(
             'wpbc_isbn' => array(
-                'label'       => __('ISBN', 'wp-book-catalog'),
+                'label'       => __('ISBN', 'mm-book-catalog'),
                 'type'        => 'isbn',
-                'placeholder' => __('Enter ISBN (10 or 13 digits)', 'wp-book-catalog'),
+                'placeholder' => __('Enter ISBN (10 or 13 digits)', 'mm-book-catalog'),
             ),
             'wpbc_author' => array(
-                'label'       => __('Author', 'wp-book-catalog'),
+                'label'       => __('Author', 'mm-book-catalog'),
                 'type'        => 'text',
-                'placeholder' => __('Enter book author', 'wp-book-catalog'),
+                'placeholder' => __('Enter book author', 'mm-book-catalog'),
             ),
             'wpbc_publisher' => array(
-                'label'       => __('Publisher', 'wp-book-catalog'),
+                'label'       => __('Publisher', 'mm-book-catalog'),
                 'type'        => 'text',
-                'placeholder' => __('Enter publisher name', 'wp-book-catalog'),
+                'placeholder' => __('Enter publisher name', 'mm-book-catalog'),
             ),
             'wpbc_year' => array(
-                'label'       => __('Publication Year', 'wp-book-catalog'),
+                'label'       => __('Publication Year', 'mm-book-catalog'),
                 'type'        => 'number',
-                'placeholder' => __('Enter publication year', 'wp-book-catalog'),
+                'placeholder' => __('Enter publication year', 'mm-book-catalog'),
                 'min'         => 1,
                 'max'         => 2100,
             ),
             'wpbc_pages' => array(
-                'label'       => __('Number of Pages', 'wp-book-catalog'),
+                'label'       => __('Number of Pages', 'mm-book-catalog'),
                 'type'        => 'number',
-                'placeholder' => __('Enter number of pages', 'wp-book-catalog'),
+                'placeholder' => __('Enter number of pages', 'mm-book-catalog'),
                 'min'         => 1,
                 'max'         => 100000,
             ),
             'wpbc_language' => array(
-                'label'       => __('Language', 'wp-book-catalog'),
+                'label'       => __('Language', 'mm-book-catalog'),
                 'type'        => 'text',
-                'placeholder' => __('Enter book language (e.g. it, en)', 'wp-book-catalog'),
+                'placeholder' => __('Enter book language (e.g. it, en)', 'mm-book-catalog'),
             ),
             'wpbc_shop_link' => array(
-                'label'       => __('Shop Link', 'wp-book-catalog'),
+                'label'       => __('Shop Link', 'mm-book-catalog'),
                 'type'        => 'url',
-                'placeholder' => __('Enter shop URL', 'wp-book-catalog'),
+                'placeholder' => __('Enter shop URL', 'mm-book-catalog'),
             ),
         );
 
@@ -102,7 +102,7 @@ class WPBC_Meta_Boxes {
     public function add_meta_boxes() {
         add_meta_box(
             'wpbc_book_details',
-            __('Book Details', 'wp-book-catalog'),
+            __('Book Details', 'mm-book-catalog'),
             array($this, 'render_meta_box'),
             'book',
             'normal',
@@ -142,11 +142,11 @@ class WPBC_Meta_Boxes {
                     echo '<input type="text" id="' . esc_attr($key) . '" name="' . esc_attr($key) . '" value="' . esc_attr($value) . '" placeholder="' . esc_attr($placeholder) . '" class="widefat" />';
                     echo '<button type="button" class="button button-secondary" id="wpbc-isbn-lookup-btn">';
                     echo '<span class="dashicons dashicons-search" aria-hidden="true"></span> ';
-                    echo esc_html__('Autofill from ISBN', 'wp-book-catalog');
+                    echo esc_html__('Autofill from ISBN', 'mm-book-catalog');
                     echo '</button>';
                     echo '<span class="spinner" id="wpbc-isbn-spinner"></span>';
                     echo '</div>';
-                    echo '<p class="description">' . esc_html__('Fetches title, author, publisher, year, pages, description and cover from Google Books / Open Library.', 'wp-book-catalog') . '</p>';
+                    echo '<p class="description">' . esc_html__('Fetches title, author, publisher, year, pages, description and cover from Google Books / Open Library.', 'mm-book-catalog') . '</p>';
                     echo '<div id="wpbc-isbn-lookup-result" style="display:none;"></div>';
                     echo '<div id="wpbc-cover-preview" style="display:none;"></div>';
                     break;
@@ -170,7 +170,7 @@ class WPBC_Meta_Boxes {
             if ('wpbc_author' === $key && !empty($default_author)) {
                 echo '<p class="description">' . esc_html(sprintf(
                     /* translators: %s: default author name */
-                    __('Leave empty to use the default author from the settings: %s', 'wp-book-catalog'),
+                    __('Leave empty to use the default author from the settings: %s', 'mm-book-catalog'),
                     $default_author
                 )) . '</p>';
             }

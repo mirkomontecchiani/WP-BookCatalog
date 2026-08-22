@@ -2,7 +2,7 @@
 /**
  * Ordering a books query by one of the custom meta fields
  *
- * @package WP_Book_Catalog
+ * @package MM_Book_Catalog
  */
 
 // Prevent direct access

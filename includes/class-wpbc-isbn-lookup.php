@@ -2,7 +2,7 @@
 /**
  * ISBN Lookup - fetch book data from external databases (Google Books, Open Library)
  *
- * @package WP_Book_Catalog
+ * @package MM_Book_Catalog
  */
 
 // Prevent direct access
@@ -58,20 +58,20 @@ class WPBC_ISBN_Lookup {
         check_ajax_referer('wpbc_admin_nonce', 'nonce');
 
         if (!current_user_can('edit_posts')) {
-            wp_send_json_error(array('message' => __('You are not allowed to do this.', 'wp-book-catalog')), 403);
+            wp_send_json_error(array('message' => __('You are not allowed to do this.', 'mm-book-catalog')), 403);
         }
 
         $raw_isbn = isset($_POST['isbn']) ? sanitize_text_field(wp_unslash($_POST['isbn'])) : '';
         $isbn     = self::normalize_isbn($raw_isbn);
 
         if (!$isbn) {
-            wp_send_json_error(array('message' => __('Invalid ISBN. Please enter a 10 or 13 digit ISBN.', 'wp-book-catalog')), 400);
+            wp_send_json_error(array('message' => __('Invalid ISBN. Please enter a 10 or 13 digit ISBN.', 'mm-book-catalog')), 400);
         }
 
         $data = self::lookup($isbn);
 
         if (empty($data) || empty($data['found'])) {
-            wp_send_json_error(array('message' => __('No book found for this ISBN. Try the other data source or check the number.', 'wp-book-catalog')), 404);
+            wp_send_json_error(array('message' => __('No book found for this ISBN. Try the other data source or check the number.', 'mm-book-catalog')), 404);
         }
 
         wp_send_json_success($data);
@@ -91,11 +91,11 @@ class WPBC_ISBN_Lookup {
         if (!$post_id || 'book' !== get_post_type($post_id)
             || !current_user_can('edit_post', $post_id)
             || !current_user_can('upload_files')) {
-            wp_send_json_error(array('message' => __('You are not allowed to do this.', 'wp-book-catalog')), 403);
+            wp_send_json_error(array('message' => __('You are not allowed to do this.', 'mm-book-catalog')), 403);
         }
 
         if (!self::is_allowed_cover_url($url)) {
-            wp_send_json_error(array('message' => __('Cover URL is not from an allowed source.', 'wp-book-catalog')), 400);
+            wp_send_json_error(array('message' => __('Cover URL is not from an allowed source.', 'mm-book-catalog')), 400);
         }
 
         require_once ABSPATH . 'wp-admin/includes/media.php';
@@ -113,7 +113,7 @@ class WPBC_ISBN_Lookup {
         wp_send_json_success(array(
             'attachment_id' => $attachment_id,
             'thumbnail_url' => wp_get_attachment_image_url($attachment_id, 'medium'),
-            'message'       => __('Cover imported and set as featured image.', 'wp-book-catalog'),
+            'message'       => __('Cover imported and set as featured image.', 'mm-book-catalog'),
         ));
     }
 
@@ -182,7 +182,7 @@ class WPBC_ISBN_Lookup {
             wp_delete_file($tmp_file);
             return new WP_Error(
                 'wpbc_invalid_cover',
-                __('The downloaded file is not a supported image.', 'wp-book-catalog')
+                __('The downloaded file is not a supported image.', 'mm-book-catalog')
             );
         }
 
@@ -500,7 +500,7 @@ class WPBC_ISBN_Lookup {
             $url,
             array(
                 'timeout'    => 8,
-                'user-agent' => 'WP-Book-Catalog/' . WPBC_VERSION,
+                'user-agent' => 'MM-Book-Catalog/' . WPBC_VERSION,
             )
         );
 
