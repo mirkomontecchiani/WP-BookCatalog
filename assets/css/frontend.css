@@ -1,11 +1,11 @@
 /**
- * WP Book Catalog - Frontend Styles
+ * Montecchiani Book Catalog - Frontend Styles
  *
  * @package WP_Book_Catalog
  */
 
 /* Container */
-.wpbc-container {
+.mbcat-container {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
@@ -14,59 +14,59 @@
 }
 
 /* Grid Layout */
-.wpbc-grid {
+.mbcat-grid {
     display: grid;
     gap: 30px;
     width: 100%;
 }
 
 /* Column variations */
-.wpbc-columns-1 {
+.mbcat-columns-1 {
     grid-template-columns: 1fr;
     max-width: 300px;
     margin: 0 auto;
 }
 
-.wpbc-columns-2 {
+.mbcat-columns-2 {
     grid-template-columns: repeat(2, 1fr);
 }
 
-.wpbc-columns-3 {
+.mbcat-columns-3 {
     grid-template-columns: repeat(3, 1fr);
 }
 
-.wpbc-columns-4 {
+.mbcat-columns-4 {
     grid-template-columns: repeat(4, 1fr);
 }
 
-.wpbc-columns-5 {
+.mbcat-columns-5 {
     grid-template-columns: repeat(5, 1fr);
 }
 
 /* Book Item */
-.wpbc-book-item {
+.mbcat-book-item {
     position: relative;
     width: 100%;
 }
 
 /* Book Link Wrapper */
-.wpbc-book-link {
+.mbcat-book-link {
     display: block;
     text-decoration: none;
     color: inherit;
 }
 
-a.wpbc-book-link:hover {
+a.mbcat-book-link:hover {
     text-decoration: none;
 }
 
-.wpbc-book-link:focus-visible {
+.mbcat-book-link:focus-visible {
     outline: 3px solid #2271b1;
     outline-offset: 3px;
     border-radius: 8px;
 }
 
-.wpbc-book-cover {
+.mbcat-book-cover {
     position: relative;
     width: 100%;
     aspect-ratio: 2 / 3;
@@ -77,16 +77,16 @@ a.wpbc-book-link:hover {
 }
 
 /* Only cards that link somewhere get the hand cursor. */
-a.wpbc-book-link .wpbc-book-cover {
+a.mbcat-book-link .mbcat-book-cover {
     cursor: pointer;
 }
 
-.wpbc-book-cover:hover {
+.mbcat-book-cover:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
 }
 
-.wpbc-book-cover img {
+.mbcat-book-cover img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -94,12 +94,12 @@ a.wpbc-book-link .wpbc-book-cover {
     transition: transform 0.4s ease;
 }
 
-.wpbc-book-cover:hover img {
+.mbcat-book-cover:hover img {
     transform: scale(1.05);
 }
 
 /* Overlay */
-.wpbc-book-overlay {
+.mbcat-book-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -116,14 +116,14 @@ a.wpbc-book-link .wpbc-book-cover {
     transition: opacity 0.3s ease;
 }
 
-.wpbc-book-cover:hover .wpbc-book-overlay,
-.wpbc-book-link:focus-within .wpbc-book-overlay,
-.wpbc-book-overlay.wpbc-visible {
+.mbcat-book-cover:hover .mbcat-book-overlay,
+.mbcat-book-link:focus-within .mbcat-book-overlay,
+.mbcat-book-overlay.mbcat-visible {
     opacity: 1;
 }
 
 /* Book Info */
-.wpbc-book-info {
+.mbcat-book-info {
     color: #ffffff;
     width: 100%;
     transform: translateY(20px);
@@ -131,19 +131,19 @@ a.wpbc-book-link .wpbc-book-cover {
 }
 
 /* Separator */
-.wpbc-separator {
+.mbcat-separator {
     border: none;
     border-top: 1px solid rgba(255, 255, 255, 0.3);
     margin: 15px 0;
 }
 
-.wpbc-book-cover:hover .wpbc-book-info,
-.wpbc-book-link:focus-within .wpbc-book-info,
-.wpbc-book-overlay.wpbc-visible .wpbc-book-info {
+.mbcat-book-cover:hover .mbcat-book-info,
+.mbcat-book-link:focus-within .mbcat-book-info,
+.mbcat-book-overlay.mbcat-visible .mbcat-book-info {
     transform: translateY(0);
 }
 
-.wpbc-book-title {
+.mbcat-book-title {
     font-size: 1.1em;
     font-weight: 700;
     margin: 0 0 10px 0;
@@ -151,25 +151,25 @@ a.wpbc-book-link .wpbc-book-cover {
     color: #ffffff;
 }
 
-.wpbc-book-author,
-.wpbc-book-publisher,
-.wpbc-book-year,
-.wpbc-book-pages,
-.wpbc-book-genre,
-.wpbc-book-isbn {
+.mbcat-book-author,
+.mbcat-book-publisher,
+.mbcat-book-year,
+.mbcat-book-pages,
+.mbcat-book-genre,
+.mbcat-book-isbn {
     font-size: 0.85em;
     margin: 0 0 5px 0;
     line-height: 1.4;
     color: rgba(255, 255, 255, 0.9);
 }
 
-.wpbc-label {
+.mbcat-label {
     font-weight: 600;
     color: rgba(255, 255, 255, 0.7);
     margin-right: 5px;
 }
 
-.wpbc-book-description {
+.mbcat-book-description {
     font-size: 0.8em;
     margin: 8px 0 0 0;
     line-height: 1.5;
@@ -182,12 +182,12 @@ a.wpbc-book-link .wpbc-book-cover {
 }
 
 /* Show All Button */
-.wpbc-show-all-wrapper {
+.mbcat-show-all-wrapper {
     text-align: center;
     margin-top: 30px;
 }
 
-.wpbc-show-all-btn {
+.mbcat-show-all-btn {
     display: inline-block;
     padding: 12px 30px;
     font-size: 1em;
@@ -200,22 +200,22 @@ a.wpbc-book-link .wpbc-book-cover {
     transition: all 0.3s ease;
 }
 
-.wpbc-show-all-btn:hover {
+.mbcat-show-all-btn:hover {
     background-color: transparent;
     color: #1a1a2e;
 }
 
-.wpbc-show-all-btn:disabled {
+.mbcat-show-all-btn:disabled {
     opacity: 0.6;
     cursor: not-allowed;
 }
 
-.wpbc-show-all-btn.loading {
+.mbcat-show-all-btn.loading {
     position: relative;
     color: transparent;
 }
 
-.wpbc-show-all-btn.loading::after {
+.mbcat-show-all-btn.loading::after {
     content: '';
     position: absolute;
     top: 50%;
@@ -226,24 +226,24 @@ a.wpbc-book-link .wpbc-book-cover {
     border: 2px solid #ffffff;
     border-top-color: transparent;
     border-radius: 50%;
-    animation: wpbc-spin 0.8s linear infinite;
+    animation: mbcat-spin 0.8s linear infinite;
 }
 
-@keyframes wpbc-spin {
+@keyframes mbcat-spin {
     to {
         transform: rotate(360deg);
     }
 }
 
 /* AJAX load error */
-.wpbc-load-error {
+.mbcat-load-error {
     margin-top: 10px;
     color: #b32d2e;
     font-size: 0.9em;
 }
 
 /* No Books Message */
-.wpbc-no-books {
+.mbcat-no-books {
     text-align: center;
     padding: 40px;
     color: #666666;
@@ -252,70 +252,70 @@ a.wpbc-book-link .wpbc-book-cover {
 
 /* Responsive Design */
 @media screen and (max-width: 1200px) {
-    .wpbc-columns-5 {
+    .mbcat-columns-5 {
         grid-template-columns: repeat(4, 1fr);
     }
 }
 
 @media screen and (max-width: 992px) {
-    .wpbc-columns-4,
-    .wpbc-columns-5 {
+    .mbcat-columns-4,
+    .mbcat-columns-5 {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
 @media screen and (max-width: 768px) {
-    .wpbc-columns-3,
-    .wpbc-columns-4,
-    .wpbc-columns-5 {
+    .mbcat-columns-3,
+    .mbcat-columns-4,
+    .mbcat-columns-5 {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .wpbc-book-title {
+    .mbcat-book-title {
         font-size: 1em;
     }
 
-    .wpbc-book-author,
-    .wpbc-book-publisher,
-    .wpbc-book-year,
-    .wpbc-book-pages,
-    .wpbc-book-genre,
-    .wpbc-book-isbn {
+    .mbcat-book-author,
+    .mbcat-book-publisher,
+    .mbcat-book-year,
+    .mbcat-book-pages,
+    .mbcat-book-genre,
+    .mbcat-book-isbn {
         font-size: 0.8em;
     }
 
-    .wpbc-book-description {
+    .mbcat-book-description {
         display: none;
     }
 }
 
 @media screen and (max-width: 480px) {
-    .wpbc-container {
+    .mbcat-container {
         padding: 10px;
     }
 
-    .wpbc-grid {
+    .mbcat-grid {
         gap: 15px;
     }
 
-    .wpbc-columns-2,
-    .wpbc-columns-3,
-    .wpbc-columns-4,
-    .wpbc-columns-5 {
+    .mbcat-columns-2,
+    .mbcat-columns-3,
+    .mbcat-columns-4,
+    .mbcat-columns-5 {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .wpbc-book-title {
+    .mbcat-book-title {
         font-size: 0.9em;
         margin-bottom: 5px;
     }
 
-    .wpbc-book-author,
-    .wpbc-book-publisher,
-    .wpbc-book-year,
-    .wpbc-book-pages,
-    .wpbc-book-genre,
-    .wpbc-book-isbn {
+    .mbcat-book-author,
+    .mbcat-book-publisher,
+    .mbcat-book-year,
+    .mbcat-book-pages,
+    .mbcat-book-genre,
+    .mbcat-book-isbn {
         font-size: 0.75em;
         margin-bottom: 3px;
     }
@@ -323,22 +323,22 @@ a.wpbc-book-link .wpbc-book-cover {
 
 /* Touch devices - lighter gradient, info revealed by tap */
 @media screen and (hover: none) {
-    .wpbc-book-overlay {
+    .mbcat-book-overlay {
         background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
     }
 
-    .wpbc-book-info {
+    .mbcat-book-info {
         transform: translateY(0);
     }
 }
 
 /* Animation for new items loaded via AJAX */
-.wpbc-book-item.wpbc-fade-in {
+.mbcat-book-item.mbcat-fade-in {
     opacity: 0;
-    animation: wpbc-fadeIn 0.5s ease forwards;
+    animation: mbcat-fadeIn 0.5s ease forwards;
 }
 
-@keyframes wpbc-fadeIn {
+@keyframes mbcat-fadeIn {
     from {
         opacity: 0;
         transform: translateY(20px);
@@ -351,33 +351,33 @@ a.wpbc-book-link .wpbc-book-cover {
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-    .wpbc-book-cover,
-    .wpbc-book-cover img,
-    .wpbc-book-info,
-    .wpbc-book-overlay,
-    .wpbc-book-item.wpbc-fade-in {
+    .mbcat-book-cover,
+    .mbcat-book-cover img,
+    .mbcat-book-info,
+    .mbcat-book-overlay,
+    .mbcat-book-item.mbcat-fade-in {
         transition: none;
         animation: none;
     }
 
     /* No animation means nothing would ever raise the opacity again. */
-    .wpbc-book-item.wpbc-fade-in {
+    .mbcat-book-item.mbcat-fade-in {
         opacity: 1;
     }
 }
 
 /* Print styles: show cover and book details stacked, readable in black on white */
 @media print {
-    .wpbc-show-all-wrapper,
-    .wpbc-load-error {
+    .mbcat-show-all-wrapper,
+    .mbcat-load-error {
         display: none;
     }
 
-    .wpbc-grid {
+    .mbcat-grid {
         gap: 15px;
     }
 
-    .wpbc-book-cover {
+    .mbcat-book-cover {
         aspect-ratio: auto;
         height: auto;
         overflow: visible;
@@ -385,14 +385,14 @@ a.wpbc-book-link .wpbc-book-cover {
         border: none;
     }
 
-    .wpbc-book-cover img {
+    .mbcat-book-cover img {
         max-height: 240px;
         width: auto;
         border: 1px solid #ddd;
     }
 
     /* Render the overlay as static content below the cover instead of hiding it */
-    .wpbc-book-overlay {
+    .mbcat-book-overlay {
         position: static;
         opacity: 1 !important;
         background: none;
@@ -400,40 +400,40 @@ a.wpbc-book-link .wpbc-book-cover {
         display: block;
     }
 
-    .wpbc-book-info {
+    .mbcat-book-info {
         transform: none;
         color: #000;
     }
 
-    .wpbc-book-title,
-    .wpbc-book-author,
-    .wpbc-book-publisher,
-    .wpbc-book-year,
-    .wpbc-book-pages,
-    .wpbc-book-genre,
-    .wpbc-book-isbn,
-    .wpbc-book-description {
+    .mbcat-book-title,
+    .mbcat-book-author,
+    .mbcat-book-publisher,
+    .mbcat-book-year,
+    .mbcat-book-pages,
+    .mbcat-book-genre,
+    .mbcat-book-isbn,
+    .mbcat-book-description {
         color: #000;
     }
 
-    .wpbc-label {
+    .mbcat-label {
         color: #333;
     }
 
-    .wpbc-book-description {
+    .mbcat-book-description {
         display: block;
         -webkit-line-clamp: none;
         line-clamp: none;
         overflow: visible;
     }
 
-    .wpbc-separator {
+    .mbcat-separator {
         border-top-color: #ccc;
     }
 }
 
 /* Screen-reader-only status region for the "Show All Books" announcement */
-.wpbc-status {
+.mbcat-status {
     position: absolute;
     width: 1px;
     height: 1px;

@@ -2,7 +2,7 @@
 /**
  * Uninstall handler - cleans up plugin data when the plugin is deleted
  *
- * @package MM_Book_Catalog
+ * @package Montecchiani_Book_Catalog
  */
 
 // Exit if uninstall is not called from WordPress
@@ -19,13 +19,13 @@ if (!defined('WP_UNINSTALL_PLUGIN')) {
  * wp_delete_post() cannot clean up the term relationships, so the opt-in data
  * removal would silently leave every genre behind.
  */
-function wpbc_uninstall_register_objects() {
-    register_post_type('book', array(
+function mbcat_uninstall_register_objects() {
+    register_post_type('mbcat_book', array(
         'public'  => false,
         'rewrite' => false,
     ));
 
-    register_taxonomy('book_genre', array('book'), array(
+    register_taxonomy('mbcat_genre', array('mbcat_book'), array(
         'public'  => false,
         'rewrite' => false,
     ));
@@ -37,10 +37,10 @@ function wpbc_uninstall_register_objects() {
  * Content is only deleted when the site owner opted in from the settings page.
  * The options and the cached ISBN lookups are always removed.
  */
-function wpbc_uninstall_site() {
+function mbcat_uninstall_site() {
     global $wpdb;
 
-    $settings = get_option('wpbc_settings', array());
+    $settings = get_option('mbcat_settings', array());
 
     if (is_array($settings) && !empty($settings['delete_data_on_uninstall'])) {
         // 'any' silently excludes trashed and auto-draft posts, so the statuses
@@ -56,7 +56,7 @@ function wpbc_uninstall_site() {
         // limit or the request time.
         do {
             $book_ids = get_posts(array(
-                'post_type'              => 'book',
+                'post_type'              => 'mbcat_book',
                 'post_status'            => $statuses,
                 'numberposts'            => 100,
                 'fields'                 => 'ids',
@@ -72,14 +72,14 @@ function wpbc_uninstall_site() {
 
         // Delete all genre terms.
         $terms = get_terms(array(
-            'taxonomy'   => 'book_genre',
+            'taxonomy'   => 'mbcat_genre',
             'hide_empty' => false,
             'fields'     => 'ids',
         ));
 
         if (!is_wp_error($terms)) {
             foreach ($terms as $term_id) {
-                wp_delete_term($term_id, 'book_genre');
+                wp_delete_term($term_id, 'mbcat_genre');
             }
         }
     }
@@ -90,9 +90,9 @@ function wpbc_uninstall_site() {
     // persistent object cache is invalidated too. On a site using an external
     // object cache the transients never reach the option table at all - those
     // simply expire on their own within twelve hours.
-    delete_option('wpbc_settings');
+    delete_option('mbcat_settings');
 
-    $like = $wpdb->esc_like('_transient_wpbc_isbn_') . '%';
+    $like = $wpdb->esc_like('_transient_mbcat_isbn_') . '%';
 
     // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- one-off cleanup on uninstall; no cache API can look option names up by prefix.
     $option_names = $wpdb->get_col(
@@ -104,22 +104,22 @@ function wpbc_uninstall_site() {
     }
 }
 
-wpbc_uninstall_register_objects();
+mbcat_uninstall_register_objects();
 
 if (is_multisite()) {
     // The plugin stores its data per site, so every site has to be cleaned.
-    $wpbc_site_ids = get_sites(array(
+    $mbcat_site_ids = get_sites(array(
         'fields'   => 'ids',
         'number'   => 0,
         'deleted'  => 0,
         'archived' => 0,
     ));
 
-    foreach ($wpbc_site_ids as $wpbc_site_id) {
-        switch_to_blog($wpbc_site_id);
-        wpbc_uninstall_site();
+    foreach ($mbcat_site_ids as $mbcat_site_id) {
+        switch_to_blog($mbcat_site_id);
+        mbcat_uninstall_site();
         restore_current_blog();
     }
 } else {
-    wpbc_uninstall_site();
+    mbcat_uninstall_site();
 }

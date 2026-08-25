@@ -1,4 +1,4 @@
-# MM Book Catalog
+# Montecchiani Book Catalog
 
 A WordPress plugin to display a book catalog with a custom post type, shortcodes, hover
 effects and ISBN autofill from external book databases.
@@ -27,14 +27,14 @@ Mirko Montecchiani
   - ISBN
   - Shop link
 - **Genres Taxonomy**: Organize books by genre and filter the shortcode by genre
-- **Shortcode Support**: Display books anywhere with `[books]` (or `[wpbc_books]`)
+- **Shortcode Support**: Display books anywhere with `[mbcat_books]` (or `[mbcat_books]`)
 - **Responsive Grid**: 1-5 columns with automatic responsive adjustments
 - **Hover Effect**: Overlay with book details on hover (tap-friendly on touch devices, keyboard accessible)
 - **AJAX Loading**: "Show All" button loads remaining books without a page reload
 - **SEO**: Automatic Schema.org `Book` structured data (JSON-LD) for rich results in search engines
 - **Admin Columns**: Cover, author, year and ISBN columns in the book list, sortable by author and year
 - **Settings Page**: Configure default author, columns, ISBN data source and uninstall cleanup
-- **i18n Ready**: Ships in English, French, Spanish, Italian and Japanese, and is fully translatable into any language
+- **i18n Ready**: Fully translatable; French, Spanish, Italian and Japanese translations are maintained on translate.wordpress.org
 
 ## Requirements
 
@@ -44,7 +44,7 @@ Mirko Montecchiani
 ## Installation
 
 1. Download or clone this repository
-2. Copy the plugin files into a folder named `mm-book-catalog` inside `/wp-content/plugins/`
+2. Copy the plugin files into a folder named `montecchiani-book-catalog` inside `/wp-content/plugins/`
    (the folder name must match the text domain)
 3. Activate the plugin through the 'Plugins' menu in WordPress
 
@@ -65,11 +65,11 @@ are cached for 12 hours.
 
 **Display all books:**
 ```
-[books]
+[mbcat_books]
 ```
 
-`[wpbc_books]` is an identical, prefixed alias; use it if another plugin also registers
-`[books]`.
+`[mbcat_books]` is an identical, prefixed alias; use it if another plugin also registers
+`[mbcat_books]`.
 
 **Display limited books with a "Show All" button:**
 ```
@@ -89,7 +89,7 @@ are cached for 12 hours.
 ```
 
 At most 500 books are rendered per request; raise it with the
-`wpbc_max_books_per_request` filter.
+`mbcat_max_books_per_request` filter.
 
 ### Settings
 
@@ -106,11 +106,11 @@ Go to **Book Catalog > Settings** in the WordPress admin to configure:
 
 | Filter | Description |
 | --- | --- |
-| `wpbc_shortcode_query_args` | The `WP_Query` arguments used to list books |
-| `wpbc_max_books_per_request` | Maximum books rendered in one request (default 500) |
-| `wpbc_author_label` | The label printed before the author name, per book |
-| `wpbc_allowed_cover_hosts` | Hosts a cover image may be downloaded from |
-| `wpbc_lookup_data` | The normalized record returned by an ISBN lookup |
+| `mbcat_shortcode_query_args` | The `WP_Query` arguments used to list books |
+| `mbcat_max_books_per_request` | Maximum books rendered in one request (default 500) |
+| `mbcat_author_label` | The label printed before the author name, per book |
+| `mbcat_allowed_cover_hosts` | Hosts a cover image may be downloaded from |
+| `mbcat_lookup_data` | The normalized record returned by an ISBN lookup |
 
 ## Privacy
 
@@ -127,17 +127,17 @@ about you or your visitors is transmitted. See the "External services" section o
 
 ```bash
 # Regenerate the translation template and merge it into every catalogue
-wp i18n make-pot . languages/mm-book-catalog.pot --slug=mm-book-catalog
+wp i18n make-pot . languages/montecchiani-book-catalog.pot --slug=montecchiani-book-catalog
 for loc in fr_FR es_ES it_IT ja; do
-  msgmerge --update --backup=none languages/mm-book-catalog-$loc.po languages/mm-book-catalog.pot
-  msgfmt -o languages/mm-book-catalog-$loc.mo languages/mm-book-catalog-$loc.po
+  msgmerge --update --backup=none languages/montecchiani-book-catalog-$loc.po languages/montecchiani-book-catalog.pot
+  msgfmt -o languages/montecchiani-book-catalog-$loc.mo languages/montecchiani-book-catalog-$loc.po
 done
 
 # Coding standards
 phpcs --standard=WordPress-Extra --extensions=php .
 
 # Build a release archive with the folder name WordPress.org expects
-git archive --format=zip --prefix=mm-book-catalog/ -o mm-book-catalog.zip HEAD
+git archive --format=zip --prefix=montecchiani-book-catalog/ -o montecchiani-book-catalog.zip HEAD
 ```
 
 ## License

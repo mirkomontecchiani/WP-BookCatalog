@@ -2,7 +2,7 @@
 /**
  * Plugin Settings Page
  *
- * @package MM_Book_Catalog
+ * @package Montecchiani_Book_Catalog
  */
 
 // Prevent direct access
@@ -11,9 +11,9 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class WPBC_Settings
+ * Class MBCat_Settings
  */
-class WPBC_Settings {
+class MBCat_Settings {
 
     /**
      * Single instance
@@ -23,7 +23,7 @@ class WPBC_Settings {
     /**
      * Settings option name
      */
-    private $option_name = 'wpbc_settings';
+    private $option_name = 'mbcat_settings';
 
     /**
      * Get single instance
@@ -48,11 +48,11 @@ class WPBC_Settings {
      */
     public function add_settings_page() {
         add_submenu_page(
-            'edit.php?post_type=book',
-            __('Book Catalog Settings', 'mm-book-catalog'),
-            __('Settings', 'mm-book-catalog'),
+            'edit.php?post_type=mbcat_book',
+            __('Book Catalog Settings', 'montecchiani-book-catalog'),
+            __('Settings', 'montecchiani-book-catalog'),
             'manage_options',
-            'wpbc-settings',
+            'mbcat-settings',
             array($this, 'render_settings_page')
         );
     }
@@ -62,95 +62,95 @@ class WPBC_Settings {
      */
     public function register_settings() {
         register_setting(
-            'wpbc_settings_group',
+            'mbcat_settings_group',
             $this->option_name,
             array($this, 'sanitize_settings')
         );
 
         // General Settings Section
         add_settings_section(
-            'wpbc_general_section',
-            __('General Settings', 'mm-book-catalog'),
+            'mbcat_general_section',
+            __('General Settings', 'montecchiani-book-catalog'),
             array($this, 'render_general_section'),
-            'wpbc-settings'
+            'mbcat-settings'
         );
 
         // Default Author Field
         add_settings_field(
             'default_author',
-            __('Default Author', 'mm-book-catalog'),
+            __('Default Author', 'montecchiani-book-catalog'),
             array($this, 'render_default_author_field'),
-            'wpbc-settings',
-            'wpbc_general_section'
+            'mbcat-settings',
+            'mbcat_general_section'
         );
 
         // Author Gender Field
         add_settings_field(
             'author_gender',
-            __('Author Gender', 'mm-book-catalog'),
+            __('Author Gender', 'montecchiani-book-catalog'),
             array($this, 'render_author_gender_field'),
-            'wpbc-settings',
-            'wpbc_general_section'
+            'mbcat-settings',
+            'mbcat_general_section'
         );
 
         // Display Settings Section
         add_settings_section(
-            'wpbc_display_section',
-            __('Display Settings', 'mm-book-catalog'),
+            'mbcat_display_section',
+            __('Display Settings', 'montecchiani-book-catalog'),
             array($this, 'render_display_section'),
-            'wpbc-settings'
+            'mbcat-settings'
         );
 
         // Columns Field
         add_settings_field(
             'columns',
-            __('Number of Columns', 'mm-book-catalog'),
+            __('Number of Columns', 'montecchiani-book-catalog'),
             array($this, 'render_columns_field'),
-            'wpbc-settings',
-            'wpbc_display_section'
+            'mbcat-settings',
+            'mbcat_display_section'
         );
 
         // ISBN Lookup Section
         add_settings_section(
-            'wpbc_isbn_section',
-            __('ISBN Autofill', 'mm-book-catalog'),
+            'mbcat_isbn_section',
+            __('ISBN Autofill', 'montecchiani-book-catalog'),
             array($this, 'render_isbn_section'),
-            'wpbc-settings'
+            'mbcat-settings'
         );
 
         // Data Source Field
         add_settings_field(
             'isbn_source',
-            __('Data Source', 'mm-book-catalog'),
+            __('Data Source', 'montecchiani-book-catalog'),
             array($this, 'render_isbn_source_field'),
-            'wpbc-settings',
-            'wpbc_isbn_section'
+            'mbcat-settings',
+            'mbcat_isbn_section'
         );
 
         // Google API Key Field
         add_settings_field(
             'google_api_key',
-            __('Google Books API Key', 'mm-book-catalog'),
+            __('Google Books API Key', 'montecchiani-book-catalog'),
             array($this, 'render_google_api_key_field'),
-            'wpbc-settings',
-            'wpbc_isbn_section'
+            'mbcat-settings',
+            'mbcat_isbn_section'
         );
 
         // Advanced Section
         add_settings_section(
-            'wpbc_advanced_section',
-            __('Advanced', 'mm-book-catalog'),
+            'mbcat_advanced_section',
+            __('Advanced', 'montecchiani-book-catalog'),
             array($this, 'render_advanced_section'),
-            'wpbc-settings'
+            'mbcat-settings'
         );
 
         // Delete data on uninstall
         add_settings_field(
             'delete_data_on_uninstall',
-            __('Delete Data on Uninstall', 'mm-book-catalog'),
+            __('Delete Data on Uninstall', 'montecchiani-book-catalog'),
             array($this, 'render_delete_data_field'),
-            'wpbc-settings',
-            'wpbc_advanced_section'
+            'mbcat-settings',
+            'mbcat_advanced_section'
         );
     }
 
@@ -216,50 +216,49 @@ class WPBC_Settings {
         // This page is not under options-general.php, so show the saved notice manually.
         if (isset($_GET['settings-updated'])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
             add_settings_error(
-                'wpbc_messages',
-                'wpbc_message',
-                __('Settings saved successfully.', 'mm-book-catalog'),
+                'mbcat_messages',
+                'mbcat_message',
+                __('Settings saved successfully.', 'montecchiani-book-catalog'),
                 'updated'
             );
         }
 
         ?>
-        <div class="wrap wpbc-settings-page">
+        <div class="wrap mbcat-settings-page">
             <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
 
-            <?php settings_errors('wpbc_messages'); ?>
+            <?php settings_errors('mbcat_messages'); ?>
 
             <form action="options.php" method="post">
                 <?php
-                settings_fields('wpbc_settings_group');
-                do_settings_sections('wpbc-settings');
-                submit_button(__('Save Settings', 'mm-book-catalog'));
+                settings_fields('mbcat_settings_group');
+                do_settings_sections('mbcat-settings');
+                submit_button(__('Save Settings', 'montecchiani-book-catalog'));
                 ?>
             </form>
 
             <hr>
 
-            <h2><?php esc_html_e('Shortcode Usage', 'mm-book-catalog'); ?></h2>
-            <div class="wpbc-shortcode-info">
-                <h3><?php esc_html_e('Display All Books', 'mm-book-catalog'); ?></h3>
-                <code>[books]</code>
-                <p><?php esc_html_e('Displays all books in the catalog.', 'mm-book-catalog'); ?></p>
-                <p class="description"><?php esc_html_e('[wpbc_books] does exactly the same and is the recommended form when another plugin also registers [books].', 'mm-book-catalog'); ?></p>
+            <h2><?php esc_html_e('Shortcode Usage', 'montecchiani-book-catalog'); ?></h2>
+            <div class="mbcat-shortcode-info">
+                <h3><?php esc_html_e('Display All Books', 'montecchiani-book-catalog'); ?></h3>
+                <code>[mbcat_books]</code>
+                <p><?php esc_html_e('Displays all books in the catalog.', 'montecchiani-book-catalog'); ?></p>
 
-                <h3><?php esc_html_e('Display Limited Books', 'mm-book-catalog'); ?></h3>
+                <h3><?php esc_html_e('Display Limited Books', 'montecchiani-book-catalog'); ?></h3>
                 <code>[books hitem="3"]</code>
-                <p><?php esc_html_e('Displays 3 books with a "Show All" button at the bottom. Replace 3 with any number.', 'mm-book-catalog'); ?></p>
+                <p><?php esc_html_e('Displays 3 books with a "Show All" button at the bottom. Replace 3 with any number.', 'montecchiani-book-catalog'); ?></p>
 
-                <h3><?php esc_html_e('Available Attributes', 'mm-book-catalog'); ?></h3>
+                <h3><?php esc_html_e('Available Attributes', 'montecchiani-book-catalog'); ?></h3>
                 <ul>
-                    <li><code>hitem</code> - <?php esc_html_e('Number of books to display (shows "Show All" button)', 'mm-book-catalog'); ?></li>
-                    <li><code>columns</code> - <?php esc_html_e('Override default columns (1-5)', 'mm-book-catalog'); ?></li>
-                    <li><code>orderby</code> - <?php esc_html_e('Order by: date, title, year, author, rand, menu_order, modified (default: date)', 'mm-book-catalog'); ?></li>
-                    <li><code>order</code> - <?php esc_html_e('Order direction: ASC, DESC (default: DESC)', 'mm-book-catalog'); ?></li>
-                    <li><code>genre</code> - <?php esc_html_e('Filter by genre slug(s), comma separated', 'mm-book-catalog'); ?></li>
+                    <li><code>hitem</code> - <?php esc_html_e('Number of books to display (shows "Show All" button)', 'montecchiani-book-catalog'); ?></li>
+                    <li><code>columns</code> - <?php esc_html_e('Override default columns (1-5)', 'montecchiani-book-catalog'); ?></li>
+                    <li><code>orderby</code> - <?php esc_html_e('Order by: date, title, year, author, rand, menu_order, modified (default: date)', 'montecchiani-book-catalog'); ?></li>
+                    <li><code>order</code> - <?php esc_html_e('Order direction: ASC, DESC (default: DESC)', 'montecchiani-book-catalog'); ?></li>
+                    <li><code>genre</code> - <?php esc_html_e('Filter by genre slug(s), comma separated', 'montecchiani-book-catalog'); ?></li>
                 </ul>
 
-                <h3><?php esc_html_e('Example with All Attributes', 'mm-book-catalog'); ?></h3>
+                <h3><?php esc_html_e('Example with All Attributes', 'montecchiani-book-catalog'); ?></h3>
                 <code>[books hitem="6" columns="3" orderby="title" order="ASC" genre="fantasy,thriller"]</code>
             </div>
         </div>
@@ -270,28 +269,28 @@ class WPBC_Settings {
      * Render general section description
      */
     public function render_general_section() {
-        echo '<p>' . esc_html__('Configure the default settings for all books.', 'mm-book-catalog') . '</p>';
+        echo '<p>' . esc_html__('Configure the default settings for all books.', 'montecchiani-book-catalog') . '</p>';
     }
 
     /**
      * Render display section description
      */
     public function render_display_section() {
-        echo '<p>' . esc_html__('Configure how books are displayed on the frontend.', 'mm-book-catalog') . '</p>';
+        echo '<p>' . esc_html__('Configure how books are displayed on the frontend.', 'montecchiani-book-catalog') . '</p>';
     }
 
     /**
      * Render ISBN section description
      */
     public function render_isbn_section() {
-        echo '<p>' . esc_html__('Configure the external book databases used to autofill book details from an ISBN.', 'mm-book-catalog') . '</p>';
+        echo '<p>' . esc_html__('Configure the external book databases used to autofill book details from an ISBN.', 'montecchiani-book-catalog') . '</p>';
     }
 
     /**
      * Render advanced section description
      */
     public function render_advanced_section() {
-        echo '<p>' . esc_html__('Advanced options.', 'mm-book-catalog') . '</p>';
+        echo '<p>' . esc_html__('Advanced options.', 'montecchiani-book-catalog') . '</p>';
     }
 
     /**
@@ -300,8 +299,8 @@ class WPBC_Settings {
     public function render_default_author_field() {
         $value = self::get_setting('default_author', '');
 
-        echo '<input type="text" id="wpbc_default_author" name="' . esc_attr($this->option_name) . '[default_author]" value="' . esc_attr($value) . '" class="regular-text" />';
-        echo '<p class="description">' . esc_html__('If set, this author will be used for all books that don\'t have an author specified.', 'mm-book-catalog') . '</p>';
+        echo '<input type="text" id="mbcat_default_author" name="' . esc_attr($this->option_name) . '[default_author]" value="' . esc_attr($value) . '" class="regular-text" />';
+        echo '<p class="description">' . esc_html__('If set, this author will be used for all books that don\'t have an author specified.', 'montecchiani-book-catalog') . '</p>';
     }
 
     /**
@@ -310,11 +309,11 @@ class WPBC_Settings {
     public function render_author_gender_field() {
         $value = self::get_setting('author_gender', 'male');
 
-        echo '<select id="wpbc_author_gender" name="' . esc_attr($this->option_name) . '[author_gender]">';
-        echo '<option value="male"' . selected($value, 'male', false) . '>' . esc_html__('Male (Author)', 'mm-book-catalog') . '</option>';
-        echo '<option value="female"' . selected($value, 'female', false) . '>' . esc_html__('Female (Authoress)', 'mm-book-catalog') . '</option>';
+        echo '<select id="mbcat_author_gender" name="' . esc_attr($this->option_name) . '[author_gender]">';
+        echo '<option value="male"' . selected($value, 'male', false) . '>' . esc_html__('Male (Author)', 'montecchiani-book-catalog') . '</option>';
+        echo '<option value="female"' . selected($value, 'female', false) . '>' . esc_html__('Female (Authoress)', 'montecchiani-book-catalog') . '</option>';
         echo '</select>';
-        echo '<p class="description">' . esc_html__('Select the gender to display the correct label (Author/Authoress).', 'mm-book-catalog') . '</p>';
+        echo '<p class="description">' . esc_html__('Select the gender to display the correct label (Author/Authoress).', 'montecchiani-book-catalog') . '</p>';
     }
 
     /**
@@ -323,15 +322,15 @@ class WPBC_Settings {
     public function render_columns_field() {
         $value = absint(self::get_setting('columns', 3));
 
-        echo '<select id="wpbc_columns" name="' . esc_attr($this->option_name) . '[columns]">';
+        echo '<select id="mbcat_columns" name="' . esc_attr($this->option_name) . '[columns]">';
         for ($i = 1; $i <= 5; $i++) {
             echo '<option value="' . esc_attr($i) . '"' . selected($value, $i, false) . '>'
                 /* translators: %d: number of columns */
-                . esc_html(sprintf(_n('%d column', '%d columns', $i, 'mm-book-catalog'), $i))
+                . esc_html(sprintf(_n('%d column', '%d columns', $i, 'montecchiani-book-catalog'), $i))
                 . '</option>';
         }
         echo '</select>';
-        echo '<p class="description">' . esc_html__('Number of columns to display books in. The layout will be responsive.', 'mm-book-catalog') . '</p>';
+        echo '<p class="description">' . esc_html__('Number of columns to display books in. The layout will be responsive.', 'montecchiani-book-catalog') . '</p>';
     }
 
     /**
@@ -340,12 +339,12 @@ class WPBC_Settings {
     public function render_isbn_source_field() {
         $value = self::get_setting('isbn_source', 'both');
 
-        echo '<select id="wpbc_isbn_source" name="' . esc_attr($this->option_name) . '[isbn_source]">';
-        echo '<option value="both"' . selected($value, 'both', false) . '>' . esc_html__('Google Books + Open Library (recommended)', 'mm-book-catalog') . '</option>';
-        echo '<option value="google"' . selected($value, 'google', false) . '>' . esc_html__('Google Books only', 'mm-book-catalog') . '</option>';
-        echo '<option value="openlibrary"' . selected($value, 'openlibrary', false) . '>' . esc_html__('Open Library only', 'mm-book-catalog') . '</option>';
+        echo '<select id="mbcat_isbn_source" name="' . esc_attr($this->option_name) . '[isbn_source]">';
+        echo '<option value="both"' . selected($value, 'both', false) . '>' . esc_html__('Google Books + Open Library (recommended)', 'montecchiani-book-catalog') . '</option>';
+        echo '<option value="google"' . selected($value, 'google', false) . '>' . esc_html__('Google Books only', 'montecchiani-book-catalog') . '</option>';
+        echo '<option value="openlibrary"' . selected($value, 'openlibrary', false) . '>' . esc_html__('Open Library only', 'montecchiani-book-catalog') . '</option>';
         echo '</select>';
-        echo '<p class="description">' . esc_html__('Which database to query when autofilling book data from an ISBN. Using both merges the best data from each source.', 'mm-book-catalog') . '</p>';
+        echo '<p class="description">' . esc_html__('Which database to query when autofilling book data from an ISBN. Using both merges the best data from each source.', 'montecchiani-book-catalog') . '</p>';
     }
 
     /**
@@ -356,15 +355,15 @@ class WPBC_Settings {
 
         // The stored key is never printed back into the page. Submitting the
         // field empty keeps the saved key; see sanitize_settings().
-        echo '<input type="password" id="wpbc_google_api_key" name="' . esc_attr($this->option_name) . '[google_api_key]" value="" class="regular-text" autocomplete="off" ';
-        echo 'placeholder="' . esc_attr($has_key ? __('A key is saved. Leave empty to keep it.', 'mm-book-catalog') : __('No key saved', 'mm-book-catalog')) . '" />';
+        echo '<input type="password" id="mbcat_google_api_key" name="' . esc_attr($this->option_name) . '[google_api_key]" value="" class="regular-text" autocomplete="off" ';
+        echo 'placeholder="' . esc_attr($has_key ? __('A key is saved. Leave empty to keep it.', 'montecchiani-book-catalog') : __('No key saved', 'montecchiani-book-catalog')) . '" />';
 
         if ($has_key) {
-            echo ' <label for="wpbc_google_api_key_clear"><input type="checkbox" id="wpbc_google_api_key_clear" name="' . esc_attr($this->option_name) . '[google_api_key_clear]" value="1" /> ';
-            echo esc_html__('Remove the saved key', 'mm-book-catalog') . '</label>';
+            echo ' <label for="mbcat_google_api_key_clear"><input type="checkbox" id="mbcat_google_api_key_clear" name="' . esc_attr($this->option_name) . '[google_api_key_clear]" value="1" /> ';
+            echo esc_html__('Remove the saved key', 'montecchiani-book-catalog') . '</label>';
         }
 
-        echo '<p class="description">' . esc_html__('Optional. Google Books works without a key, but a key raises the request quota. Create one in the Google Cloud Console.', 'mm-book-catalog') . '</p>';
+        echo '<p class="description">' . esc_html__('Optional. Google Books works without a key, but a key raises the request quota. Create one in the Google Cloud Console.', 'montecchiani-book-catalog') . '</p>';
     }
 
     /**
@@ -373,9 +372,9 @@ class WPBC_Settings {
     public function render_delete_data_field() {
         $value = self::get_setting('delete_data_on_uninstall', 0);
 
-        echo '<label for="wpbc_delete_data">';
-        echo '<input type="checkbox" id="wpbc_delete_data" name="' . esc_attr($this->option_name) . '[delete_data_on_uninstall]" value="1"' . checked($value, 1, false) . ' /> ';
-        echo esc_html__('Permanently delete all books, genres and settings when the plugin is uninstalled.', 'mm-book-catalog');
+        echo '<label for="mbcat_delete_data">';
+        echo '<input type="checkbox" id="mbcat_delete_data" name="' . esc_attr($this->option_name) . '[delete_data_on_uninstall]" value="1"' . checked($value, 1, false) . ' /> ';
+        echo esc_html__('Permanently delete all books, genres and settings when the plugin is uninstalled.', 'montecchiani-book-catalog');
         echo '</label>';
     }
 
@@ -403,7 +402,7 @@ class WPBC_Settings {
      * @return mixed
      */
     public static function get_setting($key, $fallback_value = '') {
-        $options = get_option('wpbc_settings', array());
+        $options = get_option('mbcat_settings', array());
 
         if (is_array($options) && isset($options[$key])) {
             return $options[$key];
@@ -420,4 +419,4 @@ class WPBC_Settings {
 }
 
 // Initialize
-WPBC_Settings::get_instance();
+MBCat_Settings::get_instance();

@@ -1,32 +1,32 @@
 /**
- * WP Book Catalog - Admin Styles
+ * Montecchiani Book Catalog - Admin Styles
  *
  * @package WP_Book_Catalog
  */
 
 /* Meta box styling */
-.wpbc-meta-box-wrapper {
+.mbcat-meta-box-wrapper {
     display: grid;
     gap: 15px;
     padding: 10px 0;
 }
 
-.wpbc-field-wrapper {
+.mbcat-field-wrapper {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-.wpbc-field-wrapper label {
+.mbcat-field-wrapper label {
     display: block;
     font-weight: 600;
     color: #1d2327;
 }
 
-.wpbc-field-wrapper input[type="text"],
-.wpbc-field-wrapper input[type="url"],
-.wpbc-field-wrapper input[type="number"],
-.wpbc-field-wrapper textarea {
+.mbcat-field-wrapper input[type="text"],
+.mbcat-field-wrapper input[type="url"],
+.mbcat-field-wrapper input[type="number"],
+.mbcat-field-wrapper textarea {
     width: 100%;
     padding: 8px 10px;
     border: 1px solid #8c8f94;
@@ -34,16 +34,16 @@
     font-size: 14px;
 }
 
-.wpbc-field-wrapper input[type="text"]:focus,
-.wpbc-field-wrapper input[type="url"]:focus,
-.wpbc-field-wrapper input[type="number"]:focus,
-.wpbc-field-wrapper textarea:focus {
+.mbcat-field-wrapper input[type="text"]:focus,
+.mbcat-field-wrapper input[type="url"]:focus,
+.mbcat-field-wrapper input[type="number"]:focus,
+.mbcat-field-wrapper textarea:focus {
     border-color: #2271b1;
     box-shadow: 0 0 0 1px #2271b1;
     outline: none;
 }
 
-.wpbc-field-wrapper .description {
+.mbcat-field-wrapper .description {
     margin: 5px 0 0;
     color: #646970;
     font-size: 13px;
@@ -51,48 +51,48 @@
 }
 
 /* ISBN lookup row */
-.wpbc-isbn-row {
+.mbcat-isbn-row {
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
-.wpbc-isbn-row input[type="text"] {
+.mbcat-isbn-row input[type="text"] {
     flex: 1;
 }
 
-.wpbc-isbn-row .button {
+.mbcat-isbn-row .button {
     display: inline-flex;
     align-items: center;
     gap: 4px;
     white-space: nowrap;
 }
 
-.wpbc-isbn-row .button .dashicons {
+.mbcat-isbn-row .button .dashicons {
     font-size: 16px;
     width: 16px;
     height: 16px;
     line-height: 1.2;
 }
 
-.wpbc-isbn-row .spinner {
+.mbcat-isbn-row .spinner {
     float: none;
     margin: 0;
 }
 
-#wpbc-isbn-lookup-result {
+#mbcat-isbn-lookup-result {
     margin: 10px 0 0;
     padding: 1px 12px;
 }
 
-#wpbc-cover-preview {
+#mbcat-cover-preview {
     display: flex;
     align-items: flex-start;
     gap: 12px;
     margin-top: 10px;
 }
 
-#wpbc-cover-preview img {
+#mbcat-cover-preview img {
     max-width: 90px;
     height: auto;
     border: 1px solid #dcdcde;
@@ -101,21 +101,21 @@
 }
 
 /* Settings page (scoped: these rules must not touch other admin screens) */
-.wpbc-settings-page h1 {
+.mbcat-settings-page h1 {
     margin-bottom: 20px;
 }
 
-.wpbc-settings-page .form-table th {
+.mbcat-settings-page .form-table th {
     width: 200px;
     padding: 20px 10px 20px 0;
 }
 
-.wpbc-settings-page .form-table td {
+.mbcat-settings-page .form-table td {
     padding: 15px 10px;
 }
 
 /* Shortcode documentation box on the settings page */
-.wpbc-shortcode-info {
+.mbcat-shortcode-info {
     background: #fff;
     padding: 20px;
     border: 1px solid #ccd0d4;
@@ -123,7 +123,7 @@
     max-width: 600px;
 }
 
-.wpbc-shortcode-info code {
+.mbcat-shortcode-info code {
     display: inline-block;
     background: #f0f0f1;
     padding: 5px 10px;
@@ -131,21 +131,21 @@
     border-radius: 3px;
 }
 
-.wpbc-shortcode-info ul {
+.mbcat-shortcode-info ul {
     list-style: disc;
     margin-left: 20px;
 }
 
-.wpbc-shortcode-info li {
+.mbcat-shortcode-info li {
     margin: 5px 0;
 }
 
 /* Book list table customization */
-.post-type-book .column-wpbc_cover {
+.post-type-book .column-mbcat_cover {
     width: 60px;
 }
 
-.post-type-book .wpbc-admin-cover {
+.post-type-book .mbcat-admin-cover {
     display: block;
     width: 40px;
     height: 60px;
@@ -154,18 +154,18 @@
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-.post-type-book .wpbc-admin-no-cover {
+.post-type-book .mbcat-admin-no-cover {
     color: #c3c4c7;
     font-size: 28px;
     width: 28px;
     height: 28px;
 }
 
-.post-type-book .column-wpbc_year {
+.post-type-book .column-mbcat_year {
     width: 8%;
 }
 
-.post-type-book .column-wpbc_isbn {
+.post-type-book .column-mbcat_isbn {
     width: 12%;
 }
 

@@ -1,5 +1,5 @@
 /**
- * WP Book Catalog - Admin JavaScript (ISBN lookup / autofill)
+ * Montecchiani Book Catalog - Admin JavaScript (ISBN lookup / autofill)
  *
  * @package WP_Book_Catalog
  */
@@ -7,7 +7,7 @@
 (function($) {
     'use strict';
 
-    var strings = (window.wpbc_admin && wpbc_admin.strings) || {};
+    var strings = (window.mbcat_admin && mbcat_admin.strings) || {};
     var fieldNames = strings.fields || {};
 
     /**
@@ -21,7 +21,7 @@
      * Show a notice inside the meta box result area
      */
     function showNotice(type, message) {
-        var $area = $('#wpbc-isbn-lookup-result');
+        var $area = $('#mbcat-isbn-lookup-result');
         $area
             .removeClass('notice-success notice-error notice-info')
             .addClass('notice notice-' + type)
@@ -127,13 +127,13 @@
      * Render the cover preview with an import button
      */
     function renderCoverPreview(coverUrl) {
-        var $wrap = $('#wpbc-cover-preview');
+        var $wrap = $('#mbcat-cover-preview');
         if (!$wrap.length || !coverUrl) {
             return;
         }
         $wrap.html(
             '<img src="' + escapeHtml(coverUrl) + '" alt="" />' +
-            '<button type="button" class="button" id="wpbc-import-cover" data-url="' + escapeHtml(coverUrl) + '">' +
+            '<button type="button" class="button" id="mbcat-import-cover" data-url="' + escapeHtml(coverUrl) + '">' +
             escapeHtml(strings.use_as_cover || 'Use as cover') +
             '</button>'
         ).show();
@@ -142,9 +142,9 @@
     /**
      * ISBN lookup button handler
      */
-    $(document).on('click', '#wpbc-isbn-lookup-btn', function() {
+    $(document).on('click', '#mbcat-isbn-lookup-btn', function() {
         var $btn = $(this);
-        var isbn = $.trim(String($('#wpbc_isbn').val()));
+        var isbn = $.trim(String($('#mbcat_isbn').val()));
 
         if (!isbn) {
             showNotice('error', escapeHtml(strings.enter_isbn || 'Please enter an ISBN first.'));
@@ -152,12 +152,12 @@
         }
 
         $btn.prop('disabled', true);
-        $('#wpbc-isbn-spinner').addClass('is-active');
-        $('#wpbc-cover-preview').hide().empty();
+        $('#mbcat-isbn-spinner').addClass('is-active');
+        $('#mbcat-cover-preview').hide().empty();
 
-        $.post(wpbc_admin.ajax_url, {
-            action: 'wpbc_isbn_lookup',
-            nonce: wpbc_admin.nonce,
+        $.post(mbcat_admin.ajax_url, {
+            action: 'mbcat_isbn_lookup',
+            nonce: mbcat_admin.nonce,
             isbn: isbn
         }).done(function(response) {
             if (!response || !response.success) {
@@ -169,11 +169,11 @@
             var data = response.data;
             var filled = [];
 
-            if (fillIfEmpty('#wpbc_author', data.authors)) { filled.push(fieldNames.author || 'author'); }
-            if (fillIfEmpty('#wpbc_publisher', data.publisher)) { filled.push(fieldNames.publisher || 'publisher'); }
-            if (fillIfEmpty('#wpbc_year', data.year)) { filled.push(fieldNames.year || 'year'); }
-            if (fillIfEmpty('#wpbc_pages', data.pages)) { filled.push(fieldNames.pages || 'pages'); }
-            if (fillIfEmpty('#wpbc_language', data.language)) { filled.push(fieldNames.language || 'language'); }
+            if (fillIfEmpty('#mbcat_author', data.authors)) { filled.push(fieldNames.author || 'author'); }
+            if (fillIfEmpty('#mbcat_publisher', data.publisher)) { filled.push(fieldNames.publisher || 'publisher'); }
+            if (fillIfEmpty('#mbcat_year', data.year)) { filled.push(fieldNames.year || 'year'); }
+            if (fillIfEmpty('#mbcat_pages', data.pages)) { filled.push(fieldNames.pages || 'pages'); }
+            if (fillIfEmpty('#mbcat_language', data.language)) { filled.push(fieldNames.language || 'language'); }
             if (maybeSetTitle(data.title)) { filled.push(fieldNames.title || 'title'); }
             if (maybeSetDescription(data.description)) { filled.push(fieldNames.description || 'description'); }
 
@@ -196,14 +196,14 @@
             showNotice('error', escapeHtml(strings.lookup_failed || 'Lookup failed. Please try again.'));
         }).always(function() {
             $btn.prop('disabled', false);
-            $('#wpbc-isbn-spinner').removeClass('is-active');
+            $('#mbcat-isbn-spinner').removeClass('is-active');
         });
     });
 
     /**
      * Cover import button handler
      */
-    $(document).on('click', '#wpbc-import-cover', function() {
+    $(document).on('click', '#mbcat-import-cover', function() {
         var $btn = $(this);
         var url = $btn.data('url');
         var postId = $('#post_ID').val();
@@ -214,9 +214,9 @@
 
         $btn.prop('disabled', true).text(strings.importing || 'Importing…');
 
-        $.post(wpbc_admin.ajax_url, {
-            action: 'wpbc_import_cover',
-            nonce: wpbc_admin.nonce,
+        $.post(mbcat_admin.ajax_url, {
+            action: 'mbcat_import_cover',
+            nonce: mbcat_admin.nonce,
             post_id: postId,
             url: url
         }).done(function(response) {
@@ -237,7 +237,7 @@
             if (!isBlockEditor()) {
                 // Classic editor: reload the featured image meta box on next save;
                 // show the imported thumbnail in the preview meanwhile.
-                $('#wpbc-cover-preview img').attr('src', response.data.thumbnail_url);
+                $('#mbcat-cover-preview img').attr('src', response.data.thumbnail_url);
             }
         }).fail(function() {
             showNotice('error', escapeHtml(strings.import_failed || 'Import failed. Please try again.'));
