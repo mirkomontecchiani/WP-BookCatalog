@@ -2,7 +2,7 @@
 /**
  * Meta Boxes for Book custom fields
  *
- * @package MM_Book_Catalog
+ * @package Montecchiani_Book_Catalog
  */
 
 // Prevent direct access
@@ -11,9 +11,9 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class WPBC_Meta_Boxes
+ * Class MBCat_Meta_Boxes
  */
-class WPBC_Meta_Boxes {
+class MBCat_Meta_Boxes {
 
     /**
      * Single instance
@@ -52,44 +52,44 @@ class WPBC_Meta_Boxes {
         }
 
         $this->meta_fields = array(
-            'wpbc_isbn' => array(
-                'label'       => __('ISBN', 'mm-book-catalog'),
+            'mbcat_isbn' => array(
+                'label'       => __('ISBN', 'montecchiani-book-catalog'),
                 'type'        => 'isbn',
-                'placeholder' => __('Enter ISBN (10 or 13 digits)', 'mm-book-catalog'),
+                'placeholder' => __('Enter ISBN (10 or 13 digits)', 'montecchiani-book-catalog'),
             ),
-            'wpbc_author' => array(
-                'label'       => __('Author', 'mm-book-catalog'),
+            'mbcat_author' => array(
+                'label'       => __('Author', 'montecchiani-book-catalog'),
                 'type'        => 'text',
-                'placeholder' => __('Enter book author', 'mm-book-catalog'),
+                'placeholder' => __('Enter book author', 'montecchiani-book-catalog'),
             ),
-            'wpbc_publisher' => array(
-                'label'       => __('Publisher', 'mm-book-catalog'),
+            'mbcat_publisher' => array(
+                'label'       => __('Publisher', 'montecchiani-book-catalog'),
                 'type'        => 'text',
-                'placeholder' => __('Enter publisher name', 'mm-book-catalog'),
+                'placeholder' => __('Enter publisher name', 'montecchiani-book-catalog'),
             ),
-            'wpbc_year' => array(
-                'label'       => __('Publication Year', 'mm-book-catalog'),
+            'mbcat_year' => array(
+                'label'       => __('Publication Year', 'montecchiani-book-catalog'),
                 'type'        => 'number',
-                'placeholder' => __('Enter publication year', 'mm-book-catalog'),
+                'placeholder' => __('Enter publication year', 'montecchiani-book-catalog'),
                 'min'         => 1,
                 'max'         => 2100,
             ),
-            'wpbc_pages' => array(
-                'label'       => __('Number of Pages', 'mm-book-catalog'),
+            'mbcat_pages' => array(
+                'label'       => __('Number of Pages', 'montecchiani-book-catalog'),
                 'type'        => 'number',
-                'placeholder' => __('Enter number of pages', 'mm-book-catalog'),
+                'placeholder' => __('Enter number of pages', 'montecchiani-book-catalog'),
                 'min'         => 1,
                 'max'         => 100000,
             ),
-            'wpbc_language' => array(
-                'label'       => __('Language', 'mm-book-catalog'),
+            'mbcat_language' => array(
+                'label'       => __('Language', 'montecchiani-book-catalog'),
                 'type'        => 'text',
-                'placeholder' => __('Enter book language (e.g. it, en)', 'mm-book-catalog'),
+                'placeholder' => __('Enter book language (e.g. it, en)', 'montecchiani-book-catalog'),
             ),
-            'wpbc_shop_link' => array(
-                'label'       => __('Shop Link', 'mm-book-catalog'),
+            'mbcat_shop_link' => array(
+                'label'       => __('Shop Link', 'montecchiani-book-catalog'),
                 'type'        => 'url',
-                'placeholder' => __('Enter shop URL', 'mm-book-catalog'),
+                'placeholder' => __('Enter shop URL', 'montecchiani-book-catalog'),
             ),
         );
 
@@ -101,10 +101,10 @@ class WPBC_Meta_Boxes {
      */
     public function add_meta_boxes() {
         add_meta_box(
-            'wpbc_book_details',
-            __('Book Details', 'mm-book-catalog'),
+            'mbcat_book_details',
+            __('Book Details', 'montecchiani-book-catalog'),
             array($this, 'render_meta_box'),
-            'book',
+            'mbcat_book',
             'normal',
             'high'
         );
@@ -115,12 +115,12 @@ class WPBC_Meta_Boxes {
      */
     public function render_meta_box($post) {
         // Add nonce for security
-        wp_nonce_field('wpbc_save_meta_boxes', 'wpbc_meta_nonce');
+        wp_nonce_field('mbcat_save_meta_boxes', 'mbcat_meta_nonce');
 
         // Get plugin settings
-        $default_author = WPBC_Settings::get_setting('default_author', '');
+        $default_author = MBCat_Settings::get_setting('default_author', '');
 
-        echo '<div class="wpbc-meta-box-wrapper">';
+        echo '<div class="mbcat-meta-box-wrapper">';
 
         foreach ($this->get_fields() as $key => $field) {
             $value       = get_post_meta($post->ID, $key, true);
@@ -129,26 +129,26 @@ class WPBC_Meta_Boxes {
             // The default author is shown as a placeholder, never as a value: writing
             // it into the post meta would freeze it, so that later changes to the
             // setting would no longer apply to this book.
-            if ('wpbc_author' === $key && !empty($default_author)) {
+            if ('mbcat_author' === $key && !empty($default_author)) {
                 $placeholder = $default_author;
             }
 
-            echo '<div class="wpbc-field-wrapper">';
+            echo '<div class="mbcat-field-wrapper">';
             echo '<label for="' . esc_attr($key) . '">' . esc_html($field['label']) . '</label>';
 
             switch ($field['type']) {
                 case 'isbn':
-                    echo '<div class="wpbc-isbn-row">';
+                    echo '<div class="mbcat-isbn-row">';
                     echo '<input type="text" id="' . esc_attr($key) . '" name="' . esc_attr($key) . '" value="' . esc_attr($value) . '" placeholder="' . esc_attr($placeholder) . '" class="widefat" />';
-                    echo '<button type="button" class="button button-secondary" id="wpbc-isbn-lookup-btn">';
+                    echo '<button type="button" class="button button-secondary" id="mbcat-isbn-lookup-btn">';
                     echo '<span class="dashicons dashicons-search" aria-hidden="true"></span> ';
-                    echo esc_html__('Autofill from ISBN', 'mm-book-catalog');
+                    echo esc_html__('Autofill from ISBN', 'montecchiani-book-catalog');
                     echo '</button>';
-                    echo '<span class="spinner" id="wpbc-isbn-spinner"></span>';
+                    echo '<span class="spinner" id="mbcat-isbn-spinner"></span>';
                     echo '</div>';
-                    echo '<p class="description">' . esc_html__('Fetches title, author, publisher, year, pages, description and cover from Google Books / Open Library.', 'mm-book-catalog') . '</p>';
-                    echo '<div id="wpbc-isbn-lookup-result" style="display:none;"></div>';
-                    echo '<div id="wpbc-cover-preview" style="display:none;"></div>';
+                    echo '<p class="description">' . esc_html__('Fetches title, author, publisher, year, pages, description and cover from Google Books / Open Library.', 'montecchiani-book-catalog') . '</p>';
+                    echo '<div id="mbcat-isbn-lookup-result" style="display:none;"></div>';
+                    echo '<div id="mbcat-cover-preview" style="display:none;"></div>';
                     break;
 
                 case 'url':
@@ -167,10 +167,10 @@ class WPBC_Meta_Boxes {
             }
 
             // Show note for author field if default is set
-            if ('wpbc_author' === $key && !empty($default_author)) {
+            if ('mbcat_author' === $key && !empty($default_author)) {
                 echo '<p class="description">' . esc_html(sprintf(
                     /* translators: %s: default author name */
-                    __('Leave empty to use the default author from the settings: %s', 'mm-book-catalog'),
+                    __('Leave empty to use the default author from the settings: %s', 'montecchiani-book-catalog'),
                     $default_author
                 )) . '</p>';
             }
@@ -188,7 +188,7 @@ class WPBC_Meta_Boxes {
      */
     public function save_meta_boxes($post_id) {
         // Verify nonce
-        if (!isset($_POST['wpbc_meta_nonce']) || !wp_verify_nonce(sanitize_key(wp_unslash($_POST['wpbc_meta_nonce'])), 'wpbc_save_meta_boxes')) {
+        if (!isset($_POST['mbcat_meta_nonce']) || !wp_verify_nonce(sanitize_key(wp_unslash($_POST['mbcat_meta_nonce'])), 'mbcat_save_meta_boxes')) {
             return;
         }
 
@@ -247,9 +247,9 @@ class WPBC_Meta_Boxes {
      * Get book meta data
      */
     public static function get_book_meta($post_id) {
-        $default_author = WPBC_Settings::get_setting('default_author', '');
+        $default_author = MBCat_Settings::get_setting('default_author', '');
 
-        $author = get_post_meta($post_id, 'wpbc_author', true);
+        $author = get_post_meta($post_id, 'mbcat_author', true);
 
         // Use default author if field is empty and default is set
         if (empty($author) && !empty($default_author)) {
@@ -258,15 +258,15 @@ class WPBC_Meta_Boxes {
 
         return array(
             'author'    => $author,
-            'publisher' => get_post_meta($post_id, 'wpbc_publisher', true),
-            'year'      => get_post_meta($post_id, 'wpbc_year', true),
-            'isbn'      => get_post_meta($post_id, 'wpbc_isbn', true),
-            'pages'     => get_post_meta($post_id, 'wpbc_pages', true),
-            'language'  => get_post_meta($post_id, 'wpbc_language', true),
-            'shop_link' => get_post_meta($post_id, 'wpbc_shop_link', true),
+            'publisher' => get_post_meta($post_id, 'mbcat_publisher', true),
+            'year'      => get_post_meta($post_id, 'mbcat_year', true),
+            'isbn'      => get_post_meta($post_id, 'mbcat_isbn', true),
+            'pages'     => get_post_meta($post_id, 'mbcat_pages', true),
+            'language'  => get_post_meta($post_id, 'mbcat_language', true),
+            'shop_link' => get_post_meta($post_id, 'mbcat_shop_link', true),
         );
     }
 }
 
 // Initialize
-WPBC_Meta_Boxes::get_instance();
+MBCat_Meta_Boxes::get_instance();

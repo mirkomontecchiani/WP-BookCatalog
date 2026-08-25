@@ -2,7 +2,7 @@
 /**
  * ISBN Lookup - fetch book data from external databases (Google Books, Open Library)
  *
- * @package MM_Book_Catalog
+ * @package Montecchiani_Book_Catalog
  */
 
 // Prevent direct access
@@ -11,13 +11,13 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class WPBC_ISBN_Lookup
+ * Class MBCat_ISBN_Lookup
  *
  * Provides admin-side AJAX endpoints to fetch book metadata by ISBN from
  * Google Books and Open Library, and to import the book cover as the
  * featured image. Results are cached in a transient for 12 hours.
  */
-class WPBC_ISBN_Lookup {
+class MBCat_ISBN_Lookup {
 
     /**
      * Single instance
@@ -47,31 +47,31 @@ class WPBC_ISBN_Lookup {
      * Constructor
      */
     private function __construct() {
-        add_action('wp_ajax_wpbc_isbn_lookup', array($this, 'ajax_isbn_lookup'));
-        add_action('wp_ajax_wpbc_import_cover', array($this, 'ajax_import_cover'));
+        add_action('wp_ajax_mbcat_isbn_lookup', array($this, 'ajax_isbn_lookup'));
+        add_action('wp_ajax_mbcat_import_cover', array($this, 'ajax_import_cover'));
     }
 
     /**
      * AJAX: look up book data by ISBN
      */
     public function ajax_isbn_lookup() {
-        check_ajax_referer('wpbc_admin_nonce', 'nonce');
+        check_ajax_referer('mbcat_admin_nonce', 'nonce');
 
         if (!current_user_can('edit_posts')) {
-            wp_send_json_error(array('message' => __('You are not allowed to do this.', 'mm-book-catalog')), 403);
+            wp_send_json_error(array('message' => __('You are not allowed to do this.', 'montecchiani-book-catalog')), 403);
         }
 
         $raw_isbn = isset($_POST['isbn']) ? sanitize_text_field(wp_unslash($_POST['isbn'])) : '';
         $isbn     = self::normalize_isbn($raw_isbn);
 
         if (!$isbn) {
-            wp_send_json_error(array('message' => __('Invalid ISBN. Please enter a 10 or 13 digit ISBN.', 'mm-book-catalog')), 400);
+            wp_send_json_error(array('message' => __('Invalid ISBN. Please enter a 10 or 13 digit ISBN.', 'montecchiani-book-catalog')), 400);
         }
 
         $data = self::lookup($isbn);
 
         if (empty($data) || empty($data['found'])) {
-            wp_send_json_error(array('message' => __('No book found for this ISBN. Try the other data source or check the number.', 'mm-book-catalog')), 404);
+            wp_send_json_error(array('message' => __('No book found for this ISBN. Try the other data source or check the number.', 'montecchiani-book-catalog')), 404);
         }
 
         wp_send_json_success($data);
@@ -81,21 +81,21 @@ class WPBC_ISBN_Lookup {
      * AJAX: import a cover image from an allowed host and set it as featured image
      */
     public function ajax_import_cover() {
-        check_ajax_referer('wpbc_admin_nonce', 'nonce');
+        check_ajax_referer('mbcat_admin_nonce', 'nonce');
 
         $post_id = isset($_POST['post_id']) ? absint($_POST['post_id']) : 0;
         $url     = isset($_POST['url']) ? esc_url_raw(wp_unslash($_POST['url'])) : '';
 
         // The cover is stored in the Media Library, so uploading must be allowed
         // too: 'edit_post' alone is satisfied by a Contributor on their own draft.
-        if (!$post_id || 'book' !== get_post_type($post_id)
+        if (!$post_id || 'mbcat_book' !== get_post_type($post_id)
             || !current_user_can('edit_post', $post_id)
             || !current_user_can('upload_files')) {
-            wp_send_json_error(array('message' => __('You are not allowed to do this.', 'mm-book-catalog')), 403);
+            wp_send_json_error(array('message' => __('You are not allowed to do this.', 'montecchiani-book-catalog')), 403);
         }
 
         if (!self::is_allowed_cover_url($url)) {
-            wp_send_json_error(array('message' => __('Cover URL is not from an allowed source.', 'mm-book-catalog')), 400);
+            wp_send_json_error(array('message' => __('Cover URL is not from an allowed source.', 'montecchiani-book-catalog')), 400);
         }
 
         require_once ABSPATH . 'wp-admin/includes/media.php';
@@ -113,7 +113,7 @@ class WPBC_ISBN_Lookup {
         wp_send_json_success(array(
             'attachment_id' => $attachment_id,
             'thumbnail_url' => wp_get_attachment_image_url($attachment_id, 'medium'),
-            'message'       => __('Cover imported and set as featured image.', 'mm-book-catalog'),
+            'message'       => __('Cover imported and set as featured image.', 'montecchiani-book-catalog'),
         ));
     }
 
@@ -141,7 +141,7 @@ class WPBC_ISBN_Lookup {
          *
          * @param string[] $hosts Allowed host names.
          */
-        $allowed = apply_filters('wpbc_allowed_cover_hosts', self::$allowed_cover_hosts);
+        $allowed = apply_filters('mbcat_allowed_cover_hosts', self::$allowed_cover_hosts);
         $allowed = array_map('strtolower', array_map('strval', (array) $allowed));
 
         return in_array(strtolower($host), $allowed, true);
@@ -181,12 +181,12 @@ class WPBC_ISBN_Lookup {
         if (!isset($extensions[$mime])) {
             wp_delete_file($tmp_file);
             return new WP_Error(
-                'wpbc_invalid_cover',
-                __('The downloaded file is not a supported image.', 'mm-book-catalog')
+                'mbcat_invalid_cover',
+                __('The downloaded file is not a supported image.', 'montecchiani-book-catalog')
             );
         }
 
-        $isbn      = get_post_meta($post_id, 'wpbc_isbn', true);
+        $isbn      = get_post_meta($post_id, 'mbcat_isbn', true);
         $base_name = $isbn ? $isbn : 'book-' . $post_id;
 
         $file_array = array(
@@ -234,12 +234,12 @@ class WPBC_ISBN_Lookup {
      * @return array Normalized book data.
      */
     public static function lookup($isbn) {
-        $source  = WPBC_Settings::get_setting('isbn_source', 'both');
-        $has_key = WPBC_Settings::get_setting('google_api_key', '') !== '' ? '1' : '0';
+        $source  = MBCat_Settings::get_setting('isbn_source', 'both');
+        $has_key = MBCat_Settings::get_setting('google_api_key', '') !== '' ? '1' : '0';
 
         // Include the data source (and API-key presence) in the cache key so
         // changing the source setting does not serve results from another source.
-        $cache_key = 'wpbc_isbn_' . md5($isbn . '|' . $source . '|' . $has_key);
+        $cache_key = 'mbcat_isbn_' . md5($isbn . '|' . $source . '|' . $has_key);
         $cached    = get_transient($cache_key);
 
         if (is_array($cached)) {
@@ -260,7 +260,7 @@ class WPBC_ISBN_Lookup {
          * @param array  $data Normalized record.
          * @param string $isbn Normalized ISBN that was looked up.
          */
-        $data = apply_filters('wpbc_lookup_data', $data, $isbn);
+        $data = apply_filters('mbcat_lookup_data', $data, $isbn);
 
         // Cache also negative results, but for a shorter time.
         $ttl = !empty($data['found']) ? 12 * HOUR_IN_SECONDS : HOUR_IN_SECONDS;
@@ -335,7 +335,7 @@ class WPBC_ISBN_Lookup {
             'https://www.googleapis.com/books/v1/volumes'
         );
 
-        $api_key = WPBC_Settings::get_setting('google_api_key', '');
+        $api_key = MBCat_Settings::get_setting('google_api_key', '');
         if (!empty($api_key)) {
             $url = add_query_arg('key', rawurlencode($api_key), $url);
         }
@@ -500,7 +500,7 @@ class WPBC_ISBN_Lookup {
             $url,
             array(
                 'timeout'    => 8,
-                'user-agent' => 'MM-Book-Catalog/' . WPBC_VERSION,
+                'user-agent' => 'MM-Book-Catalog/' . MBCAT_VERSION,
             )
         );
 
@@ -515,4 +515,4 @@ class WPBC_ISBN_Lookup {
 }
 
 // Initialize
-WPBC_ISBN_Lookup::get_instance();
+MBCat_ISBN_Lookup::get_instance();

@@ -1,5 +1,5 @@
 /**
- * WP Book Catalog - Frontend JavaScript
+ * Montecchiani Book Catalog - Frontend JavaScript
  *
  * @package WP_Book_Catalog
  */
@@ -19,17 +19,17 @@
      * Initialize Show All button functionality
      */
     function initShowAllButton() {
-        $(document).on('click', '.wpbc-show-all-btn', function(e) {
+        $(document).on('click', '.mbcat-show-all-btn', function(e) {
             e.preventDefault();
 
             var $button = $(this);
             var instanceId = $button.data('instance');
             var $container = $('#' + instanceId);
-            var $grid = $container.find('.wpbc-grid');
-            var $status = $container.find('.wpbc-status');
+            var $grid = $container.find('.mbcat-grid');
+            var $status = $container.find('.mbcat-status');
             // Remember how many books were already on screen, so focus can be
             // moved to the first genuinely new one.
-            var alreadyShown = $grid.find('.wpbc-book-item').length;
+            var alreadyShown = $grid.find('.mbcat-book-item').length;
 
             // Prevent multiple clicks
             if ($button.hasClass('loading')) {
@@ -39,14 +39,14 @@
             // Add loading state
             $button.addClass('loading').prop('disabled', true);
             $grid.attr('aria-busy', 'true');
-            $container.find('.wpbc-load-error').remove();
+            $container.find('.mbcat-load-error').remove();
 
             // AJAX request to load all books
             $.ajax({
-                url: wpbc_ajax.ajax_url,
+                url: mbcat_ajax.ajax_url,
                 type: 'POST',
                 data: {
-                    action: 'wpbc_load_all_books',
+                    action: 'mbcat_load_all_books',
                     orderby: $button.data('orderby'),
                     order: $button.data('order'),
                     genre: $button.data('genre')
@@ -67,24 +67,24 @@
                         // Stagger the fade-in with a CSS animation delay. The class
                         // is added before the browser paints, so the cards never
                         // flash at full opacity first.
-                        var $items = $grid.find('.wpbc-book-item');
+                        var $items = $grid.find('.mbcat-book-item');
                         $items.each(function(index) {
                             this.style.animationDelay = (Math.min(index, 20) * 50) + 'ms';
-                            this.className += ' wpbc-fade-in';
+                            this.className += ' mbcat-fade-in';
                         });
 
                         // Announce the result in a small status region instead of
                         // making the whole grid a live region.
-                        $status.text((window.wpbc_ajax && wpbc_ajax.loaded_text) || '');
+                        $status.text((window.mbcat_ajax && mbcat_ajax.loaded_text) || '');
 
                         // Move keyboard focus to the first genuinely new book.
                         // Both <a> and <div tabindex="0"> cards are already focusable,
                         // so focus without overriding tabindex (which would drop the
                         // element from the Tab order).
-                        $items.eq(alreadyShown).find('.wpbc-book-link').trigger('focus');
+                        $items.eq(alreadyShown).find('.mbcat-book-link').trigger('focus');
 
                         // Remove the button wrapper
-                        $button.closest('.wpbc-show-all-wrapper').fadeOut(300, function() {
+                        $button.closest('.mbcat-show-all-wrapper').fadeOut(300, function() {
                             $(this).remove();
                         });
                     } else {
@@ -106,9 +106,9 @@
      */
     function showLoadError($button, message) {
         $button.removeClass('loading').prop('disabled', false);
-        $button.closest('.wpbc-container').find('.wpbc-grid').attr('aria-busy', 'false');
-        $('<p class="wpbc-load-error" role="alert"></p>')
-            .text(message || (window.wpbc_ajax && wpbc_ajax.error_text) || 'Error loading books.')
+        $button.closest('.mbcat-container').find('.mbcat-grid').attr('aria-busy', 'false');
+        $('<p class="mbcat-load-error" role="alert"></p>')
+            .text(message || (window.mbcat_ajax && mbcat_ajax.error_text) || 'Error loading books.')
             .insertAfter($button);
     }
 
@@ -125,17 +125,17 @@
         }
 
         // Add touch class to body
-        $('body').addClass('wpbc-touch-device');
+        $('body').addClass('mbcat-touch-device');
 
         // First tap reveals the overlay; the second tap follows the link.
-        $(document).on('click', '.wpbc-book-link', function(e) {
+        $(document).on('click', '.mbcat-book-link', function(e) {
             var $link = $(this);
-            var $overlay = $link.find('.wpbc-book-overlay');
+            var $overlay = $link.find('.mbcat-book-overlay');
 
-            if ($overlay.hasClass('wpbc-visible')) {
+            if ($overlay.hasClass('mbcat-visible')) {
                 // Overlay already open: links navigate, plain cards close it.
                 if (!$link.is('a')) {
-                    $overlay.removeClass('wpbc-visible');
+                    $overlay.removeClass('mbcat-visible');
                 }
                 return;
             }
@@ -143,14 +143,14 @@
             e.preventDefault();
 
             // Hide all other overlays first
-            $('.wpbc-book-overlay.wpbc-visible').removeClass('wpbc-visible');
-            $overlay.addClass('wpbc-visible');
+            $('.mbcat-book-overlay.mbcat-visible').removeClass('mbcat-visible');
+            $overlay.addClass('mbcat-visible');
         });
 
         // Close overlay when tapping outside
         $(document).on('click', function(e) {
-            if (!$(e.target).closest('.wpbc-book-item').length) {
-                $('.wpbc-book-overlay.wpbc-visible').removeClass('wpbc-visible');
+            if (!$(e.target).closest('.mbcat-book-item').length) {
+                $('.mbcat-book-overlay.mbcat-visible').removeClass('mbcat-visible');
             }
         });
     }

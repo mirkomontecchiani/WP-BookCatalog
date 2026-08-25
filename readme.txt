@@ -1,10 +1,10 @@
-=== MM Book Catalog ===
+=== Montecchiani Book Catalog ===
 Contributors: mirkomontecchiani
 Tags: books, book catalog, isbn, library, bookshelf
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.2
-Stable tag: 1.2.0
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,8 +12,8 @@ Build a book catalog with a Book post type, genres, a responsive shortcode grid 
 
 == Description ==
 
-MM Book Catalog adds a dedicated **Book** content type to WordPress and displays your books
-anywhere on your site with the `[books]` shortcode: a responsive 1–5 column grid of covers
+Montecchiani Book Catalog adds a dedicated **Book** content type to WordPress and displays your books
+anywhere on your site with the `[mbcat_books]` shortcode: a responsive 1–5 column grid of covers
 with an overlay that reveals the book details on hover, on focus or on tap.
 
 Every book stores its own details (author, publisher, publication year, number of pages,
@@ -36,13 +36,14 @@ featured image with one click.
 * Book fields: author, publisher, publication year, pages, language, ISBN, shop link
 * **ISBN autofill** from Google Books and Open Library, with the results merged and cached
 * **Cover import**: one click to store the cover in the Media Library as the featured image
-* `[books]` shortcode with `columns`, `hitem`, `orderby`, `order` and `genre` attributes
+* `[mbcat_books]` shortcode with `columns`, `hitem`, `orderby`, `order` and `genre` attributes
 * Responsive grid (1–5 columns), hover overlay, keyboard accessible, touch friendly
 * "Show All Books" button that loads the rest of the catalog over AJAX
 * Schema.org `Book` JSON-LD structured data for SEO
 * Admin list columns for cover, author, year and ISBN, sortable by author and year
 * Settings page: default author, author label, columns, ISBN data source, uninstall cleanup
-* Available in English, French, Spanish, Italian and Japanese, and fully translatable
+* Fully translatable — French, Spanish, Italian and Japanese translations are ready
+  on translate.wordpress.org, and any other language can be contributed there
 * Assets are only loaded on the pages that actually use the shortcode
 
 = External services =
@@ -85,11 +86,11 @@ You can choose which of the two services is used — or use only one of them —
 
 == Installation ==
 
-1. Upload the `mm-book-catalog` folder to `/wp-content/plugins/`, or install the plugin
+1. Upload the `montecchiani-book-catalog` folder to `/wp-content/plugins/`, or install the plugin
    through the **Plugins → Add New** screen in WordPress.
 2. Activate the plugin through the **Plugins** menu.
 3. Go to **Book Catalog → Add New Book** to create your first book.
-4. Add the `[books]` shortcode to any page, post or block where you want the catalog.
+4. Add the `[mbcat_books]` shortcode to any page, post or block where you want the catalog.
 5. Optionally review **Book Catalog → Settings** to set the default author, the number of
    columns and the ISBN data source.
 
@@ -97,7 +98,7 @@ You can choose which of the two services is used — or use only one of them —
 
 = How do I display the catalog? =
 
-Add the `[books]` shortcode to a page or post. Available attributes:
+Add the `[mbcat_books]` shortcode to a page or post. Available attributes:
 
 * `columns` — number of columns, from 1 to 5 (defaults to the value in the settings)
 * `hitem` — show only this many books, with a "Show All Books" button underneath
@@ -107,8 +108,8 @@ Add the `[books]` shortcode to a page or post. Available attributes:
 
 Example: `[books hitem="6" columns="3" orderby="title" order="ASC" genre="fantasy,thriller"]`
 
-`[wpbc_books]` accepts exactly the same attributes and is the recommended form if another
-plugin on your site also registers a `[books]` shortcode.
+`[mbcat_books]` accepts exactly the same attributes and is the recommended form if another
+plugin on your site also registers a `[mbcat_books]` shortcode.
 
 = Does the ISBN autofill overwrite what I already typed? =
 
@@ -142,18 +143,28 @@ deleting the plugin.
 = Can I show more than 500 books at once? =
 
 A single request renders at most 500 books, so a very large catalog cannot exhaust the PHP
-memory limit. Developers can raise the limit with the `wpbc_max_books_per_request` filter.
+memory limit. Developers can raise the limit with the `mbcat_max_books_per_request` filter.
 
 = Which languages is the plugin available in? =
 
-English (the original), French, Spanish, Italian and Japanese. The plugin switches
+English (the original), with French, Spanish, Italian and Japanese provided through
+translate.wordpress.org. The plugin switches
 automatically to your site's language, with no configuration.
 
-It is fully internationalised, so any other language can be added: the translation
-template is included as `languages/mm-book-catalog.pot`, and translations can also be
-contributed at https://translate.wordpress.org/projects/wp-plugins/mm-book-catalog/.
+It is fully internationalised, so any other language can be added by contributing at
+https://translate.wordpress.org/projects/wp-plugins/montecchiani-book-catalog/.
 
 == Changelog ==
+
+= 1.3.0 =
+* Changed: the plugin is now named Montecchiani Book Catalog. Post type, taxonomy,
+  shortcode, options, transients, AJAX actions and every PHP symbol now carry the
+  `mbcat` prefix to rule out collisions with other plugins.
+* Changed: the shortcode is `[mbcat_books]`. The former unprefixed `[books]` name
+  (and its `[wpbc_books]` alias) registered a generic name that other plugins may
+  legitimately want.
+* Changed: translation files are no longer bundled; translations are delivered
+  automatically through translate.wordpress.org.
 
 = 1.2.0 =
 * Fixed: importing a cover from Google Books could never work. Those URLs carry no file
@@ -181,9 +192,9 @@ contributed at https://translate.wordpress.org/projects/wp-plugins/mm-book-catal
   cover URLs are passed through `esc_url_raw()`.
 * Privacy: the plugin no longer sends your site URL to Google Books / Open Library.
 * Privacy: the Google Books API key is no longer rendered back into the settings page.
-* Added: `[wpbc_books]`, a prefixed alias of `[books]`.
-* Added: a 500-book cap per request, adjustable with `wpbc_max_books_per_request`.
-* Added: the `wpbc_shortcode_query_args`, `wpbc_allowed_cover_hosts` and `wpbc_lookup_data`
+* Added: `[mbcat_books]`, a prefixed alias of `[mbcat_books]`.
+* Added: a 500-book cap per request, adjustable with `mbcat_max_books_per_request`.
+* Added: the `mbcat_shortcode_query_args`, `mbcat_allowed_cover_hosts` and `mbcat_lookup_data`
   filters.
 * Added: readme.txt, a bundled copy of the GPLv2 licence and a `.distignore`.
 * Improved: the JSON-LD block is refreshed when "Show All Books" expands the catalog, and
@@ -200,7 +211,7 @@ contributed at https://translate.wordpress.org/projects/wp-plugins/mm-book-catal
 * Added the settings page options for the ISBN data source and uninstall cleanup.
 
 = 1.0.0 =
-* First release: Book post type, book fields, `[books]` shortcode, responsive grid with
+* First release: Book post type, book fields, `[mbcat_books]` shortcode, responsive grid with
   hover overlay, "Show All Books" AJAX button, settings page and Italian translation.
 
 == Upgrade Notice ==

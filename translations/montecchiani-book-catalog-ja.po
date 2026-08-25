@@ -1,10 +1,10 @@
-# Japanese translation for mm-book-catalog.
+# Japanese translation for montecchiani-book-catalog.
 # Copyright (C) 2026 Mirko Montecchiani
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: mm-book-catalog 1.2.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/mm-book-catalog\n"
+"Project-Id-Version: montecchiani-book-catalog 1.3.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/montecchiani-book-catalog\n"
 "PO-Revision-Date: 2026-08-22 14:40+0000\n"
 "Last-Translator: Mirko Montecchiani\n"
 "Language-Team: Japanese\n"
@@ -13,610 +13,606 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Domain: mm-book-catalog\n"
+"X-Domain: montecchiani-book-catalog\n"
 
 #. Plugin Name of the plugin
-#: mm-book-catalog.php
-msgid "MM Book Catalog"
-msgstr ""
+#: montecchiani-book-catalog.php
+msgid "Montecchiani Book Catalog"
+msgstr "Montecchiani Book Catalog"
 
 #. Plugin URI of the plugin
-#: mm-book-catalog.php
-msgid "https://github.com/mirkomontecchiani/WP-BookCatalog"
-msgstr ""
+#: montecchiani-book-catalog.php
+msgid "https://github.com/mirkomontecchiani/montecchiani-book-catalog"
+msgstr "https://github.com/mirkomontecchiani/montecchiani-book-catalog"
 
 #. Description of the plugin
-#: mm-book-catalog.php
+#: montecchiani-book-catalog.php
 msgid "Book catalog with a Book post type, genres, a responsive shortcode grid and one-click ISBN autofill from Google Books and Open Library."
 msgstr "書籍投稿タイプ、ジャンル、レスポンシブなショートコードグリッド、Google BooksとOpen LibraryからのワンクリックISBN自動入力を備えた書籍カタログです。"
 
 #. Author of the plugin
-#: mm-book-catalog.php
+#: montecchiani-book-catalog.php
 msgid "Mirko Montecchiani"
-msgstr ""
+msgstr "Mirko Montecchiani"
 
 #. Author URI of the plugin
-#: mm-book-catalog.php
+#: montecchiani-book-catalog.php
 msgid "https://github.com/mirkomontecchiani"
-msgstr ""
+msgstr "https://github.com/mirkomontecchiani"
 
-#: includes/class-wpbc-isbn-lookup.php:61
-#: includes/class-wpbc-isbn-lookup.php:94
+#: includes/class-mbcat-isbn-lookup.php:61
+#: includes/class-mbcat-isbn-lookup.php:94
 msgid "You are not allowed to do this."
 msgstr "この操作を行う権限がありません。"
 
-#: includes/class-wpbc-isbn-lookup.php:68
+#: includes/class-mbcat-isbn-lookup.php:68
 msgid "Invalid ISBN. Please enter a 10 or 13 digit ISBN."
 msgstr "無効なISBNです。10桁または13桁のISBNを入力してください。"
 
-#: includes/class-wpbc-isbn-lookup.php:74
+#: includes/class-mbcat-isbn-lookup.php:74
 msgid "No book found for this ISBN. Try the other data source or check the number."
 msgstr "このISBNの書籍は見つかりませんでした。別のデータソースを試すか、番号をご確認ください。"
 
-#: includes/class-wpbc-isbn-lookup.php:98
+#: includes/class-mbcat-isbn-lookup.php:98
 msgid "Cover URL is not from an allowed source."
 msgstr "表紙のURLが許可されたソースのものではありません。"
 
-#: includes/class-wpbc-isbn-lookup.php:116
+#: includes/class-mbcat-isbn-lookup.php:116
 msgid "Cover imported and set as featured image."
 msgstr "表紙をインポートし、アイキャッチ画像に設定しました。"
 
-#: includes/class-wpbc-isbn-lookup.php:185
+#: includes/class-mbcat-isbn-lookup.php:185
 msgid "The downloaded file is not a supported image."
 msgstr "ダウンロードしたファイルはサポートされている画像ではありません。"
 
-#: includes/class-wpbc-meta-boxes.php:56
-#: includes/class-wpbc-post-type.php:144
+#: includes/class-mbcat-meta-boxes.php:56
+#: includes/class-mbcat-post-type.php:144
 msgid "ISBN"
 msgstr "ISBN"
 
-#: includes/class-wpbc-meta-boxes.php:58
+#: includes/class-mbcat-meta-boxes.php:58
 msgid "Enter ISBN (10 or 13 digits)"
 msgstr "ISBNを入力してください（10桁または13桁）"
 
-#: includes/class-wpbc-meta-boxes.php:61
-#: includes/class-wpbc-post-type.php:142
+#: includes/class-mbcat-meta-boxes.php:61
+#: includes/class-mbcat-post-type.php:142
 msgid "Author"
 msgstr "著者"
 
-#: includes/class-wpbc-meta-boxes.php:63
+#: includes/class-mbcat-meta-boxes.php:63
 msgid "Enter book author"
 msgstr "書籍の著者を入力してください"
 
-#: includes/class-wpbc-meta-boxes.php:66
+#: includes/class-mbcat-meta-boxes.php:66
 msgid "Publisher"
 msgstr "出版社"
 
-#: includes/class-wpbc-meta-boxes.php:68
+#: includes/class-mbcat-meta-boxes.php:68
 msgid "Enter publisher name"
 msgstr "出版社名を入力してください"
 
-#: includes/class-wpbc-meta-boxes.php:71
+#: includes/class-mbcat-meta-boxes.php:71
 msgid "Publication Year"
 msgstr "出版年"
 
-#: includes/class-wpbc-meta-boxes.php:73
+#: includes/class-mbcat-meta-boxes.php:73
 msgid "Enter publication year"
 msgstr "出版年を入力してください"
 
-#: includes/class-wpbc-meta-boxes.php:78
+#: includes/class-mbcat-meta-boxes.php:78
 msgid "Number of Pages"
 msgstr "ページ数"
 
-#: includes/class-wpbc-meta-boxes.php:80
+#: includes/class-mbcat-meta-boxes.php:80
 msgid "Enter number of pages"
 msgstr "ページ数を入力してください"
 
-#: includes/class-wpbc-meta-boxes.php:85
+#: includes/class-mbcat-meta-boxes.php:85
 msgid "Language"
 msgstr "言語"
 
-#: includes/class-wpbc-meta-boxes.php:87
+#: includes/class-mbcat-meta-boxes.php:87
 msgid "Enter book language (e.g. it, en)"
 msgstr "書籍の言語を入力してください（例: it、en）"
 
-#: includes/class-wpbc-meta-boxes.php:90
+#: includes/class-mbcat-meta-boxes.php:90
 msgid "Shop Link"
 msgstr "ショップリンク"
 
-#: includes/class-wpbc-meta-boxes.php:92
+#: includes/class-mbcat-meta-boxes.php:92
 msgid "Enter shop URL"
 msgstr "ショップのURLを入力してください"
 
-#: includes/class-wpbc-meta-boxes.php:105
+#: includes/class-mbcat-meta-boxes.php:105
 msgid "Book Details"
 msgstr "書籍の詳細"
 
-#: includes/class-wpbc-meta-boxes.php:145
+#: includes/class-mbcat-meta-boxes.php:145
 msgid "Autofill from ISBN"
 msgstr "ISBNから自動入力"
 
-#: includes/class-wpbc-meta-boxes.php:149
+#: includes/class-mbcat-meta-boxes.php:149
 msgid "Fetches title, author, publisher, year, pages, description and cover from Google Books / Open Library."
 msgstr "タイトル、著者、出版社、出版年、ページ数、説明、表紙をGoogle Books / Open Libraryから取得します。"
 
 #. translators: %s: default author name
-#: includes/class-wpbc-meta-boxes.php:173
+#: includes/class-mbcat-meta-boxes.php:173
 #, php-format
 msgid "Leave empty to use the default author from the settings: %s"
 msgstr "空欄のままにすると、設定のデフォルト著者を使用します: %s"
 
-#: includes/class-wpbc-post-type.php:52
+#: includes/class-mbcat-post-type.php:52
 msgctxt "Post type general name"
 msgid "Books"
 msgstr "書籍"
 
-#: includes/class-wpbc-post-type.php:53
+#: includes/class-mbcat-post-type.php:53
 msgctxt "Post type singular name"
 msgid "Book"
 msgstr "書籍"
 
-#: includes/class-wpbc-post-type.php:54
+#: includes/class-mbcat-post-type.php:54
 msgctxt "Admin Menu text"
 msgid "Book Catalog"
 msgstr "書籍カタログ"
 
-#: includes/class-wpbc-post-type.php:55
+#: includes/class-mbcat-post-type.php:55
 msgctxt "Add New on Toolbar"
 msgid "Book"
 msgstr "書籍"
 
-#: includes/class-wpbc-post-type.php:56
+#: includes/class-mbcat-post-type.php:56
 msgid "Add New"
 msgstr "新規追加"
 
-#: includes/class-wpbc-post-type.php:57
+#: includes/class-mbcat-post-type.php:57
 msgid "Add New Book"
 msgstr "新規書籍を追加"
 
-#: includes/class-wpbc-post-type.php:58
+#: includes/class-mbcat-post-type.php:58
 msgid "New Book"
 msgstr "新しい書籍"
 
-#: includes/class-wpbc-post-type.php:59
+#: includes/class-mbcat-post-type.php:59
 msgid "Edit Book"
 msgstr "書籍を編集"
 
-#: includes/class-wpbc-post-type.php:60
+#: includes/class-mbcat-post-type.php:60
 msgid "View Book"
 msgstr "書籍を表示"
 
-#: includes/class-wpbc-post-type.php:61
+#: includes/class-mbcat-post-type.php:61
 msgid "All Books"
 msgstr "書籍一覧"
 
-#: includes/class-wpbc-post-type.php:62
+#: includes/class-mbcat-post-type.php:62
 msgid "Search Books"
 msgstr "書籍を検索"
 
-#: includes/class-wpbc-post-type.php:63
+#: includes/class-mbcat-post-type.php:63
 msgid "Parent Books:"
 msgstr "親の書籍:"
 
-#: includes/class-wpbc-post-type.php:64
-#: includes/class-wpbc-shortcode.php:96
-#: includes/class-wpbc-shortcode.php:484
+#: includes/class-mbcat-post-type.php:64
+#: includes/class-mbcat-shortcode.php:93
+#: includes/class-mbcat-shortcode.php:481
 msgid "No books found."
 msgstr "書籍が見つかりませんでした。"
 
-#: includes/class-wpbc-post-type.php:65
+#: includes/class-mbcat-post-type.php:65
 msgid "No books found in Trash."
 msgstr "ゴミ箱に書籍が見つかりませんでした。"
 
-#: includes/class-wpbc-post-type.php:66
+#: includes/class-mbcat-post-type.php:66
 msgctxt "Overrides the \"Featured Image\" phrase"
 msgid "Book Cover"
 msgstr "書籍の表紙"
 
-#: includes/class-wpbc-post-type.php:67
+#: includes/class-mbcat-post-type.php:67
 msgctxt "Overrides the \"Set featured image\" phrase"
 msgid "Set book cover"
 msgstr "書籍の表紙を設定"
 
-#: includes/class-wpbc-post-type.php:68
+#: includes/class-mbcat-post-type.php:68
 msgctxt "Overrides the \"Remove featured image\" phrase"
 msgid "Remove book cover"
 msgstr "書籍の表紙を削除"
 
-#: includes/class-wpbc-post-type.php:69
+#: includes/class-mbcat-post-type.php:69
 msgctxt "Overrides the \"Use as featured image\" phrase"
 msgid "Use as book cover"
 msgstr "書籍の表紙として使用"
 
-#: includes/class-wpbc-post-type.php:70
+#: includes/class-mbcat-post-type.php:70
 msgctxt "The post type archive label"
 msgid "Book archives"
 msgstr "書籍アーカイブ"
 
-#: includes/class-wpbc-post-type.php:71
+#: includes/class-mbcat-post-type.php:71
 msgctxt "Overrides the \"Insert into post\" phrase"
 msgid "Insert into book"
 msgstr "書籍に挿入"
 
-#: includes/class-wpbc-post-type.php:72
+#: includes/class-mbcat-post-type.php:72
 msgctxt "Overrides the \"Uploaded to this post\" phrase"
 msgid "Uploaded to this book"
 msgstr "この書籍へのアップロード"
 
-#: includes/class-wpbc-post-type.php:73
+#: includes/class-mbcat-post-type.php:73
 msgctxt "Screen reader text"
 msgid "Filter books list"
 msgstr "書籍リストを絞り込む"
 
-#: includes/class-wpbc-post-type.php:74
+#: includes/class-mbcat-post-type.php:74
 msgctxt "Screen reader text"
 msgid "Books list navigation"
 msgstr "書籍リストナビゲーション"
 
-#: includes/class-wpbc-post-type.php:75
+#: includes/class-mbcat-post-type.php:75
 msgctxt "Screen reader text"
 msgid "Books list"
 msgstr "書籍リスト"
 
-#: includes/class-wpbc-post-type.php:103
+#: includes/class-mbcat-post-type.php:103
 msgctxt "taxonomy general name"
 msgid "Genres"
 msgstr "ジャンル"
 
-#: includes/class-wpbc-post-type.php:104
+#: includes/class-mbcat-post-type.php:104
 msgctxt "taxonomy singular name"
 msgid "Genre"
 msgstr "ジャンル"
 
-#: includes/class-wpbc-post-type.php:105
+#: includes/class-mbcat-post-type.php:105
 msgid "Search Genres"
 msgstr "ジャンルを検索"
 
-#: includes/class-wpbc-post-type.php:106
+#: includes/class-mbcat-post-type.php:106
 msgid "All Genres"
 msgstr "すべてのジャンル"
 
-#: includes/class-wpbc-post-type.php:107
+#: includes/class-mbcat-post-type.php:107
 msgid "Parent Genre"
 msgstr "親のジャンル"
 
-#: includes/class-wpbc-post-type.php:108
+#: includes/class-mbcat-post-type.php:108
 msgid "Parent Genre:"
 msgstr "親のジャンル:"
 
-#: includes/class-wpbc-post-type.php:109
+#: includes/class-mbcat-post-type.php:109
 msgid "Edit Genre"
 msgstr "ジャンルを編集"
 
-#: includes/class-wpbc-post-type.php:110
+#: includes/class-mbcat-post-type.php:110
 msgid "Update Genre"
 msgstr "ジャンルを更新"
 
-#: includes/class-wpbc-post-type.php:111
+#: includes/class-mbcat-post-type.php:111
 msgid "Add New Genre"
 msgstr "新規ジャンルを追加"
 
-#: includes/class-wpbc-post-type.php:112
+#: includes/class-mbcat-post-type.php:112
 msgid "New Genre Name"
 msgstr "新しいジャンル名"
 
-#: includes/class-wpbc-post-type.php:113
+#: includes/class-mbcat-post-type.php:113
 msgid "Genres"
 msgstr "ジャンル"
 
-#: includes/class-wpbc-post-type.php:140
+#: includes/class-mbcat-post-type.php:140
 msgid "Cover"
 msgstr "表紙"
 
-#: includes/class-wpbc-post-type.php:143
+#: includes/class-mbcat-post-type.php:143
 msgid "Year"
 msgstr "出版年"
 
-#: includes/class-wpbc-settings.php:52
+#: includes/class-mbcat-settings.php:52
 msgid "Book Catalog Settings"
 msgstr "書籍カタログ設定"
 
-#: includes/class-wpbc-settings.php:53
+#: includes/class-mbcat-settings.php:53
 msgid "Settings"
 msgstr "設定"
 
-#: includes/class-wpbc-settings.php:73
+#: includes/class-mbcat-settings.php:73
 msgid "General Settings"
 msgstr "一般設定"
 
-#: includes/class-wpbc-settings.php:81
+#: includes/class-mbcat-settings.php:81
 msgid "Default Author"
 msgstr "デフォルト著者"
 
-#: includes/class-wpbc-settings.php:90
+#: includes/class-mbcat-settings.php:90
 msgid "Author Gender"
 msgstr "著者の性別"
 
-#: includes/class-wpbc-settings.php:99
+#: includes/class-mbcat-settings.php:99
 msgid "Display Settings"
 msgstr "表示設定"
 
-#: includes/class-wpbc-settings.php:107
+#: includes/class-mbcat-settings.php:107
 msgid "Number of Columns"
 msgstr "カラム数"
 
-#: includes/class-wpbc-settings.php:116
+#: includes/class-mbcat-settings.php:116
 msgid "ISBN Autofill"
 msgstr "ISBN自動入力"
 
-#: includes/class-wpbc-settings.php:124
+#: includes/class-mbcat-settings.php:124
 msgid "Data Source"
 msgstr "データソース"
 
-#: includes/class-wpbc-settings.php:133
+#: includes/class-mbcat-settings.php:133
 msgid "Google Books API Key"
 msgstr "Google Books APIキー"
 
-#: includes/class-wpbc-settings.php:142
+#: includes/class-mbcat-settings.php:142
 msgid "Advanced"
 msgstr "詳細設定"
 
-#: includes/class-wpbc-settings.php:150
+#: includes/class-mbcat-settings.php:150
 msgid "Delete Data on Uninstall"
 msgstr "アンインストール時にデータを削除"
 
-#: includes/class-wpbc-settings.php:221
+#: includes/class-mbcat-settings.php:221
 msgid "Settings saved successfully."
 msgstr "設定を保存しました。"
 
-#: includes/class-wpbc-settings.php:236
+#: includes/class-mbcat-settings.php:236
 msgid "Save Settings"
 msgstr "設定を保存"
 
-#: includes/class-wpbc-settings.php:242
+#: includes/class-mbcat-settings.php:242
 msgid "Shortcode Usage"
 msgstr "ショートコードの使い方"
 
-#: includes/class-wpbc-settings.php:244
+#: includes/class-mbcat-settings.php:244
 msgid "Display All Books"
 msgstr "すべての書籍を表示"
 
-#: includes/class-wpbc-settings.php:246
+#: includes/class-mbcat-settings.php:246
 msgid "Displays all books in the catalog."
 msgstr "カタログ内のすべての書籍を表示します。"
 
-#: includes/class-wpbc-settings.php:247
-msgid "[wpbc_books] does exactly the same and is the recommended form when another plugin also registers [books]."
-msgstr "[wpbc_books]はまったく同じ動作をします。他のプラグインも[books]を登録している場合は、こちらの形式を推奨します。"
-
-#: includes/class-wpbc-settings.php:249
+#: includes/class-mbcat-settings.php:248
 msgid "Display Limited Books"
 msgstr "件数を制限して書籍を表示"
 
-#: includes/class-wpbc-settings.php:251
+#: includes/class-mbcat-settings.php:250
 msgid "Displays 3 books with a \"Show All\" button at the bottom. Replace 3 with any number."
 msgstr "書籍を3件表示し、下部に「すべて表示」ボタンを表示します。3は任意の数値に置き換えてください。"
 
-#: includes/class-wpbc-settings.php:253
+#: includes/class-mbcat-settings.php:252
 msgid "Available Attributes"
 msgstr "利用できる属性"
 
-#: includes/class-wpbc-settings.php:255
+#: includes/class-mbcat-settings.php:254
 msgid "Number of books to display (shows \"Show All\" button)"
 msgstr "表示する書籍の件数（「すべて表示」ボタンが表示されます）"
 
-#: includes/class-wpbc-settings.php:256
+#: includes/class-mbcat-settings.php:255
 msgid "Override default columns (1-5)"
 msgstr "デフォルトのカラム数を上書きします（1〜5）"
 
-#: includes/class-wpbc-settings.php:257
+#: includes/class-mbcat-settings.php:256
 msgid "Order by: date, title, year, author, rand, menu_order, modified (default: date)"
 msgstr "並び替えの基準: date、title、year、author、rand、menu_order、modified（デフォルト: date）"
 
-#: includes/class-wpbc-settings.php:258
+#: includes/class-mbcat-settings.php:257
 msgid "Order direction: ASC, DESC (default: DESC)"
 msgstr "並び順: ASC、DESC（デフォルト: DESC）"
 
-#: includes/class-wpbc-settings.php:259
+#: includes/class-mbcat-settings.php:258
 msgid "Filter by genre slug(s), comma separated"
 msgstr "ジャンルのスラッグで絞り込みます（カンマ区切り）"
 
-#: includes/class-wpbc-settings.php:262
+#: includes/class-mbcat-settings.php:261
 msgid "Example with All Attributes"
 msgstr "すべての属性を使用した例"
 
-#: includes/class-wpbc-settings.php:273
+#: includes/class-mbcat-settings.php:272
 msgid "Configure the default settings for all books."
 msgstr "すべての書籍に適用されるデフォルト設定を行います。"
 
-#: includes/class-wpbc-settings.php:280
+#: includes/class-mbcat-settings.php:279
 msgid "Configure how books are displayed on the frontend."
 msgstr "フロントエンドでの書籍の表示方法を設定します。"
 
-#: includes/class-wpbc-settings.php:287
+#: includes/class-mbcat-settings.php:286
 msgid "Configure the external book databases used to autofill book details from an ISBN."
 msgstr "ISBNから書籍情報を自動入力する際に使用する外部書籍データベースを設定します。"
 
-#: includes/class-wpbc-settings.php:294
+#: includes/class-mbcat-settings.php:293
 msgid "Advanced options."
 msgstr "詳細オプションです。"
 
-#: includes/class-wpbc-settings.php:304
+#: includes/class-mbcat-settings.php:303
 msgid "If set, this author will be used for all books that don't have an author specified."
 msgstr "設定すると、著者が指定されていないすべての書籍にこの著者が使用されます。"
 
-#: includes/class-wpbc-settings.php:314
+#: includes/class-mbcat-settings.php:313
 msgid "Male (Author)"
 msgstr "男性（著者）"
 
-#: includes/class-wpbc-settings.php:315
+#: includes/class-mbcat-settings.php:314
 msgid "Female (Authoress)"
 msgstr "女性（著者）"
 
-#: includes/class-wpbc-settings.php:317
+#: includes/class-mbcat-settings.php:316
 msgid "Select the gender to display the correct label (Author/Authoress)."
 msgstr "正しいラベルを表示するための性別を選択してください。日本語ではどちらの場合も「著者」と表示されます。"
 
 #. translators: %d: number of columns
-#: includes/class-wpbc-settings.php:330
+#: includes/class-mbcat-settings.php:329
 #, php-format
 msgid "%d column"
 msgid_plural "%d columns"
 msgstr[0] "%dカラム"
 
-#: includes/class-wpbc-settings.php:334
+#: includes/class-mbcat-settings.php:333
 msgid "Number of columns to display books in. The layout will be responsive."
 msgstr "書籍を表示するカラム数です。レイアウトはレスポンシブになります。"
 
-#: includes/class-wpbc-settings.php:344
+#: includes/class-mbcat-settings.php:343
 msgid "Google Books + Open Library (recommended)"
 msgstr "Google Books + Open Library（推奨）"
 
-#: includes/class-wpbc-settings.php:345
+#: includes/class-mbcat-settings.php:344
 msgid "Google Books only"
 msgstr "Google Booksのみ"
 
-#: includes/class-wpbc-settings.php:346
+#: includes/class-mbcat-settings.php:345
 msgid "Open Library only"
 msgstr "Open Libraryのみ"
 
-#: includes/class-wpbc-settings.php:348
+#: includes/class-mbcat-settings.php:347
 msgid "Which database to query when autofilling book data from an ISBN. Using both merges the best data from each source."
 msgstr "ISBNから書籍データを自動入力する際に照会するデータベースです。両方を使用すると、各ソースから最適なデータを統合します。"
 
-#: includes/class-wpbc-settings.php:360
+#: includes/class-mbcat-settings.php:359
 msgid "A key is saved. Leave empty to keep it."
 msgstr "キーが保存されています。保持する場合は空欄のままにしてください。"
 
-#: includes/class-wpbc-settings.php:360
+#: includes/class-mbcat-settings.php:359
 msgid "No key saved"
 msgstr "キーは保存されていません"
 
-#: includes/class-wpbc-settings.php:364
+#: includes/class-mbcat-settings.php:363
 msgid "Remove the saved key"
 msgstr "保存されたキーを削除"
 
-#: includes/class-wpbc-settings.php:367
+#: includes/class-mbcat-settings.php:366
 msgid "Optional. Google Books works without a key, but a key raises the request quota. Create one in the Google Cloud Console."
 msgstr "任意です。Google Booksはキーなしでも動作しますが、キーを設定するとリクエストの上限が増えます。キーはGoogle Cloud Consoleで作成できます。"
 
-#: includes/class-wpbc-settings.php:378
+#: includes/class-mbcat-settings.php:377
 msgid "Permanently delete all books, genres and settings when the plugin is uninstalled."
 msgstr "プラグインのアンインストール時に、すべての書籍、ジャンル、設定を完全に削除します。"
 
-#: includes/class-wpbc-shortcode.php:147
+#: includes/class-mbcat-shortcode.php:144
 msgid "Show All Books"
 msgstr "すべての書籍を表示"
 
-#: includes/class-wpbc-shortcode.php:262
+#: includes/class-mbcat-shortcode.php:259
 msgid "Authoress:"
 msgstr "著者:"
 
-#: includes/class-wpbc-shortcode.php:262
+#: includes/class-mbcat-shortcode.php:259
 msgid "Author:"
 msgstr "著者:"
 
 #. translators: %s: book title
-#: includes/class-wpbc-shortcode.php:286
+#: includes/class-mbcat-shortcode.php:283
 #, php-format
 msgid "%s (opens in a new tab)"
 msgstr "%s（新しいタブで開きます）"
 
-#: includes/class-wpbc-shortcode.php:317
+#: includes/class-mbcat-shortcode.php:314
 msgid "Publisher:"
 msgstr "出版社:"
 
-#: includes/class-wpbc-shortcode.php:324
+#: includes/class-mbcat-shortcode.php:321
 msgid "Year:"
 msgstr "出版年:"
 
-#: includes/class-wpbc-shortcode.php:331
+#: includes/class-mbcat-shortcode.php:328
 msgid "Pages:"
 msgstr "ページ数:"
 
-#: includes/class-wpbc-shortcode.php:338
+#: includes/class-mbcat-shortcode.php:335
 msgid "Genre:"
 msgstr "ジャンル:"
 
-#: includes/class-wpbc-shortcode.php:345
+#: includes/class-mbcat-shortcode.php:342
 msgid "ISBN:"
 msgstr "ISBN:"
 
-#: mm-book-catalog.php:141
+#: montecchiani-book-catalog.php:119
 msgid "Could not load the books. Please try again."
 msgstr "書籍を読み込めませんでした。もう一度お試しください。"
 
-#: mm-book-catalog.php:142
+#: montecchiani-book-catalog.php:120
 msgid "All books are now shown."
 msgstr "すべての書籍が表示されました。"
 
-#: mm-book-catalog.php:211
+#: montecchiani-book-catalog.php:188
 msgid "Please enter an ISBN first."
 msgstr "先にISBNを入力してください。"
 
-#: mm-book-catalog.php:212
+#: montecchiani-book-catalog.php:189
 msgid "Lookup failed. Please try again."
 msgstr "検索に失敗しました。もう一度お試しください。"
 
-#: mm-book-catalog.php:213
+#: montecchiani-book-catalog.php:190
 msgid "Cover import failed. Please try again."
 msgstr "表紙のインポートに失敗しました。もう一度お試しください。"
 
-#: mm-book-catalog.php:214
+#: montecchiani-book-catalog.php:191
 msgid "Importing…"
 msgstr "インポート中…"
 
-#: mm-book-catalog.php:215
+#: montecchiani-book-catalog.php:192
 msgid "Use as cover"
 msgstr "表紙として使用"
 
-#: mm-book-catalog.php:216
+#: montecchiani-book-catalog.php:193
 msgid "Cover imported."
 msgstr "表紙をインポートしました。"
 
 #. translators: %s: comma separated list of field names
-#: mm-book-catalog.php:218
+#: montecchiani-book-catalog.php:195
 #, php-format
 msgid "Fields filled: %s"
 msgstr "入力したフィールド: %s"
 
-#: mm-book-catalog.php:219
+#: montecchiani-book-catalog.php:196
 msgid "No empty fields to fill. Existing values were kept."
 msgstr "入力する空のフィールドはありませんでした。既存の値は保持されています。"
 
 #. translators: %s: comma separated list of data sources, e.g. "Google Books, Open Library"
-#: mm-book-catalog.php:221
+#: montecchiani-book-catalog.php:198
 #, php-format
 msgid "Source: %s"
 msgstr "ソース: %s"
 
 #. translators: separator between the field names listed in the "Fields filled" notice
-#: mm-book-catalog.php:223
+#: montecchiani-book-catalog.php:200
 msgctxt "list item separator"
 msgid ", "
 msgstr "、"
 
-#: mm-book-catalog.php:225
+#: montecchiani-book-catalog.php:202
 msgctxt "book field name"
 msgid "author"
 msgstr "著者"
 
-#: mm-book-catalog.php:226
+#: montecchiani-book-catalog.php:203
 msgctxt "book field name"
 msgid "publisher"
 msgstr "出版社"
 
-#: mm-book-catalog.php:227
+#: montecchiani-book-catalog.php:204
 msgctxt "book field name"
 msgid "year"
 msgstr "出版年"
 
-#: mm-book-catalog.php:228
+#: montecchiani-book-catalog.php:205
 msgctxt "book field name"
 msgid "pages"
 msgstr "ページ数"
 
-#: mm-book-catalog.php:229
+#: montecchiani-book-catalog.php:206
 msgctxt "book field name"
 msgid "language"
 msgstr "言語"
 
-#: mm-book-catalog.php:230
+#: montecchiani-book-catalog.php:207
 msgctxt "book field name"
 msgid "title"
 msgstr "タイトル"
 
-#: mm-book-catalog.php:231
+#: montecchiani-book-catalog.php:208
 msgctxt "book field name"
 msgid "description"
 msgstr "説明"

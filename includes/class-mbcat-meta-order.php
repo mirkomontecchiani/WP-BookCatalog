@@ -2,7 +2,7 @@
 /**
  * Ordering a books query by one of the custom meta fields
  *
- * @package MM_Book_Catalog
+ * @package Montecchiani_Book_Catalog
  */
 
 // Prevent direct access
@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class WPBC_Meta_Order
+ * Class MBCat_Meta_Order
  *
  * WP_Query cannot order by a meta value without also requiring that meta value
  * to exist: 'meta_key' + 'orderby' => 'meta_value' produces an INNER JOIN, so
@@ -25,12 +25,12 @@ if (!defined('ABSPATH')) {
  * produces exactly one row per book and a stable order: books that do have a
  * value first (in the requested direction), books without one last.
  */
-class WPBC_Meta_Order {
+class MBCat_Meta_Order {
 
     /**
      * Query var holding the meta key to order by
      */
-    const QUERY_VAR = 'wpbc_meta_order';
+    const QUERY_VAR = 'mbcat_meta_order';
 
     /**
      * Whether the posts_clauses filter is registered
@@ -46,8 +46,8 @@ class WPBC_Meta_Order {
      */
     public static function get_supported_keys() {
         return array(
-            'wpbc_year'   => true,
-            'wpbc_author' => false,
+            'mbcat_year'   => true,
+            'mbcat_author' => false,
         );
     }
 
@@ -116,16 +116,16 @@ class WPBC_Meta_Order {
         }
 
         $clauses['join'] .= $wpdb->prepare(
-            " LEFT JOIN {$wpdb->postmeta} AS wpbc_ord ON (wpbc_ord.post_id = {$wpdb->posts}.ID AND wpbc_ord.meta_key = %s)",
+            " LEFT JOIN {$wpdb->postmeta} AS mbcat_ord ON (mbcat_ord.post_id = {$wpdb->posts}.ID AND mbcat_ord.meta_key = %s)",
             $meta_key
         );
 
         $direction = ('ASC' === strtoupper((string) $query->get('order'))) ? 'ASC' : 'DESC';
-        $value     = $numeric[$meta_key] ? 'CAST(wpbc_ord.meta_value AS SIGNED)' : 'wpbc_ord.meta_value';
+        $value     = $numeric[$meta_key] ? 'CAST(mbcat_ord.meta_value AS SIGNED)' : 'mbcat_ord.meta_value';
 
         // Books without a value always come last, whatever the direction, and
         // post_date breaks any remaining tie so the order is reproducible.
-        $clauses['orderby'] = "(wpbc_ord.meta_value IS NULL OR wpbc_ord.meta_value = '') ASC, "
+        $clauses['orderby'] = "(mbcat_ord.meta_value IS NULL OR mbcat_ord.meta_value = '') ASC, "
             . $value . ' ' . $direction . ", {$wpdb->posts}.post_date DESC";
 
         return $clauses;

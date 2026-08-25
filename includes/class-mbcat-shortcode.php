@@ -2,7 +2,7 @@
 /**
  * Shortcode functionality for displaying books
  *
- * @package MM_Book_Catalog
+ * @package Montecchiani_Book_Catalog
  */
 
 // Prevent direct access
@@ -11,9 +11,9 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class WPBC_Shortcode
+ * Class MBCat_Shortcode
  */
-class WPBC_Shortcode {
+class MBCat_Shortcode {
 
     /**
      * Single instance
@@ -34,13 +34,10 @@ class WPBC_Shortcode {
      * Constructor
      */
     private function __construct() {
-        // [wpbc_books] is the prefixed, canonical name; [books] is kept as an
-        // alias so that content written before 1.2.0 keeps working.
-        add_shortcode('wpbc_books', array($this, 'render_shortcode'));
-        add_shortcode('books', array($this, 'render_shortcode'));
+        add_shortcode('mbcat_books', array($this, 'render_shortcode'));
 
-        add_action('wp_ajax_wpbc_load_all_books', array($this, 'ajax_load_all_books'));
-        add_action('wp_ajax_nopriv_wpbc_load_all_books', array($this, 'ajax_load_all_books'));
+        add_action('wp_ajax_mbcat_load_all_books', array($this, 'ajax_load_all_books'));
+        add_action('wp_ajax_nopriv_mbcat_load_all_books', array($this, 'ajax_load_all_books'));
     }
 
     /**
@@ -59,7 +56,7 @@ class WPBC_Shortcode {
          *
          * @param int $max Maximum number of books. Default 500.
          */
-        $max = (int) apply_filters('wpbc_max_books_per_request', 500);
+        $max = (int) apply_filters('mbcat_max_books_per_request', 500);
 
         return $max > 0 ? $max : 500;
     }
@@ -67,7 +64,7 @@ class WPBC_Shortcode {
     /**
      * Render the shortcode
      */
-    public function render_shortcode($atts, $content = '', $tag = 'wpbc_books') {
+    public function render_shortcode($atts, $content = '', $tag = 'mbcat_books') {
         $atts = shortcode_atts(array(
             'hitem'   => '',
             'columns' => '',
@@ -77,11 +74,11 @@ class WPBC_Shortcode {
         ), $atts, $tag);
 
         // Assets are registered globally but only loaded when the shortcode renders.
-        wp_enqueue_style('wpbc-frontend');
-        wp_enqueue_script('wpbc-frontend');
+        wp_enqueue_style('mbcat-frontend');
+        wp_enqueue_script('mbcat-frontend');
 
         // Get columns from settings if not specified
-        $columns = !empty($atts['columns']) ? absint($atts['columns']) : absint(WPBC_Settings::get_setting('columns', 3));
+        $columns = !empty($atts['columns']) ? absint($atts['columns']) : absint(MBCat_Settings::get_setting('columns', 3));
         $columns = max(1, min(5, $columns));
 
         // Determine if we're limiting items
@@ -93,7 +90,7 @@ class WPBC_Shortcode {
         $books = new WP_Query($query_args);
 
         if (!$books->have_posts()) {
-            return '<p class="wpbc-no-books">' . esc_html__('No books found.', 'mm-book-catalog') . '</p>';
+            return '<p class="mbcat-no-books">' . esc_html__('No books found.', 'montecchiani-book-catalog') . '</p>';
         }
 
         // Load every cover attachment in one query instead of one per book.
@@ -104,15 +101,15 @@ class WPBC_Shortcode {
         $show_all_button = ($limit > 0) && ($books->post_count > $limit);
 
         // Generate unique ID for this instance (guaranteed unique within the request)
-        $instance_id = wp_unique_id('wpbc-');
+        $instance_id = wp_unique_id('mbcat-');
 
         $schema_items = array();
 
         ob_start();
         ?>
-        <div id="<?php echo esc_attr($instance_id); ?>" class="wpbc-container" data-columns="<?php echo esc_attr($columns); ?>">
-            <p class="wpbc-status" role="status"></p>
-            <div class="wpbc-grid wpbc-columns-<?php echo esc_attr($columns); ?>" aria-busy="false">
+        <div id="<?php echo esc_attr($instance_id); ?>" class="mbcat-container" data-columns="<?php echo esc_attr($columns); ?>">
+            <p class="mbcat-status" role="status"></p>
+            <div class="mbcat-grid mbcat-columns-<?php echo esc_attr($columns); ?>" aria-busy="false">
                 <?php
                 $rendered = 0;
 
@@ -124,7 +121,7 @@ class WPBC_Shortcode {
                     }
 
                     $book_id      = get_the_ID();
-                    $book_meta    = WPBC_Meta_Boxes::get_book_meta($book_id);
+                    $book_meta    = MBCat_Meta_Boxes::get_book_meta($book_id);
                     $book_excerpt = get_the_excerpt($book_id);
 
                     $this->render_book_item($book_id, $book_meta, $book_excerpt);
@@ -137,14 +134,14 @@ class WPBC_Shortcode {
             </div>
 
             <?php if ($show_all_button) : ?>
-                <div class="wpbc-show-all-wrapper">
-                    <button type="button" class="wpbc-show-all-btn"
+                <div class="mbcat-show-all-wrapper">
+                    <button type="button" class="mbcat-show-all-btn"
                             data-instance="<?php echo esc_attr($instance_id); ?>"
                             data-columns="<?php echo esc_attr($columns); ?>"
                             data-orderby="<?php echo esc_attr($atts['orderby']); ?>"
                             data-order="<?php echo esc_attr($atts['order']); ?>"
                             data-genre="<?php echo esc_attr($atts['genre']); ?>">
-                        <?php esc_html_e('Show All Books', 'mm-book-catalog'); ?>
+                        <?php esc_html_e('Show All Books', 'montecchiani-book-catalog'); ?>
                     </button>
                 </div>
             <?php endif; ?>
@@ -176,7 +173,7 @@ class WPBC_Shortcode {
         $posts_per_page = ($limit < 1) ? $max : min($limit + 1, $max);
 
         $args = array(
-            'post_type'           => 'book',
+            'post_type'           => 'mbcat_book',
             'posts_per_page'      => $posts_per_page,
             'post_status'         => 'publish',
             'has_password'        => false, // Never expose password-protected books in the public catalog.
@@ -189,11 +186,11 @@ class WPBC_Shortcode {
             case 'year':
                 // A keyed LEFT JOIN, so books without a year are still listed
                 // (they simply sort last) instead of vanishing from the grid.
-                $args = WPBC_Meta_Order::add_to_args($args, 'wpbc_year', $args['order']);
+                $args = MBCat_Meta_Order::add_to_args($args, 'mbcat_year', $args['order']);
                 break;
 
             case 'author':
-                $args = WPBC_Meta_Order::add_to_args($args, 'wpbc_author', $args['order']);
+                $args = MBCat_Meta_Order::add_to_args($args, 'mbcat_author', $args['order']);
                 break;
 
             case 'title':
@@ -214,7 +211,7 @@ class WPBC_Shortcode {
             if (!empty($slugs)) {
                 $args['tax_query'] = array(
                     array(
-                        'taxonomy' => 'book_genre',
+                        'taxonomy' => 'mbcat_genre',
                         'field'    => 'slug',
                         'terms'    => $slugs,
                     ),
@@ -233,7 +230,7 @@ class WPBC_Shortcode {
          * @param string $genre   Requested genre slugs, comma separated.
          * @param int    $limit   Requested limit (-1 for all).
          */
-        return apply_filters('wpbc_shortcode_query_args', $args, $orderby, $order, $genre, $limit);
+        return apply_filters('mbcat_shortcode_query_args', $args, $orderby, $order, $genre, $limit);
     }
 
     /**
@@ -247,19 +244,19 @@ class WPBC_Shortcode {
      * @param string|null $excerpt Book excerpt, when the caller already resolved it.
      */
     private function render_book_item($post_id, $meta = null, $excerpt = null) {
-        $meta        = (null === $meta) ? WPBC_Meta_Boxes::get_book_meta($post_id) : $meta;
+        $meta        = (null === $meta) ? MBCat_Meta_Boxes::get_book_meta($post_id) : $meta;
         $description = (null === $excerpt) ? get_the_excerpt($post_id) : $excerpt;
         $thumbnail   = get_the_post_thumbnail_url($post_id, 'medium');
         $title       = get_the_title($post_id);
         $shop_link   = !empty($meta['shop_link']) ? $meta['shop_link'] : '';
 
         // Genre names (plain text: the whole card may already be a link)
-        $genres = get_the_terms($post_id, 'book_genre');
+        $genres = get_the_terms($post_id, 'mbcat_genre');
         $genre_names = (!empty($genres) && !is_wp_error($genres)) ? implode(', ', wp_list_pluck($genres, 'name')) : '';
 
         // Get author gender from settings
-        $author_gender = WPBC_Settings::get_setting('author_gender', 'male');
-        $author_label  = ('female' === $author_gender) ? __('Authoress:', 'mm-book-catalog') : __('Author:', 'mm-book-catalog');
+        $author_gender = MBCat_Settings::get_setting('author_gender', 'male');
+        $author_label  = ('female' === $author_gender) ? __('Authoress:', 'montecchiani-book-catalog') : __('Author:', 'montecchiani-book-catalog');
 
         /**
          * Filters the label shown before the author name.
@@ -272,77 +269,77 @@ class WPBC_Shortcode {
          * @param string $author_label Label, including its colon.
          * @param int    $post_id      Book post ID.
          */
-        $author_label = apply_filters('wpbc_author_label', $author_label, $post_id);
+        $author_label = apply_filters('mbcat_author_label', $author_label, $post_id);
 
         // Fallback image
         if (!$thumbnail) {
-            $thumbnail = WPBC_PLUGIN_URL . 'assets/images/no-cover.svg';
+            $thumbnail = MBCAT_PLUGIN_URL . 'assets/images/no-cover.svg';
         }
 
         // Determine if book is clickable
         $has_link = !empty($shop_link);
 
         /* translators: %s: book title */
-        $link_label = sprintf(__('%s (opens in a new tab)', 'mm-book-catalog'), $title);
+        $link_label = sprintf(__('%s (opens in a new tab)', 'montecchiani-book-catalog'), $title);
         ?>
-        <div class="wpbc-book-item">
+        <div class="mbcat-book-item">
             <?php if ($has_link) : ?>
-            <a href="<?php echo esc_url($shop_link); ?>" class="wpbc-book-link" target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr($link_label); ?>">
+            <a href="<?php echo esc_url($shop_link); ?>" class="mbcat-book-link" target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr($link_label); ?>">
             <?php else : ?>
-            <div class="wpbc-book-link" tabindex="0" role="group" aria-label="<?php echo esc_attr($title); ?>">
+            <div class="mbcat-book-link" tabindex="0" role="group" aria-label="<?php echo esc_attr($title); ?>">
             <?php endif; ?>
-                <div class="wpbc-book-cover">
+                <div class="mbcat-book-cover">
                     <?php // The title is part of the card, so the cover itself is decorative. ?>
                     <img src="<?php echo esc_url($thumbnail); ?>" alt="" loading="lazy" />
 
-                    <div class="wpbc-book-overlay">
-                        <div class="wpbc-book-info">
-                            <h3 class="wpbc-book-title"><?php echo esc_html($title); ?></h3>
+                    <div class="mbcat-book-overlay">
+                        <div class="mbcat-book-info">
+                            <h3 class="mbcat-book-title"><?php echo esc_html($title); ?></h3>
 
                             <?php if (!empty($description)) : ?>
-                                <p class="wpbc-book-description"><?php echo esc_html(wp_trim_words($description, 15)); ?></p>
+                                <p class="mbcat-book-description"><?php echo esc_html(wp_trim_words($description, 15)); ?></p>
                             <?php endif; ?>
 
-                            <hr class="wpbc-separator" />
+                            <hr class="mbcat-separator" />
 
                             <?php if (!empty($meta['author'])) : ?>
-                                <p class="wpbc-book-author">
-                                    <span class="wpbc-label"><?php echo esc_html($author_label); ?></span>
+                                <p class="mbcat-book-author">
+                                    <span class="mbcat-label"><?php echo esc_html($author_label); ?></span>
                                     <?php echo esc_html($meta['author']); ?>
                                 </p>
                             <?php endif; ?>
 
                             <?php if (!empty($meta['publisher'])) : ?>
-                                <p class="wpbc-book-publisher">
-                                    <span class="wpbc-label"><?php esc_html_e('Publisher:', 'mm-book-catalog'); ?></span>
+                                <p class="mbcat-book-publisher">
+                                    <span class="mbcat-label"><?php esc_html_e('Publisher:', 'montecchiani-book-catalog'); ?></span>
                                     <?php echo esc_html($meta['publisher']); ?>
                                 </p>
                             <?php endif; ?>
 
                             <?php if (!empty($meta['year'])) : ?>
-                                <p class="wpbc-book-year">
-                                    <span class="wpbc-label"><?php esc_html_e('Year:', 'mm-book-catalog'); ?></span>
+                                <p class="mbcat-book-year">
+                                    <span class="mbcat-label"><?php esc_html_e('Year:', 'montecchiani-book-catalog'); ?></span>
                                     <?php echo esc_html($meta['year']); ?>
                                 </p>
                             <?php endif; ?>
 
                             <?php if (!empty($meta['pages'])) : ?>
-                                <p class="wpbc-book-pages">
-                                    <span class="wpbc-label"><?php esc_html_e('Pages:', 'mm-book-catalog'); ?></span>
+                                <p class="mbcat-book-pages">
+                                    <span class="mbcat-label"><?php esc_html_e('Pages:', 'montecchiani-book-catalog'); ?></span>
                                     <?php echo esc_html($meta['pages']); ?>
                                 </p>
                             <?php endif; ?>
 
                             <?php if (!empty($genre_names)) : ?>
-                                <p class="wpbc-book-genre">
-                                    <span class="wpbc-label"><?php esc_html_e('Genre:', 'mm-book-catalog'); ?></span>
+                                <p class="mbcat-book-genre">
+                                    <span class="mbcat-label"><?php esc_html_e('Genre:', 'montecchiani-book-catalog'); ?></span>
                                     <?php echo esc_html($genre_names); ?>
                                 </p>
                             <?php endif; ?>
 
                             <?php if (!empty($meta['isbn'])) : ?>
-                                <p class="wpbc-book-isbn">
-                                    <span class="wpbc-label"><?php esc_html_e('ISBN:', 'mm-book-catalog'); ?></span>
+                                <p class="mbcat-book-isbn">
+                                    <span class="mbcat-label"><?php esc_html_e('ISBN:', 'montecchiani-book-catalog'); ?></span>
                                     <?php echo esc_html($meta['isbn']); ?>
                                 </p>
                             <?php endif; ?>
@@ -367,7 +364,7 @@ class WPBC_Shortcode {
      * @return array
      */
     private function get_book_schema($post_id, $meta = null, $excerpt = null) {
-        $meta = (null === $meta) ? WPBC_Meta_Boxes::get_book_meta($post_id) : $meta;
+        $meta = (null === $meta) ? MBCat_Meta_Boxes::get_book_meta($post_id) : $meta;
 
         $item = array(
             '@type' => 'Book',
@@ -481,7 +478,7 @@ class WPBC_Shortcode {
         $books = new WP_Query($query_args);
 
         if (!$books->have_posts()) {
-            wp_send_json_error(array('message' => __('No books found.', 'mm-book-catalog')));
+            wp_send_json_error(array('message' => __('No books found.', 'montecchiani-book-catalog')));
         }
 
         update_post_thumbnail_cache($books);
@@ -493,7 +490,7 @@ class WPBC_Shortcode {
             $books->the_post();
 
             $book_id      = get_the_ID();
-            $book_meta    = WPBC_Meta_Boxes::get_book_meta($book_id);
+            $book_meta    = MBCat_Meta_Boxes::get_book_meta($book_id);
             $book_excerpt = get_the_excerpt($book_id);
 
             $this->render_book_item($book_id, $book_meta, $book_excerpt);
@@ -516,4 +513,4 @@ class WPBC_Shortcode {
 }
 
 // Initialize
-WPBC_Shortcode::get_instance();
+MBCat_Shortcode::get_instance();
