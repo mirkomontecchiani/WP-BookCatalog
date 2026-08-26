@@ -42,8 +42,8 @@ featured image with one click.
 * Schema.org `Book` JSON-LD structured data for SEO
 * Admin list columns for cover, author, year and ISBN, sortable by author and year
 * Settings page: default author, author label, columns, ISBN data source, uninstall cleanup
-* Fully translatable — French, Spanish, Italian and Japanese translations are ready
-  on translate.wordpress.org, and any other language can be contributed there
+* Fully translatable — French, Spanish, Italian and Japanese translations are prepared
+  for translate.wordpress.org, where any other language can be contributed too
 * Assets are only loaded on the pages that actually use the shortcode
 
 = External services =
@@ -59,7 +59,7 @@ transmitted.
 What is sent, and when: the ISBN you typed, each time you click "Autofill from ISBN" (unless
 you disabled this source in the settings). If you entered an optional Google Books API key in
 the plugin settings, that key is sent with the request too. Every request also carries a
-`User-Agent` header identifying the plugin and its version (`MM-Book-Catalog/1.2.0`); your
+`User-Agent` header identifying the plugin and its version (`Montecchiani-Book-Catalog/1.3.0`); your
 site URL is not sent.
 If you then click "Use as cover", the cover image file is downloaded from
 `books.google.com` or `books.googleusercontent.com` and stored permanently in your site's
@@ -71,7 +71,7 @@ Privacy Policy: https://policies.google.com/privacy
 **Open Library API (Internet Archive)** — endpoint: `https://openlibrary.org/api/books`
 What is sent, and when: the ISBN you typed, each time you click "Autofill from ISBN" (unless
 you disabled this source in the settings). Every request also carries a `User-Agent` header
-identifying the plugin and its version (`MM-Book-Catalog/1.2.0`); your site URL is not sent.
+identifying the plugin and its version (`Montecchiani-Book-Catalog/1.3.0`); your site URL is not sent.
 If you then click "Use as cover", the cover image file is downloaded from
 `covers.openlibrary.org` and stored permanently in your site's Media Library.
 Terms of Use: https://archive.org/about/terms.php
@@ -106,10 +106,7 @@ Add the `[mbcat_books]` shortcode to a page or post. Available attributes:
 * `order` — `ASC` or `DESC`
 * `genre` — one or more genre slugs, comma separated
 
-Example: `[books hitem="6" columns="3" orderby="title" order="ASC" genre="fantasy,thriller"]`
-
-`[mbcat_books]` accepts exactly the same attributes and is the recommended form if another
-plugin on your site also registers a `[mbcat_books]` shortcode.
+Example: `[mbcat_books hitem="6" columns="3" orderby="title" order="ASC" genre="fantasy,thriller"]`
 
 = Does the ISBN autofill overwrite what I already typed? =
 
@@ -147,8 +144,9 @@ memory limit. Developers can raise the limit with the `mbcat_max_books_per_reque
 
 = Which languages is the plugin available in? =
 
-English (the original), with French, Spanish, Italian and Japanese provided through
-translate.wordpress.org. The plugin switches
+English out of the box; French, Spanish, Italian and Japanese translations are prepared
+and will be delivered through translate.wordpress.org once the plugin is published there.
+The plugin switches
 automatically to your site's language, with no configuration.
 
 It is fully internationalised, so any other language can be added by contributing at
@@ -192,7 +190,8 @@ https://translate.wordpress.org/projects/wp-plugins/montecchiani-book-catalog/.
   cover URLs are passed through `esc_url_raw()`.
 * Privacy: the plugin no longer sends your site URL to Google Books / Open Library.
 * Privacy: the Google Books API key is no longer rendered back into the settings page.
-* Added: `[mbcat_books]`, a prefixed alias of `[mbcat_books]`.
+* Added: `[wpbc_books]`, a prefixed alias of the original `[books]` shortcode (both were
+  replaced by `[mbcat_books]` in 1.3.0).
 * Added: a 500-book cap per request, adjustable with `mbcat_max_books_per_request`.
 * Added: the `mbcat_shortcode_query_args`, `mbcat_allowed_cover_hosts` and `mbcat_lookup_data`
   filters.
@@ -201,7 +200,7 @@ https://translate.wordpress.org/projects/wp-plugins/montecchiani-book-catalog/.
   the books admin list now shows the default author like the front end does.
 * Added: French, Spanish and Japanese translations, alongside the existing Italian one.
 * Removed: the manual `load_plugin_textdomain()` call, which WordPress has not needed
-  since 4.6. The bundled catalogues still load, from the `Domain Path` header.
+  since 4.6.
 
 = 1.1.0 =
 * Added ISBN autofill from Google Books and Open Library, with cover import.
@@ -215,6 +214,11 @@ https://translate.wordpress.org/projects/wp-plugins/montecchiani-book-catalog/.
   hover overlay, "Show All Books" AJAX button, settings page and Italian translation.
 
 == Upgrade Notice ==
+
+= 1.3.0 =
+The plugin is now Montecchiani Book Catalog and the shortcode is renamed: replace
+`[books]` and `[wpbc_books]` in your pages and posts with `[mbcat_books]`. Your books,
+genres and settings are untouched.
 
 = 1.2.0 =
 Fixes cover import from Google Books, ordering by year or author, the Default Author

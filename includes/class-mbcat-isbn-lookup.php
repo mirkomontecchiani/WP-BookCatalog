@@ -500,7 +500,7 @@ class MBCat_ISBN_Lookup {
             $url,
             array(
                 'timeout'    => 8,
-                'user-agent' => 'MM-Book-Catalog/' . MBCAT_VERSION,
+                'user-agent' => 'Montecchiani-Book-Catalog/' . MBCAT_VERSION,
             )
         );
 

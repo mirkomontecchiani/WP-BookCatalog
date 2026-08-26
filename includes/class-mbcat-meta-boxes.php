@@ -40,7 +40,7 @@ class MBCat_Meta_Boxes {
      */
     private function __construct() {
         add_action('add_meta_boxes', array($this, 'add_meta_boxes'));
-        add_action('save_post_book', array($this, 'save_meta_boxes'));
+        add_action('save_post_mbcat_book', array($this, 'save_meta_boxes'));
     }
 
     /**

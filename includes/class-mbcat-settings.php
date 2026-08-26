@@ -246,7 +246,7 @@ class MBCat_Settings {
                 <p><?php esc_html_e('Displays all books in the catalog.', 'montecchiani-book-catalog'); ?></p>
 
                 <h3><?php esc_html_e('Display Limited Books', 'montecchiani-book-catalog'); ?></h3>
-                <code>[books hitem="3"]</code>
+                <code>[mbcat_books hitem="3"]</code>
                 <p><?php esc_html_e('Displays 3 books with a "Show All" button at the bottom. Replace 3 with any number.', 'montecchiani-book-catalog'); ?></p>
 
                 <h3><?php esc_html_e('Available Attributes', 'montecchiani-book-catalog'); ?></h3>
@@ -259,7 +259,7 @@ class MBCat_Settings {
                 </ul>
 
                 <h3><?php esc_html_e('Example with All Attributes', 'montecchiani-book-catalog'); ?></h3>
-                <code>[books hitem="6" columns="3" orderby="title" order="ASC" genre="fantasy,thriller"]</code>
+                <code>[mbcat_books hitem="6" columns="3" orderby="title" order="ASC" genre="fantasy,thriller"]</code>
             </div>
         </div>
         <?php
