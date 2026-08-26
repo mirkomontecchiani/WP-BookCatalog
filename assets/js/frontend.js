@@ -1,7 +1,7 @@
 /**
  * Montecchiani Book Catalog - Frontend JavaScript
  *
- * @package WP_Book_Catalog
+ * @package Montecchiani_Book_Catalog
  */
 
 (function($) {

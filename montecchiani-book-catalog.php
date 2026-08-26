@@ -38,7 +38,7 @@ if (!defined('ABSPATH')) {
 define('MBCAT_VERSION', '1.3.0');
 define('MBCAT_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('MBCAT_PLUGIN_URL', plugin_dir_url(__FILE__));
-define('MBCat_PLUGIN_BASENAME', plugin_basename(__FILE__));
+define('MBCAT_PLUGIN_BASENAME', plugin_basename(__FILE__));
 
 /**
  * Main plugin class
@@ -160,9 +160,9 @@ class MBCat_Plugin {
 
         $is_book_screen = ('mbcat_book' === $screen->post_type);
 
-        // The settings page hook is "book_page_mbcat-settings" because it lives
-        // under edit.php?post_type=mbcat_book.
-        if ($is_book_screen || 'book_page_mbcat-settings' === $screen->id) {
+        // The settings page screen ID is "{post_type}_page_{menu_slug}"
+        // because it lives under edit.php?post_type=mbcat_book.
+        if ($is_book_screen || 'mbcat_book_page_mbcat-settings' === $screen->id) {
             wp_enqueue_style(
                 'mbcat-admin',
                 MBCAT_PLUGIN_URL . 'assets/css/admin.css',
@@ -271,7 +271,7 @@ class MBCat_Plugin {
             require_once ABSPATH . 'wp-admin/includes/plugin.php';
         }
 
-        if (!is_plugin_active_for_network(MBCat_PLUGIN_BASENAME)) {
+        if (!is_plugin_active_for_network(MBCAT_PLUGIN_BASENAME)) {
             return;
         }
 

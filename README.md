@@ -27,7 +27,7 @@ Mirko Montecchiani
   - ISBN
   - Shop link
 - **Genres Taxonomy**: Organize books by genre and filter the shortcode by genre
-- **Shortcode Support**: Display books anywhere with `[mbcat_books]` (or `[mbcat_books]`)
+- **Shortcode Support**: Display books anywhere with `[mbcat_books]`
 - **Responsive Grid**: 1-5 columns with automatic responsive adjustments
 - **Hover Effect**: Overlay with book details on hover (tap-friendly on touch devices, keyboard accessible)
 - **AJAX Loading**: "Show All" button loads remaining books without a page reload
@@ -68,12 +68,9 @@ are cached for 12 hours.
 [mbcat_books]
 ```
 
-`[mbcat_books]` is an identical, prefixed alias; use it if another plugin also registers
-`[mbcat_books]`.
-
 **Display limited books with a "Show All" button:**
 ```
-[books hitem="3"]
+[mbcat_books hitem="3"]
 ```
 
 **Available attributes:**
@@ -85,7 +82,7 @@ are cached for 12 hours.
 
 **Example with all attributes:**
 ```
-[books hitem="6" columns="3" orderby="title" order="ASC" genre="fantasy,thriller"]
+[mbcat_books hitem="6" columns="3" orderby="title" order="ASC" genre="fantasy,thriller"]
 ```
 
 At most 500 books are rendered per request; raise it with the
@@ -129,8 +126,8 @@ about you or your visitors is transmitted. See the "External services" section o
 # Regenerate the translation template and merge it into every catalogue
 wp i18n make-pot . languages/montecchiani-book-catalog.pot --slug=montecchiani-book-catalog
 for loc in fr_FR es_ES it_IT ja; do
-  msgmerge --update --backup=none languages/montecchiani-book-catalog-$loc.po languages/montecchiani-book-catalog.pot
-  msgfmt -o languages/montecchiani-book-catalog-$loc.mo languages/montecchiani-book-catalog-$loc.po
+  msgmerge --update --backup=none translations/montecchiani-book-catalog-$loc.po languages/montecchiani-book-catalog.pot
+  msgfmt -o translations/montecchiani-book-catalog-$loc.mo translations/montecchiani-book-catalog-$loc.po
 done
 
 # Coding standards

@@ -1,7 +1,7 @@
 /**
  * Montecchiani Book Catalog - Admin Styles
  *
- * @package WP_Book_Catalog
+ * @package Montecchiani_Book_Catalog
  */
 
 /* Meta box styling */
@@ -141,11 +141,11 @@
 }
 
 /* Book list table customization */
-.post-type-book .column-mbcat_cover {
+.post-type-mbcat_book .column-mbcat_cover {
     width: 60px;
 }
 
-.post-type-book .mbcat-admin-cover {
+.post-type-mbcat_book .mbcat-admin-cover {
     display: block;
     width: 40px;
     height: 60px;
@@ -154,25 +154,25 @@
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-.post-type-book .mbcat-admin-no-cover {
+.post-type-mbcat_book .mbcat-admin-no-cover {
     color: #c3c4c7;
     font-size: 28px;
     width: 28px;
     height: 28px;
 }
 
-.post-type-book .column-mbcat_year {
+.post-type-mbcat_book .column-mbcat_year {
     width: 8%;
 }
 
-.post-type-book .column-mbcat_isbn {
+.post-type-mbcat_book .column-mbcat_isbn {
     width: 12%;
 }
 
-.post-type-book .column-taxonomy-book_genre {
+.post-type-mbcat_book .column-taxonomy-mbcat_genre {
     width: 12%;
 }
 
-.post-type-book .column-date {
+.post-type-mbcat_book .column-date {
     width: 12%;
 }
