@@ -1,9 +1,9 @@
 <?php
 /**
  * Plugin Name: Montecchiani Book Catalog
- * Plugin URI: https://github.com/mirkomontecchiani/montecchiani-book-catalog
+ * Plugin URI: https://github.com/mirkomontecchiani/WP-BookCatalog
  * Description: Book catalog with a Book post type, genres, a responsive shortcode grid and one-click ISBN autofill from Google Books and Open Library.
- * Version: 1.3.0
+ * Version: 1.3.1
  * Author: Mirko Montecchiani
  * Author URI: https://github.com/mirkomontecchiani
  * License: GPLv2 or later
@@ -35,7 +35,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants
-define('MBCAT_VERSION', '1.3.0');
+define('MBCAT_VERSION', '1.3.1');
 define('MBCAT_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('MBCAT_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('MBCAT_PLUGIN_BASENAME', plugin_basename(__FILE__));
@@ -190,6 +190,7 @@ class MBCat_Plugin {
                     'import_failed'  => __('Cover import failed. Please try again.', 'montecchiani-book-catalog'),
                     'importing'      => __('Importing…', 'montecchiani-book-catalog'),
                     'use_as_cover'   => __('Use as cover', 'montecchiani-book-catalog'),
+                    'no_preview'     => __('A cover was found (no preview available).', 'montecchiani-book-catalog'),
                     'cover_imported' => __('Cover imported.', 'montecchiani-book-catalog'),
                     /* translators: %s: comma separated list of field names */
                     'filled_fields'  => __('Fields filled: %s', 'montecchiani-book-catalog'),

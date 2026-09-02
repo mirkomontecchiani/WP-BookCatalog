@@ -100,6 +100,12 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
+#mbcat-cover-preview .mbcat-cover-no-preview {
+    color: #646970;
+    font-style: italic;
+    line-height: 30px;
+}
+
 /* Settings page (scoped: these rules must not touch other admin screens) */
 .mbcat-settings-page h1 {
     margin-bottom: 20px;

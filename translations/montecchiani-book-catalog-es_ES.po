@@ -3,15 +3,16 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: montecchiani-book-catalog 1.3.0\n"
+"Project-Id-Version: Montecchiani Book Catalog 1.3.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/montecchiani-book-catalog\n"
-"PO-Revision-Date: 2026-08-22 14:40+0000\n"
 "Last-Translator: Mirko Montecchiani\n"
 "Language-Team: Spanish\n"
-"Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-09-02T15:09:56+00:00\n"
+"PO-Revision-Date: 2026-08-22 14:40+0000\n"
+"Language: es_ES\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Domain: montecchiani-book-catalog\n"
 
@@ -19,11 +20,6 @@ msgstr ""
 #: montecchiani-book-catalog.php
 msgid "Montecchiani Book Catalog"
 msgstr "Montecchiani Book Catalog"
-
-#. Plugin URI of the plugin
-#: montecchiani-book-catalog.php
-msgid "https://github.com/mirkomontecchiani/montecchiani-book-catalog"
-msgstr "https://github.com/mirkomontecchiani/montecchiani-book-catalog"
 
 #. Description of the plugin
 #: montecchiani-book-catalog.php
@@ -40,28 +36,25 @@ msgstr "Mirko Montecchiani"
 msgid "https://github.com/mirkomontecchiani"
 msgstr "https://github.com/mirkomontecchiani"
 
-#: includes/class-mbcat-isbn-lookup.php:61
-#: includes/class-mbcat-isbn-lookup.php:94
+#: includes/class-mbcat-isbn-lookup.php:71
+#: includes/class-mbcat-isbn-lookup.php:127
 msgid "You are not allowed to do this."
 msgstr "No tienes permisos para hacer esto."
 
-#: includes/class-mbcat-isbn-lookup.php:68
+#: includes/class-mbcat-isbn-lookup.php:78
+#: includes/class-mbcat-isbn-lookup.php:131
 msgid "Invalid ISBN. Please enter a 10 or 13 digit ISBN."
 msgstr "ISBN no válido. Introduce un ISBN de 10 o 13 dígitos."
 
-#: includes/class-mbcat-isbn-lookup.php:74
+#: includes/class-mbcat-isbn-lookup.php:84
 msgid "No book found for this ISBN. Try the other data source or check the number."
 msgstr "No se ha encontrado ningún libro con este ISBN. Prueba con la otra fuente de datos o comprueba el número."
 
-#: includes/class-mbcat-isbn-lookup.php:98
-msgid "Cover URL is not from an allowed source."
-msgstr "La URL de la portada no procede de una fuente permitida."
-
-#: includes/class-mbcat-isbn-lookup.php:116
+#: includes/class-mbcat-isbn-lookup.php:164
 msgid "Cover imported and set as featured image."
 msgstr "Portada importada y establecida como imagen destacada."
 
-#: includes/class-mbcat-isbn-lookup.php:185
+#: includes/class-mbcat-isbn-lookup.php:396
 msgid "The downloaded file is not a supported image."
 msgstr "El archivo descargado no es una imagen compatible."
 
@@ -557,63 +550,93 @@ msgstr "Importando…"
 msgid "Use as cover"
 msgstr "Usar como portada"
 
-#: montecchiani-book-catalog.php:193
+#: montecchiani-book-catalog.php:194
 msgid "Cover imported."
 msgstr "Portada importada."
 
 #. translators: %s: comma separated list of field names
-#: montecchiani-book-catalog.php:195
+#: montecchiani-book-catalog.php:196
 #, php-format
 msgid "Fields filled: %s"
 msgstr "Campos rellenados: %s"
 
-#: montecchiani-book-catalog.php:196
+#: montecchiani-book-catalog.php:197
 msgid "No empty fields to fill. Existing values were kept."
 msgstr "No hay campos vacíos que rellenar. Se han conservado los valores existentes."
 
 #. translators: %s: comma separated list of data sources, e.g. "Google Books, Open Library"
-#: montecchiani-book-catalog.php:198
+#: montecchiani-book-catalog.php:199
 #, php-format
 msgid "Source: %s"
 msgstr "Fuente: %s"
 
 #. translators: separator between the field names listed in the "Fields filled" notice
-#: montecchiani-book-catalog.php:200
+#: montecchiani-book-catalog.php:201
 msgctxt "list item separator"
 msgid ", "
 msgstr ", "
 
-#: montecchiani-book-catalog.php:202
+#: montecchiani-book-catalog.php:203
 msgctxt "book field name"
 msgid "author"
 msgstr "autor"
 
-#: montecchiani-book-catalog.php:203
+#: montecchiani-book-catalog.php:204
 msgctxt "book field name"
 msgid "publisher"
 msgstr "editorial"
 
-#: montecchiani-book-catalog.php:204
+#: montecchiani-book-catalog.php:205
 msgctxt "book field name"
 msgid "year"
 msgstr "año"
 
-#: montecchiani-book-catalog.php:205
+#: montecchiani-book-catalog.php:206
 msgctxt "book field name"
 msgid "pages"
 msgstr "páginas"
 
-#: montecchiani-book-catalog.php:206
+#: montecchiani-book-catalog.php:207
 msgctxt "book field name"
 msgid "language"
 msgstr "idioma"
 
-#: montecchiani-book-catalog.php:207
+#: montecchiani-book-catalog.php:208
 msgctxt "book field name"
 msgid "title"
 msgstr "título"
 
-#: montecchiani-book-catalog.php:208
+#: montecchiani-book-catalog.php:209
 msgctxt "book field name"
 msgid "description"
 msgstr "descripción"
+
+#. Plugin URI of the plugin
+#: montecchiani-book-catalog.php
+msgid "https://github.com/mirkomontecchiani/WP-BookCatalog"
+msgstr "https://github.com/mirkomontecchiani/WP-BookCatalog"
+
+#: includes/class-mbcat-isbn-lookup.php:142
+msgid "The book data could not be retrieved again. Please run the ISBN autofill once more."
+msgstr "No se pudieron recuperar de nuevo los datos del libro. Vuelve a ejecutar el autocompletado por ISBN."
+
+#: includes/class-mbcat-isbn-lookup.php:146
+#: includes/class-mbcat-isbn-lookup.php:315
+msgid "No cover is available for this ISBN."
+msgstr "No hay ninguna portada disponible para este ISBN."
+
+#: includes/class-mbcat-isbn-lookup.php:321
+msgid "Could not create a temporary file."
+msgstr "No se pudo crear un archivo temporal."
+
+#: includes/class-mbcat-isbn-lookup.php:349
+msgid "The cover could not be downloaded."
+msgstr "No se pudo descargar la portada."
+
+#: includes/class-mbcat-isbn-lookup.php:355
+msgid "The cover file is too large to import."
+msgstr "El archivo de la portada es demasiado grande para importarlo."
+
+#: montecchiani-book-catalog.php:193
+msgid "A cover was found (no preview available)."
+msgstr "Se encontró una portada (vista previa no disponible)."

@@ -106,7 +106,6 @@ Go to **Book Catalog > Settings** in the WordPress admin to configure:
 | `mbcat_shortcode_query_args` | The `WP_Query` arguments used to list books |
 | `mbcat_max_books_per_request` | Maximum books rendered in one request (default 500) |
 | `mbcat_author_label` | The label printed before the author name, per book |
-| `mbcat_allowed_cover_hosts` | Hosts a cover image may be downloaded from |
 | `mbcat_lookup_data` | The normalized record returned by an ISBN lookup |
 
 ## Privacy
@@ -114,11 +113,15 @@ Go to **Book Catalog > Settings** in the WordPress admin to configure:
 The ISBN autofill feature sends the ISBN you type — and, if you configured one, your Google
 Books API key — from your server to the Google Books API (`googleapis.com`) and/or the Open
 Library API (`openlibrary.org`). Each request carries a `User-Agent` header naming the plugin
-and its version; your site URL is not sent. Importing a cover downloads the image file from
-`books.google.com`, `books.googleusercontent.com` or `covers.openlibrary.org` and stores it
-in your Media Library. Nothing is requested from the public frontend, and no personal data
-about you or your visitors is transmitted. See the "External services" section of
-[`readme.txt`](readme.txt) for the full disclosure and the providers' terms.
+and its version; your site URL is not sent. When a cover is found, the server downloads its
+small thumbnail from the address returned by the API (`books.google.com` or
+`books.googleusercontent.com`, `covers.openlibrary.org` or its `archive.org` redirect) and
+embeds it in the editor as a preview; importing the cover downloads the full image file from
+the same address and stores it in your Media Library. The browser itself never loads anything
+from these hosts. Nothing is
+requested from the public frontend, and no personal data about you or your visitors is
+transmitted. See the "External services" section of [`readme.txt`](readme.txt) for the full
+disclosure and the providers' terms.
 
 ## Development
 
