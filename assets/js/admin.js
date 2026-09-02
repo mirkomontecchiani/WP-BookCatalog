@@ -125,18 +125,29 @@
 
     /**
      * Render the cover preview with an import button
+     *
+     * The preview is a data URI that the server embedded in the lookup
+     * response, so this page never loads an image from a third-party host.
+     * The import button only carries the ISBN that was looked up: the server
+     * resolves the cover file from its own cached lookup.
      */
-    function renderCoverPreview(coverUrl) {
+    function renderCoverPreview(data, isbn) {
         var $wrap = $('#mbcat-cover-preview');
-        if (!$wrap.length || !coverUrl) {
+        if (!$wrap.length || !data || !data.has_cover || !isbn) {
             return;
         }
-        $wrap.html(
-            '<img src="' + escapeHtml(coverUrl) + '" alt="" />' +
-            '<button type="button" class="button" id="mbcat-import-cover" data-url="' + escapeHtml(coverUrl) + '">' +
+
+        var html = '';
+        if (data.cover_preview && /^data:image\/[a-z0-9.+-]+;base64,[A-Za-z0-9+\/=]+$/i.test(data.cover_preview)) {
+            html += '<img src="' + escapeHtml(data.cover_preview) + '" alt="" />';
+        } else {
+            html += '<span class="mbcat-cover-no-preview">' + escapeHtml(strings.no_preview || 'A cover was found (no preview available).') + '</span>';
+        }
+        html += '<button type="button" class="button" id="mbcat-import-cover" data-isbn="' + escapeHtml(isbn) + '">' +
             escapeHtml(strings.use_as_cover || 'Use as cover') +
-            '</button>'
-        ).show();
+            '</button>';
+
+        $wrap.html(html).show();
     }
 
     /**
@@ -191,7 +202,7 @@
             }
             showNotice('success', message);
 
-            renderCoverPreview(data.cover);
+            renderCoverPreview(data, data.isbn || isbn);
         }).fail(function() {
             showNotice('error', escapeHtml(strings.lookup_failed || 'Lookup failed. Please try again.'));
         }).always(function() {
@@ -205,10 +216,10 @@
      */
     $(document).on('click', '#mbcat-import-cover', function() {
         var $btn = $(this);
-        var url = $btn.data('url');
+        var isbn = $btn.data('isbn');
         var postId = $('#post_ID').val();
 
-        if (!url || !postId) {
+        if (!isbn || !postId) {
             return;
         }
 
@@ -218,7 +229,7 @@
             action: 'mbcat_import_cover',
             nonce: mbcat_admin.nonce,
             post_id: postId,
-            url: url
+            isbn: isbn
         }).done(function(response) {
             if (!response || !response.success) {
                 var msg = (response && response.data && response.data.message) ? response.data.message : (strings.import_failed || 'Import failed.');
@@ -234,10 +245,16 @@
             showNotice('success', escapeHtml(response.data.message || strings.cover_imported || 'Cover imported.'));
             $btn.remove();
 
-            if (!isBlockEditor()) {
-                // Classic editor: reload the featured image meta box on next save;
-                // show the imported thumbnail in the preview meanwhile.
-                $('#mbcat-cover-preview img').attr('src', response.data.thumbnail_url);
+            if (!isBlockEditor() && response.data.thumbnail_url) {
+                // Classic editor: the featured image meta box refreshes on the
+                // next save; show the imported (local) thumbnail meanwhile.
+                var $preview = $('#mbcat-cover-preview');
+                $preview.find('.mbcat-cover-no-preview').remove();
+                if ($preview.find('img').length) {
+                    $preview.find('img').attr('src', response.data.thumbnail_url);
+                } else {
+                    $preview.prepend('<img src="' + escapeHtml(response.data.thumbnail_url) + '" alt="" />');
+                }
             }
         }).fail(function() {
             showNotice('error', escapeHtml(strings.import_failed || 'Import failed. Please try again.'));

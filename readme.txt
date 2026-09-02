@@ -4,7 +4,7 @@ Tags: books, book catalog, isbn, library, bookshelf
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.2
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -57,23 +57,33 @@ transmitted.
 
 **Google Books API** — endpoint: `https://www.googleapis.com/books/v1/volumes`
 What is sent, and when: the ISBN you typed, each time you click "Autofill from ISBN" (unless
-you disabled this source in the settings). If you entered an optional Google Books API key in
-the plugin settings, that key is sent with the request too. Every request also carries a
-`User-Agent` header identifying the plugin and its version (`Montecchiani-Book-Catalog/1.3.0`); your
-site URL is not sent.
-If you then click "Use as cover", the cover image file is downloaded from
-`books.google.com` or `books.googleusercontent.com` and stored permanently in your site's
-Media Library.
+you disabled this source in the settings) and, if the cached result of that lookup has expired
+in the meantime, again when you click "Use as cover". If you entered an optional Google Books
+API key in the plugin settings, that key is sent with the request too. Every request also
+carries a `User-Agent` header identifying the plugin and its version
+(`Montecchiani-Book-Catalog/1.3.1`); your site URL is not sent.
+When the answer includes a cover, your server also downloads its small thumbnail (a few
+kilobytes) from the address returned by the API, on `books.google.com` or its file host
+`books.googleusercontent.com`, and embeds it in the editor as a preview: the editor page itself
+never loads anything from Google. If you then click "Use as cover", the cover image file is
+downloaded from the same address by your server and stored permanently in your site's Media
+Library.
 Terms of Service: https://developers.google.com/books/terms and
 https://policies.google.com/terms
 Privacy Policy: https://policies.google.com/privacy
 
 **Open Library API (Internet Archive)** — endpoint: `https://openlibrary.org/api/books`
 What is sent, and when: the ISBN you typed, each time you click "Autofill from ISBN" (unless
-you disabled this source in the settings). Every request also carries a `User-Agent` header
-identifying the plugin and its version (`Montecchiani-Book-Catalog/1.3.0`); your site URL is not sent.
-If you then click "Use as cover", the cover image file is downloaded from
-`covers.openlibrary.org` and stored permanently in your site's Media Library.
+you disabled this source in the settings) and, if the cached result of that lookup has expired
+in the meantime, again when you click "Use as cover". Every request also carries a `User-Agent`
+header identifying the plugin and its version (`Montecchiani-Book-Catalog/1.3.1`); your site
+URL is not sent.
+When the answer includes a cover, your server also downloads its small thumbnail (a few
+kilobytes) from the address returned by the API, on `covers.openlibrary.org` (which may redirect
+to `archive.org`, the Internet Archive's file server), and embeds it in the editor as a preview:
+the editor page itself never loads anything from Open Library. If you then click "Use as cover",
+the cover image file is downloaded from the same address by your server and stored permanently
+in your site's Media Library.
 Terms of Use: https://archive.org/about/terms.php
 Privacy Policy: https://archive.org/about/terms.php
 
@@ -81,8 +91,8 @@ Please note that cover images downloaded from these services are third-party con
 your responsibility to check that you are allowed to publish them on your site.
 
 You can choose which of the two services is used — or use only one of them — in
-**Book Catalog → Settings → ISBN Autofill**. Lookup results are cached on your own server for
-12 hours so that repeated lookups do not generate new outgoing requests.
+**Book Catalog → Settings → ISBN Autofill**. Lookup results and cover previews are cached on
+your own server for 12 hours so that repeated lookups do not generate new outgoing requests.
 
 == Installation ==
 
@@ -149,10 +159,23 @@ and will be delivered through translate.wordpress.org once the plugin is publish
 The plugin switches
 automatically to your site's language, with no configuration.
 
-It is fully internationalised, so any other language can be added by contributing at
-https://translate.wordpress.org/projects/wp-plugins/montecchiani-book-catalog/.
+It is fully internationalised, so any other language can be added by contributing to the
+plugin's project on https://translate.wordpress.org/ once the plugin is published there.
 
 == Changelog ==
+
+= 1.3.1 =
+* Fixed: the cover preview in the book editor was loaded by the browser straight from
+  Google Books or Open Library. The preview is now downloaded by the server together with
+  the lookup and embedded in the response, so the editor never loads a file from a
+  third-party host.
+* Changed: the cover import no longer accepts a URL from the browser. The server resolves
+  the cover from its own cached lookup of the ISBN, so the cover-host allowlist and the
+  `mbcat_allowed_cover_hosts` filter are gone.
+* Changed: cover downloads are limited to 10 MB and previews to 128 KB.
+* Privacy: the cover download no longer sends your site URL, which the default WordPress
+  `User-Agent` carried.
+* Fixed: the Plugin URI pointed at a repository that does not exist.
 
 = 1.3.0 =
 * Changed: the plugin is now named Montecchiani Book Catalog. Post type, taxonomy,
