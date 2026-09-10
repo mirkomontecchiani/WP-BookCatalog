@@ -1,4 +1,5 @@
 translations/ export-ignore
+.wordpress-org/ export-ignore
 .gitattributes export-ignore
 .distignore export-ignore
 README.md export-ignore
