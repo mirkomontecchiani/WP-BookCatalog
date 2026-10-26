@@ -154,13 +154,13 @@ memory limit. Developers can raise the limit with the `mbcat_max_books_per_reque
 
 = Which languages is the plugin available in? =
 
-English out of the box; French, Spanish, Italian and Japanese translations are prepared
-and will be delivered through translate.wordpress.org once the plugin is published there.
-The plugin switches
-automatically to your site's language, with no configuration.
+English out of the box. Translations are delivered through translate.wordpress.org:
+French, Spanish, Italian and Japanese are being added there, and WordPress downloads a
+translation automatically as soon as it is available for your site's language, with no
+configuration.
 
-It is fully internationalised, so any other language can be added by contributing to the
-plugin's project on https://translate.wordpress.org/ once the plugin is published there.
+Any other language can be contributed on the plugin's translation project:
+https://translate.wordpress.org/projects/wp-plugins/montecchiani-book-catalog/
 
 == Screenshots ==
 
