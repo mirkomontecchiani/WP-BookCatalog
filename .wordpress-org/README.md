@@ -37,3 +37,16 @@ MBCAT_FONT_DIR=/path/to/fonts python3 .wordpress-org/build-assets.py
 ```
 
 Screenshots are not generated: they are captured from a running WordPress site.
+
+## Filling a local site with books to screenshot
+
+`seed-demo-books.py` creates a dozen books in a local WordPress, so the catalog in
+the screenshots looks like a real one. Author, publisher, year, page count, ISBN,
+cover and description all come from the Open Library API, so none of it is invented;
+the only hand written part is the list of titles and the genre each one is filed
+under. It needs WP-CLI and is safe to run twice, as books already there are skipped.
+
+```bash
+cd ~/wp-mbcat   # the WordPress root, the folder that holds wp-config.php
+python3 -I wp-content/plugins/montecchiani-book-catalog/.wordpress-org/seed-demo-books.py
+```
