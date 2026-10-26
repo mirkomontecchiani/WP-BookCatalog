@@ -140,6 +140,28 @@ phpcs --standard=WordPress-Extra --extensions=php .
 git archive --format=zip --prefix=montecchiani-book-catalog/ -o montecchiani-book-catalog.zip HEAD
 ```
 
+## Releasing
+
+New versions reach the WordPress.org directory through GitHub Actions: nothing has to be
+done in Subversion by hand.
+
+1. Raise the version in the three places that carry it, the `Version:` header and the
+   `MBCAT_VERSION` constant in `montecchiani-book-catalog.php` and `Stable tag:` in
+   `readme.txt`, and add the changelog entry to `readme.txt`.
+2. Merge into `main`.
+3. Publish a GitHub release on `main` with the tag `vX.Y.Z`.
+   [`deploy.yml`](.github/workflows/deploy.yml) checks that the tag matches the three
+   versions and that the changelog has an entry for it, then commits `trunk/`, the new tag
+   and the directory artwork to SVN. Pre-releases are never deployed.
+
+A change to `readme.txt` or to `.wordpress-org/assets/` alone, for a version that is already
+released, goes live as soon as it reaches `main`, through
+[`readme-assets.yml`](.github/workflows/readme-assets.yml). If `main` also holds code that has
+not been released yet, that workflow refuses to deploy and fails: the change then waits for
+the next release.
+
+Both workflows need the `SVN_USERNAME` and `SVN_PASSWORD` repository secrets.
+
 ## License
 
 GPLv2 or later. See [LICENSE](LICENSE).

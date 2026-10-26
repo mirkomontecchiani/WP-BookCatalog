@@ -1,0 +1,70 @@
+# Publishes a new version of the plugin to the WordPress.org directory.
+#
+# Runs when a release is published on GitHub, with a tag such as v1.4.0.
+# Pre-releases are skipped, so a release can be drafted or tested as a
+# pre-release without reaching the users.
+#
+# The plugin files are copied into trunk/ (minus everything listed in
+# .distignore), trunk/ is tagged with the version, and the directory artwork in
+# .wordpress-org/assets goes into the top-level assets/ folder with the right
+# MIME types.
+#
+# Needs the SVN_USERNAME and SVN_PASSWORD repository secrets.
+#
+# Author: Mirko Montecchiani (mirkomontecchiani.com)
+
+name: Deploy to WordPress.org
+
+on:
+  release:
+    types: [released]
+
+# One SVN commit at a time, and never cancel one that is already running.
+concurrency:
+  group: wordpress-org
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy to WordPress.org
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # A release whose tag disagrees with the version in the code would
+      # publish a broken update, so every place that carries the version has
+      # to match the tag before anything is sent.
+      - name: Check that the tag matches the plugin version
+        run: |
+          tag="${GITHUB_REF#refs/tags/}"
+          version="${tag#v}"
+
+          header=$(sed -n -E 's/^[[:space:]]*\*[[:space:]]*Version:[[:space:]]*([^[:space:]]+).*/\1/p' montecchiani-book-catalog.php | head -n 1)
+          constant=$(sed -n -E "s/.*define\('MBCAT_VERSION',[[:space:]]*'([^']+)'\).*/\1/p" montecchiani-book-catalog.php | head -n 1)
+          stable=$(sed -n -E 's/^Stable tag:[[:space:]]*([^[:space:]]+).*/\1/p' readme.txt | head -n 1)
+
+          echo "Release tag:            $tag"
+          echo "Plugin header Version:  $header"
+          echo "MBCAT_VERSION:          $constant"
+          echo "readme.txt Stable tag:  $stable"
+
+          status=0
+          [ "$header" = "$version" ]   || { echo "::error::The plugin header says $header, the tag says $version"; status=1; }
+          [ "$constant" = "$version" ] || { echo "::error::MBCAT_VERSION says $constant, the tag says $version"; status=1; }
+          [ "$stable" = "$version" ]   || { echo "::error::The readme Stable tag says $stable, the tag says $version"; status=1; }
+          grep -q -F "= $version =" readme.txt || { echo "::error::readme.txt has no changelog entry for $version"; status=1; }
+          exit $status
+
+      - name: Deploy
+        uses: 10up/action-wordpress-plugin-deploy@stable
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          # The repository name differs from the WordPress.org slug.
+          SLUG: montecchiani-book-catalog
+          # Only the images: the scripts and the README next to them stay out.
+          ASSETS_DIR: .wordpress-org/assets
