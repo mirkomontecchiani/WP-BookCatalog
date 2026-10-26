@@ -1,0 +1,71 @@
+# Updates the readme and the directory artwork on WordPress.org, without
+# releasing a new version of the plugin.
+#
+# Runs when readme.txt or .wordpress-org/assets changes on main. The readme is
+# copied into trunk/ and into the tag named by its "Stable tag", the artwork
+# into the top-level assets/ folder.
+#
+# Two safeguards keep unreleased work off the directory:
+# - while the readme points at a version that has no release yet (a release
+#   being prepared), this workflow does nothing: the release will carry the
+#   readme itself, through deploy.yml;
+# - if anything besides the readme and the artwork differs from trunk/ on
+#   WordPress.org, the action refuses to deploy and the run fails, which
+#   means that a release is needed instead.
+#
+# Needs the SVN_USERNAME and SVN_PASSWORD repository secrets.
+#
+# Author: Mirko Montecchiani (mirkomontecchiani.com)
+
+name: Update readme and assets on WordPress.org
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - readme.txt
+      - .wordpress-org/assets/**
+
+# Shares the group with deploy.yml: one SVN commit at a time.
+concurrency:
+  group: wordpress-org
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  update:
+    name: Update readme and assets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # The tags are needed to tell a released version from one in progress.
+          fetch-depth: 0
+
+      - name: Check that the Stable tag is already released
+        id: stable
+        run: |
+          stable=$(sed -n -E 's/^Stable tag:[[:space:]]*([^[:space:]]+).*/\1/p' readme.txt | head -n 1)
+          echo "readme.txt Stable tag: $stable"
+
+          if git rev-parse -q --verify "refs/tags/v$stable" >/dev/null \
+            || git rev-parse -q --verify "refs/tags/$stable" >/dev/null; then
+            echo "released=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::Version $stable has no release yet: the readme will go out with the release."
+            echo "released=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Update readme and assets
+        if: steps.stable.outputs.released == 'true'
+        uses: 10up/action-wordpress-plugin-asset-update@stable
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          # The repository name differs from the WordPress.org slug.
+          SLUG: montecchiani-book-catalog
+          # Only the images: the scripts and the README next to them stay out.
+          ASSETS_DIR: .wordpress-org/assets

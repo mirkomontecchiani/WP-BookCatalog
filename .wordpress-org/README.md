@@ -21,6 +21,9 @@ montecchiani-book-catalog/     <- SVN repository root
 | `banner-1544x500.png` | Same banner for high density screens |
 | `screenshot-1.png`, ... | Screenshots, each one described in the `== Screenshots ==` section of `readme.txt`, in the same order |
 
+You do not copy them by hand: the workflows in `.github/workflows` send them to SVN with every
+release, and on their own whenever they change on `main`.
+
 The images are served through a CDN with an aggressive cache, so replacing one can take a
 few hours to show up on the plugin page.
 
