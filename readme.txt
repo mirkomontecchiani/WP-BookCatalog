@@ -162,6 +162,17 @@ automatically to your site's language, with no configuration.
 It is fully internationalised, so any other language can be added by contributing to the
 plugin's project on https://translate.wordpress.org/ once the plugin is published there.
 
+== Screenshots ==
+
+1. The catalog grid: the cover opens a panel with the book details, and the button below
+   loads the rest of the catalog without reloading the page.
+2. Autofill from ISBN in the book editor: one click fills the empty fields from Google
+   Books and Open Library, and the cover found can be imported as the featured image.
+3. The books list in the admin, with the cover, author, year, ISBN and genre columns,
+   sortable by author and by year.
+4. The settings page: default author, number of columns, which databases to query for the
+   ISBN autofill, and whether to delete everything on uninstall.
+
 == Changelog ==
 
 = 1.3.1 =
