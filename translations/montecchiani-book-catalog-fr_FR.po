@@ -10,8 +10,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-02T15:09:56+00:00\n"
-"PO-Revision-Date: 2026-08-22 14:40+0000\n"
+"POT-Creation-Date: 2026-09-02T15:47:01+00:00\n"
+"PO-Revision-Date: 2026-10-27 08:55+0000\n"
 "Language: fr_FR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Domain: montecchiani-book-catalog\n"
@@ -24,7 +24,7 @@ msgstr "Montecchiani Book Catalog"
 #. Description of the plugin
 #: montecchiani-book-catalog.php
 msgid "Book catalog with a Book post type, genres, a responsive shortcode grid and one-click ISBN autofill from Google Books and Open Library."
-msgstr "Catalogue de livres avec un type de publication Livre, des genres, une grille responsive via code court et le remplissage automatique en un clic depuis l’ISBN avec Google Books et Open Library."
+msgstr "Catalogue de livres avec un type de publication Livre, des genres, une grille adaptative par code court et le remplissage automatique en un clic à partir de l’ISBN via Google Books et Open Library."
 
 #. Author of the plugin
 #: montecchiani-book-catalog.php
@@ -122,7 +122,7 @@ msgstr "Détails du livre"
 
 #: includes/class-mbcat-meta-boxes.php:145
 msgid "Autofill from ISBN"
-msgstr "Remplissage automatique depuis l’ISBN"
+msgstr "Remplir automatiquement à partir de l’ISBN"
 
 #: includes/class-mbcat-meta-boxes.php:149
 msgid "Fetches title, author, publisher, year, pages, description and cover from Google Books / Open Library."
@@ -209,7 +209,7 @@ msgstr "Définir la couverture du livre"
 #: includes/class-mbcat-post-type.php:68
 msgctxt "Overrides the \"Remove featured image\" phrase"
 msgid "Remove book cover"
-msgstr "Supprimer la couverture du livre"
+msgstr "Retirer la couverture du livre"
 
 #: includes/class-mbcat-post-type.php:69
 msgctxt "Overrides the \"Use as featured image\" phrase"
@@ -318,7 +318,7 @@ msgstr "Auteur par défaut"
 
 #: includes/class-mbcat-settings.php:90
 msgid "Author Gender"
-msgstr "Genre de l’auteur"
+msgstr "Auteur ou autrice"
 
 #: includes/class-mbcat-settings.php:99
 msgid "Display Settings"
@@ -374,7 +374,7 @@ msgstr "Afficher un nombre limité de livres"
 
 #: includes/class-mbcat-settings.php:250
 msgid "Displays 3 books with a \"Show All\" button at the bottom. Replace 3 with any number."
-msgstr "Affiche 3 livres avec un bouton « Tout afficher » en bas. Remplacez 3 par le nombre de votre choix."
+msgstr "Affiche 3 livres avec un bouton « Afficher tous les livres » en bas. Remplacez 3 par le nombre de votre choix."
 
 #: includes/class-mbcat-settings.php:252
 msgid "Available Attributes"
@@ -382,11 +382,11 @@ msgstr "Attributs disponibles"
 
 #: includes/class-mbcat-settings.php:254
 msgid "Number of books to display (shows \"Show All\" button)"
-msgstr "Nombre de livres à afficher (affiche le bouton « Tout afficher »)"
+msgstr "Nombre de livres à afficher (affiche le bouton « Afficher tous les livres »)"
 
 #: includes/class-mbcat-settings.php:255
 msgid "Override default columns (1-5)"
-msgstr "Remplace le nombre de colonnes par défaut (1-5)"
+msgstr "Remplacer le nombre de colonnes par défaut (1-5)"
 
 #: includes/class-mbcat-settings.php:256
 msgid "Order by: date, title, year, author, rand, menu_order, modified (default: date)"
@@ -398,7 +398,7 @@ msgstr "Sens du tri : ASC, DESC (par défaut : DESC)"
 
 #: includes/class-mbcat-settings.php:258
 msgid "Filter by genre slug(s), comma separated"
-msgstr "Filtrer par slug(s) de genre, séparés par des virgules"
+msgstr "Filtrer par identifiant(s) de genre, séparés par des virgules"
 
 #: includes/class-mbcat-settings.php:261
 msgid "Example with All Attributes"
@@ -422,7 +422,7 @@ msgstr "Options avancées."
 
 #: includes/class-mbcat-settings.php:303
 msgid "If set, this author will be used for all books that don't have an author specified."
-msgstr "Si cette valeur est renseignée, cet auteur sera utilisé pour tous les livres dont l’auteur n’est pas indiqué."
+msgstr "Si ce champ est renseigné, cet auteur sera utilisé pour tous les livres dont l’auteur n’est pas indiqué."
 
 #: includes/class-mbcat-settings.php:313
 msgid "Male (Author)"
@@ -434,7 +434,7 @@ msgstr "Féminin (Autrice)"
 
 #: includes/class-mbcat-settings.php:316
 msgid "Select the gender to display the correct label (Author/Authoress)."
-msgstr "Sélectionnez le genre afin d’afficher le libellé correct (Auteur/Autrice)."
+msgstr "Choisissez le masculin ou le féminin pour afficher le libellé approprié (Auteur/Autrice)."
 
 #. translators: %d: number of columns
 #: includes/class-mbcat-settings.php:329
@@ -446,7 +446,7 @@ msgstr[1] "%d colonnes"
 
 #: includes/class-mbcat-settings.php:333
 msgid "Number of columns to display books in. The layout will be responsive."
-msgstr "Nombre de colonnes utilisées pour afficher les livres. La mise en page sera responsive."
+msgstr "Nombre de colonnes utilisées pour afficher les livres. La mise en page sera adaptative."
 
 #: includes/class-mbcat-settings.php:343
 msgid "Google Books + Open Library (recommended)"
@@ -462,7 +462,7 @@ msgstr "Open Library uniquement"
 
 #: includes/class-mbcat-settings.php:347
 msgid "Which database to query when autofilling book data from an ISBN. Using both merges the best data from each source."
-msgstr "Base de données à interroger lors du remplissage automatique des données d’un livre à partir d’un ISBN. L’utilisation des deux fusionne les meilleures données de chaque source."
+msgstr "Base de données à interroger lors du remplissage automatique des données d’un livre à partir d’un ISBN. Avec les deux sources, les meilleures données de chacune sont fusionnées."
 
 #: includes/class-mbcat-settings.php:359
 msgid "A key is saved. Leave empty to keep it."
@@ -478,7 +478,7 @@ msgstr "Supprimer la clé enregistrée"
 
 #: includes/class-mbcat-settings.php:366
 msgid "Optional. Google Books works without a key, but a key raises the request quota. Create one in the Google Cloud Console."
-msgstr "Facultatif. Google Books fonctionne sans clé, mais une clé augmente le quota de requêtes. Créez-en une dans la Google Cloud Console."
+msgstr "Facultatif. Google Books fonctionne sans clé, mais une clé augmente le quota de requêtes. Créez-en une dans la console Google Cloud."
 
 #: includes/class-mbcat-settings.php:377
 msgid "Permanently delete all books, genres and settings when the plugin is uninstalled."
@@ -500,7 +500,7 @@ msgstr "Auteur :"
 #: includes/class-mbcat-shortcode.php:283
 #, php-format
 msgid "%s (opens in a new tab)"
-msgstr "%s (s’ouvre dans un nouvel onglet)"
+msgstr "%s (ouvre un nouvel onglet)"
 
 #: includes/class-mbcat-shortcode.php:314
 msgid "Publisher:"
@@ -540,7 +540,7 @@ msgstr "La recherche a échoué. Veuillez réessayer."
 
 #: montecchiani-book-catalog.php:190
 msgid "Cover import failed. Please try again."
-msgstr "L’import de la couverture a échoué. Veuillez réessayer."
+msgstr "L’importation de la couverture a échoué. Veuillez réessayer."
 
 #: montecchiani-book-catalog.php:191
 msgid "Importing…"
