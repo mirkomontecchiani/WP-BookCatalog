@@ -42,8 +42,8 @@ featured image with one click.
 * Schema.org `Book` JSON-LD structured data for SEO
 * Admin list columns for cover, author, year and ISBN, sortable by author and year
 * Settings page: default author, author label, columns, ISBN data source, uninstall cleanup
-* Fully translatable — French, Spanish, Italian and Japanese translations are prepared
-  for translate.wordpress.org, where any other language can be contributed too
+* Fully translatable — French, Spanish, Italian, Japanese and Russian translations are
+  prepared for translate.wordpress.org, where any other language can be contributed too
 * Assets are only loaded on the pages that actually use the shortcode
 
 = External services =
@@ -155,7 +155,7 @@ memory limit. Developers can raise the limit with the `mbcat_max_books_per_reque
 = Which languages is the plugin available in? =
 
 English out of the box. Translations are delivered through translate.wordpress.org:
-French, Spanish, Italian and Japanese are being added there, and WordPress downloads a
+French, Spanish, Italian, Japanese and Russian are being added there, and WordPress downloads a
 translation automatically as soon as it is available for your site's language, with no
 configuration.
 

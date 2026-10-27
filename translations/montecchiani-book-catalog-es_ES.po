@@ -6,12 +6,12 @@ msgstr ""
 "Project-Id-Version: Montecchiani Book Catalog 1.3.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/montecchiani-book-catalog\n"
 "Last-Translator: Mirko Montecchiani\n"
-"Language-Team: Spanish\n"
+"Language-Team: Spanish (Spain)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-02T15:09:56+00:00\n"
-"PO-Revision-Date: 2026-08-22 14:40+0000\n"
+"POT-Creation-Date: 2026-09-02T15:47:01+00:00\n"
+"PO-Revision-Date: 2026-10-27 08:49+0000\n"
 "Language: es_ES\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Domain: montecchiani-book-catalog\n"
@@ -24,7 +24,7 @@ msgstr "Montecchiani Book Catalog"
 #. Description of the plugin
 #: montecchiani-book-catalog.php
 msgid "Book catalog with a Book post type, genres, a responsive shortcode grid and one-click ISBN autofill from Google Books and Open Library."
-msgstr "Catálogo de libros con un tipo de contenido Libro, géneros, una cuadrícula responsive mediante shortcode y autorrelleno del ISBN con un solo clic desde Google Books y Open Library."
+msgstr "Catálogo de libros con un tipo de contenido Libro, géneros, una cuadrícula adaptable mediante shortcode y autorrelleno a partir del ISBN con un solo clic desde Google Books y Open Library."
 
 #. Author of the plugin
 #: montecchiani-book-catalog.php
@@ -122,7 +122,7 @@ msgstr "Detalles del libro"
 
 #: includes/class-mbcat-meta-boxes.php:145
 msgid "Autofill from ISBN"
-msgstr "Autorrellenar desde el ISBN"
+msgstr "Autorrellenar a partir del ISBN"
 
 #: includes/class-mbcat-meta-boxes.php:149
 msgid "Fetches title, author, publisher, year, pages, description and cover from Google Books / Open Library."
@@ -382,11 +382,11 @@ msgstr "Atributos disponibles"
 
 #: includes/class-mbcat-settings.php:254
 msgid "Number of books to display (shows \"Show All\" button)"
-msgstr "Número de libros a mostrar (muestra el botón «Mostrar todos»)"
+msgstr "Número de libros que se mostrarán (añade el botón «Mostrar todos»)"
 
 #: includes/class-mbcat-settings.php:255
 msgid "Override default columns (1-5)"
-msgstr "Sobrescribe las columnas por defecto (1-5)"
+msgstr "Sobrescribir el número de columnas por defecto (1-5)"
 
 #: includes/class-mbcat-settings.php:256
 msgid "Order by: date, title, year, author, rand, menu_order, modified (default: date)"
@@ -394,11 +394,11 @@ msgstr "Ordenar por: date, title, year, author, rand, menu_order, modified (por 
 
 #: includes/class-mbcat-settings.php:257
 msgid "Order direction: ASC, DESC (default: DESC)"
-msgstr "Dirección de la ordenación: ASC, DESC (por defecto: DESC)"
+msgstr "Sentido del orden: ASC, DESC (por defecto: DESC)"
 
 #: includes/class-mbcat-settings.php:258
 msgid "Filter by genre slug(s), comma separated"
-msgstr "Filtrar por el slug (o slugs) del género, separados por comas"
+msgstr "Filtrar por uno o varios slugs de género, separados por comas"
 
 #: includes/class-mbcat-settings.php:261
 msgid "Example with All Attributes"
@@ -446,7 +446,7 @@ msgstr[1] "%d columnas"
 
 #: includes/class-mbcat-settings.php:333
 msgid "Number of columns to display books in. The layout will be responsive."
-msgstr "Número de columnas en las que mostrar los libros. El diseño será responsive."
+msgstr "Número de columnas en las que mostrar los libros. El diseño será adaptable."
 
 #: includes/class-mbcat-settings.php:343
 msgid "Google Books + Open Library (recommended)"
@@ -500,7 +500,7 @@ msgstr "Autor:"
 #: includes/class-mbcat-shortcode.php:283
 #, php-format
 msgid "%s (opens in a new tab)"
-msgstr "%s (se abre en una pestaña nueva)"
+msgstr "%s (se abre en una nueva pestaña)"
 
 #: includes/class-mbcat-shortcode.php:314
 msgid "Publisher:"
@@ -618,7 +618,7 @@ msgstr "https://github.com/mirkomontecchiani/WP-BookCatalog"
 
 #: includes/class-mbcat-isbn-lookup.php:142
 msgid "The book data could not be retrieved again. Please run the ISBN autofill once more."
-msgstr "No se pudieron recuperar de nuevo los datos del libro. Vuelve a ejecutar el autocompletado por ISBN."
+msgstr "No se han podido recuperar de nuevo los datos del libro. Vuelve a ejecutar el autorrelleno por ISBN."
 
 #: includes/class-mbcat-isbn-lookup.php:146
 #: includes/class-mbcat-isbn-lookup.php:315
@@ -627,11 +627,11 @@ msgstr "No hay ninguna portada disponible para este ISBN."
 
 #: includes/class-mbcat-isbn-lookup.php:321
 msgid "Could not create a temporary file."
-msgstr "No se pudo crear un archivo temporal."
+msgstr "No se ha podido crear un archivo temporal."
 
 #: includes/class-mbcat-isbn-lookup.php:349
 msgid "The cover could not be downloaded."
-msgstr "No se pudo descargar la portada."
+msgstr "No se ha podido descargar la portada."
 
 #: includes/class-mbcat-isbn-lookup.php:355
 msgid "The cover file is too large to import."
@@ -639,4 +639,4 @@ msgstr "El archivo de la portada es demasiado grande para importarlo."
 
 #: montecchiani-book-catalog.php:193
 msgid "A cover was found (no preview available)."
-msgstr "Se encontró una portada (vista previa no disponible)."
+msgstr "Se ha encontrado una portada (vista previa no disponible)."

@@ -34,7 +34,7 @@ Mirko Montecchiani
 - **SEO**: Automatic Schema.org `Book` structured data (JSON-LD) for rich results in search engines
 - **Admin Columns**: Cover, author, year and ISBN columns in the book list, sortable by author and year
 - **Settings Page**: Configure default author, columns, ISBN data source and uninstall cleanup
-- **i18n Ready**: Fully translatable; French, Spanish, Italian and Japanese translations are being added to [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/montecchiani-book-catalog/)
+- **i18n Ready**: Fully translatable; French, Spanish, Italian, Japanese and Russian translations are being added to [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/montecchiani-book-catalog/)
 
 ## Requirements
 
@@ -128,7 +128,7 @@ disclosure and the providers' terms.
 ```bash
 # Regenerate the translation template and merge it into every catalogue
 wp i18n make-pot . languages/montecchiani-book-catalog.pot --slug=montecchiani-book-catalog
-for loc in fr_FR es_ES it_IT ja; do
+for loc in fr_FR es_ES it_IT ja ru_RU; do
   msgmerge --update --backup=none translations/montecchiani-book-catalog-$loc.po languages/montecchiani-book-catalog.pot
   msgfmt -o translations/montecchiani-book-catalog-$loc.mo translations/montecchiani-book-catalog-$loc.po
 done

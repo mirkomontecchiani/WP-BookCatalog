@@ -1,0 +1,636 @@
+# Russian translation for montecchiani-book-catalog.
+# Copyright (C) 2026 Mirko Montecchiani
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Montecchiani Book Catalog 1.3.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/montecchiani-book-catalog\n"
+"POT-Creation-Date: 2026-09-02T15:47:01+00:00\n"
+"PO-Revision-Date: 2026-10-27 09:00+0000\n"
+"Last-Translator: Mirko Montecchiani\n"
+"Language-Team: Russian\n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Domain: montecchiani-book-catalog\n"
+
+#. Plugin Name of the plugin
+#: montecchiani-book-catalog.php
+msgid "Montecchiani Book Catalog"
+msgstr "Montecchiani Book Catalog"
+
+#. Plugin URI of the plugin
+#: montecchiani-book-catalog.php
+msgid "https://github.com/mirkomontecchiani/WP-BookCatalog"
+msgstr "https://github.com/mirkomontecchiani/WP-BookCatalog"
+
+#. Description of the plugin
+#: montecchiani-book-catalog.php
+msgid "Book catalog with a Book post type, genres, a responsive shortcode grid and one-click ISBN autofill from Google Books and Open Library."
+msgstr "Каталог книг с типом записи «Книга», жанрами, адаптивной сеткой, выводимой шорткодом, и автозаполнением по ISBN в один клик из Google Books и Open Library."
+
+#. Author of the plugin
+#: montecchiani-book-catalog.php
+msgid "Mirko Montecchiani"
+msgstr "Mirko Montecchiani"
+
+#. Author URI of the plugin
+#: montecchiani-book-catalog.php
+msgid "https://github.com/mirkomontecchiani"
+msgstr "https://github.com/mirkomontecchiani"
+
+#: includes/class-mbcat-isbn-lookup.php:71 includes/class-mbcat-isbn-lookup.php:127
+msgid "You are not allowed to do this."
+msgstr "У вас недостаточно прав для выполнения этого действия."
+
+#: includes/class-mbcat-isbn-lookup.php:78 includes/class-mbcat-isbn-lookup.php:131
+msgid "Invalid ISBN. Please enter a 10 or 13 digit ISBN."
+msgstr "Неверный ISBN. Введите ISBN из 10 или 13 цифр."
+
+#: includes/class-mbcat-isbn-lookup.php:84
+msgid "No book found for this ISBN. Try the other data source or check the number."
+msgstr "По этому ISBN книга не найдена. Попробуйте другой источник данных или проверьте номер."
+
+#: includes/class-mbcat-isbn-lookup.php:142
+msgid "The book data could not be retrieved again. Please run the ISBN autofill once more."
+msgstr "Не удалось повторно получить данные книги. Пожалуйста, запустите автозаполнение по ISBN ещё раз."
+
+#: includes/class-mbcat-isbn-lookup.php:146 includes/class-mbcat-isbn-lookup.php:315
+msgid "No cover is available for this ISBN."
+msgstr "Для этого ISBN обложка недоступна."
+
+#: includes/class-mbcat-isbn-lookup.php:164
+msgid "Cover imported and set as featured image."
+msgstr "Обложка импортирована и установлена как изображение записи."
+
+#: includes/class-mbcat-isbn-lookup.php:321
+msgid "Could not create a temporary file."
+msgstr "Не удалось создать временный файл."
+
+#: includes/class-mbcat-isbn-lookup.php:349
+msgid "The cover could not be downloaded."
+msgstr "Не удалось скачать обложку."
+
+#: includes/class-mbcat-isbn-lookup.php:355
+msgid "The cover file is too large to import."
+msgstr "Файл обложки слишком велик для импорта."
+
+#: includes/class-mbcat-isbn-lookup.php:396
+msgid "The downloaded file is not a supported image."
+msgstr "Скачанный файл не является изображением поддерживаемого формата."
+
+#: includes/class-mbcat-meta-boxes.php:56 includes/class-mbcat-post-type.php:144
+msgid "ISBN"
+msgstr "ISBN"
+
+#: includes/class-mbcat-meta-boxes.php:58
+msgid "Enter ISBN (10 or 13 digits)"
+msgstr "Введите ISBN (10 или 13 цифр)"
+
+#: includes/class-mbcat-meta-boxes.php:61 includes/class-mbcat-post-type.php:142
+msgid "Author"
+msgstr "Автор"
+
+#: includes/class-mbcat-meta-boxes.php:63
+msgid "Enter book author"
+msgstr "Введите автора книги"
+
+#: includes/class-mbcat-meta-boxes.php:66
+msgid "Publisher"
+msgstr "Издательство"
+
+#: includes/class-mbcat-meta-boxes.php:68
+msgid "Enter publisher name"
+msgstr "Введите название издательства"
+
+#: includes/class-mbcat-meta-boxes.php:71
+msgid "Publication Year"
+msgstr "Год издания"
+
+#: includes/class-mbcat-meta-boxes.php:73
+msgid "Enter publication year"
+msgstr "Введите год издания"
+
+#: includes/class-mbcat-meta-boxes.php:78
+msgid "Number of Pages"
+msgstr "Количество страниц"
+
+#: includes/class-mbcat-meta-boxes.php:80
+msgid "Enter number of pages"
+msgstr "Введите количество страниц"
+
+#: includes/class-mbcat-meta-boxes.php:85
+msgid "Language"
+msgstr "Язык"
+
+#: includes/class-mbcat-meta-boxes.php:87
+msgid "Enter book language (e.g. it, en)"
+msgstr "Введите язык книги (например, it, en)"
+
+#: includes/class-mbcat-meta-boxes.php:90
+msgid "Shop Link"
+msgstr "Ссылка на магазин"
+
+#: includes/class-mbcat-meta-boxes.php:92
+msgid "Enter shop URL"
+msgstr "Введите URL магазина"
+
+#: includes/class-mbcat-meta-boxes.php:105
+msgid "Book Details"
+msgstr "Сведения о книге"
+
+#: includes/class-mbcat-meta-boxes.php:145
+msgid "Autofill from ISBN"
+msgstr "Заполнить по ISBN"
+
+#: includes/class-mbcat-meta-boxes.php:149
+msgid "Fetches title, author, publisher, year, pages, description and cover from Google Books / Open Library."
+msgstr "Получает название, автора, издательство, год, количество страниц, описание и обложку из Google Books / Open Library."
+
+#. translators: %s: default author name
+#: includes/class-mbcat-meta-boxes.php:173
+#, php-format
+msgid "Leave empty to use the default author from the settings: %s"
+msgstr "Оставьте пустым, чтобы использовать автора по умолчанию из настроек: %s"
+
+#: includes/class-mbcat-post-type.php:52
+msgctxt "Post type general name"
+msgid "Books"
+msgstr "Книги"
+
+#: includes/class-mbcat-post-type.php:53
+msgctxt "Post type singular name"
+msgid "Book"
+msgstr "Книга"
+
+#: includes/class-mbcat-post-type.php:54
+msgctxt "Admin Menu text"
+msgid "Book Catalog"
+msgstr "Каталог книг"
+
+#: includes/class-mbcat-post-type.php:55
+msgctxt "Add New on Toolbar"
+msgid "Book"
+msgstr "Книгу"
+
+#: includes/class-mbcat-post-type.php:56
+msgid "Add New"
+msgstr "Добавить новую"
+
+#: includes/class-mbcat-post-type.php:57
+msgid "Add New Book"
+msgstr "Добавить новую книгу"
+
+#: includes/class-mbcat-post-type.php:58
+msgid "New Book"
+msgstr "Новая книга"
+
+#: includes/class-mbcat-post-type.php:59
+msgid "Edit Book"
+msgstr "Редактировать книгу"
+
+#: includes/class-mbcat-post-type.php:60
+msgid "View Book"
+msgstr "Просмотреть книгу"
+
+#: includes/class-mbcat-post-type.php:61
+msgid "All Books"
+msgstr "Все книги"
+
+#: includes/class-mbcat-post-type.php:62
+msgid "Search Books"
+msgstr "Поиск книг"
+
+#: includes/class-mbcat-post-type.php:63
+msgid "Parent Books:"
+msgstr "Родительская книга:"
+
+#: includes/class-mbcat-post-type.php:64 includes/class-mbcat-shortcode.php:93 includes/class-mbcat-shortcode.php:481
+msgid "No books found."
+msgstr "Книг не найдено."
+
+#: includes/class-mbcat-post-type.php:65
+msgid "No books found in Trash."
+msgstr "В корзине книг не найдено."
+
+#: includes/class-mbcat-post-type.php:66
+msgctxt "Overrides the \"Featured Image\" phrase"
+msgid "Book Cover"
+msgstr "Обложка книги"
+
+#: includes/class-mbcat-post-type.php:67
+msgctxt "Overrides the \"Set featured image\" phrase"
+msgid "Set book cover"
+msgstr "Установить обложку книги"
+
+#: includes/class-mbcat-post-type.php:68
+msgctxt "Overrides the \"Remove featured image\" phrase"
+msgid "Remove book cover"
+msgstr "Удалить обложку книги"
+
+#: includes/class-mbcat-post-type.php:69
+msgctxt "Overrides the \"Use as featured image\" phrase"
+msgid "Use as book cover"
+msgstr "Использовать как обложку книги"
+
+#: includes/class-mbcat-post-type.php:70
+msgctxt "The post type archive label"
+msgid "Book archives"
+msgstr "Архивы книг"
+
+#: includes/class-mbcat-post-type.php:71
+msgctxt "Overrides the \"Insert into post\" phrase"
+msgid "Insert into book"
+msgstr "Вставить в книгу"
+
+#: includes/class-mbcat-post-type.php:72
+msgctxt "Overrides the \"Uploaded to this post\" phrase"
+msgid "Uploaded to this book"
+msgstr "Загружено для этой книги"
+
+#: includes/class-mbcat-post-type.php:73
+msgctxt "Screen reader text"
+msgid "Filter books list"
+msgstr "Фильтровать список книг"
+
+#: includes/class-mbcat-post-type.php:74
+msgctxt "Screen reader text"
+msgid "Books list navigation"
+msgstr "Навигация по списку книг"
+
+#: includes/class-mbcat-post-type.php:75
+msgctxt "Screen reader text"
+msgid "Books list"
+msgstr "Список книг"
+
+#: includes/class-mbcat-post-type.php:103
+msgctxt "taxonomy general name"
+msgid "Genres"
+msgstr "Жанры"
+
+#: includes/class-mbcat-post-type.php:104
+msgctxt "taxonomy singular name"
+msgid "Genre"
+msgstr "Жанр"
+
+#: includes/class-mbcat-post-type.php:105
+msgid "Search Genres"
+msgstr "Поиск жанров"
+
+#: includes/class-mbcat-post-type.php:106
+msgid "All Genres"
+msgstr "Все жанры"
+
+#: includes/class-mbcat-post-type.php:107
+msgid "Parent Genre"
+msgstr "Родительский жанр"
+
+#: includes/class-mbcat-post-type.php:108
+msgid "Parent Genre:"
+msgstr "Родительский жанр:"
+
+#: includes/class-mbcat-post-type.php:109
+msgid "Edit Genre"
+msgstr "Изменить жанр"
+
+#: includes/class-mbcat-post-type.php:110
+msgid "Update Genre"
+msgstr "Обновить жанр"
+
+#: includes/class-mbcat-post-type.php:111
+msgid "Add New Genre"
+msgstr "Добавить новый жанр"
+
+#: includes/class-mbcat-post-type.php:112
+msgid "New Genre Name"
+msgstr "Название нового жанра"
+
+#: includes/class-mbcat-post-type.php:113
+msgid "Genres"
+msgstr "Жанры"
+
+#: includes/class-mbcat-post-type.php:140
+msgid "Cover"
+msgstr "Обложка"
+
+#: includes/class-mbcat-post-type.php:143
+msgid "Year"
+msgstr "Год"
+
+#: includes/class-mbcat-settings.php:52
+msgid "Book Catalog Settings"
+msgstr "Настройки каталога книг"
+
+#: includes/class-mbcat-settings.php:53
+msgid "Settings"
+msgstr "Настройки"
+
+#: includes/class-mbcat-settings.php:73
+msgid "General Settings"
+msgstr "Общие настройки"
+
+#: includes/class-mbcat-settings.php:81
+msgid "Default Author"
+msgstr "Автор по умолчанию"
+
+#: includes/class-mbcat-settings.php:90
+msgid "Author Gender"
+msgstr "Пол автора"
+
+#: includes/class-mbcat-settings.php:99
+msgid "Display Settings"
+msgstr "Настройки отображения"
+
+#: includes/class-mbcat-settings.php:107
+msgid "Number of Columns"
+msgstr "Количество колонок"
+
+#: includes/class-mbcat-settings.php:116
+msgid "ISBN Autofill"
+msgstr "Автозаполнение по ISBN"
+
+#: includes/class-mbcat-settings.php:124
+msgid "Data Source"
+msgstr "Источник данных"
+
+#: includes/class-mbcat-settings.php:133
+msgid "Google Books API Key"
+msgstr "Ключ API Google Books"
+
+#: includes/class-mbcat-settings.php:142
+msgid "Advanced"
+msgstr "Дополнительно"
+
+#: includes/class-mbcat-settings.php:150
+msgid "Delete Data on Uninstall"
+msgstr "Удалять данные при удалении плагина"
+
+#: includes/class-mbcat-settings.php:221
+msgid "Settings saved successfully."
+msgstr "Настройки успешно сохранены."
+
+#: includes/class-mbcat-settings.php:236
+msgid "Save Settings"
+msgstr "Сохранить настройки"
+
+#: includes/class-mbcat-settings.php:242
+msgid "Shortcode Usage"
+msgstr "Использование шорткода"
+
+#: includes/class-mbcat-settings.php:244
+msgid "Display All Books"
+msgstr "Вывод всех книг"
+
+#: includes/class-mbcat-settings.php:246
+msgid "Displays all books in the catalog."
+msgstr "Выводит все книги каталога."
+
+#: includes/class-mbcat-settings.php:248
+msgid "Display Limited Books"
+msgstr "Вывод ограниченного числа книг"
+
+#: includes/class-mbcat-settings.php:250
+msgid "Displays 3 books with a \"Show All\" button at the bottom. Replace 3 with any number."
+msgstr "Выводит 3 книги с кнопкой «Показать все книги» внизу. Замените 3 на любое число."
+
+#: includes/class-mbcat-settings.php:252
+msgid "Available Attributes"
+msgstr "Доступные атрибуты"
+
+#: includes/class-mbcat-settings.php:254
+msgid "Number of books to display (shows \"Show All\" button)"
+msgstr "Количество выводимых книг (добавляет кнопку «Показать все книги»)"
+
+#: includes/class-mbcat-settings.php:255
+msgid "Override default columns (1-5)"
+msgstr "Переопределяет количество колонок по умолчанию (1-5)"
+
+#: includes/class-mbcat-settings.php:256
+msgid "Order by: date, title, year, author, rand, menu_order, modified (default: date)"
+msgstr "Сортировка по: date, title, year, author, rand, menu_order, modified (по умолчанию: date)"
+
+#: includes/class-mbcat-settings.php:257
+msgid "Order direction: ASC, DESC (default: DESC)"
+msgstr "Направление сортировки: ASC, DESC (по умолчанию: DESC)"
+
+#: includes/class-mbcat-settings.php:258
+msgid "Filter by genre slug(s), comma separated"
+msgstr "Фильтр по ярлыкам жанров через запятую"
+
+#: includes/class-mbcat-settings.php:261
+msgid "Example with All Attributes"
+msgstr "Пример со всеми атрибутами"
+
+#: includes/class-mbcat-settings.php:272
+msgid "Configure the default settings for all books."
+msgstr "Настройте параметры по умолчанию для всех книг."
+
+#: includes/class-mbcat-settings.php:279
+msgid "Configure how books are displayed on the frontend."
+msgstr "Настройте отображение книг на сайте."
+
+#: includes/class-mbcat-settings.php:286
+msgid "Configure the external book databases used to autofill book details from an ISBN."
+msgstr "Настройте внешние базы данных книг, используемые для автозаполнения сведений о книге по ISBN."
+
+#: includes/class-mbcat-settings.php:293
+msgid "Advanced options."
+msgstr "Дополнительные параметры."
+
+#: includes/class-mbcat-settings.php:303
+msgid "If set, this author will be used for all books that don't have an author specified."
+msgstr "Если задан, этот автор будет использоваться для всех книг, у которых автор не указан."
+
+#: includes/class-mbcat-settings.php:313
+msgid "Male (Author)"
+msgstr "Мужской (Автор)"
+
+#: includes/class-mbcat-settings.php:314
+msgid "Female (Authoress)"
+msgstr "Женский (Писательница)"
+
+#: includes/class-mbcat-settings.php:316
+msgid "Select the gender to display the correct label (Author/Authoress)."
+msgstr "Выберите пол, чтобы выводилась правильная подпись (Автор/Писательница)."
+
+#. translators: %d: number of columns
+#: includes/class-mbcat-settings.php:329
+#, php-format
+msgid "%d column"
+msgid_plural "%d columns"
+msgstr[0] "%d колонка"
+msgstr[1] "%d колонки"
+msgstr[2] "%d колонок"
+
+#: includes/class-mbcat-settings.php:333
+msgid "Number of columns to display books in. The layout will be responsive."
+msgstr "Количество колонок для вывода книг. Макет будет адаптивным."
+
+#: includes/class-mbcat-settings.php:343
+msgid "Google Books + Open Library (recommended)"
+msgstr "Google Books + Open Library (рекомендуется)"
+
+#: includes/class-mbcat-settings.php:344
+msgid "Google Books only"
+msgstr "Только Google Books"
+
+#: includes/class-mbcat-settings.php:345
+msgid "Open Library only"
+msgstr "Только Open Library"
+
+#: includes/class-mbcat-settings.php:347
+msgid "Which database to query when autofilling book data from an ISBN. Using both merges the best data from each source."
+msgstr "Выберите базу данных для запросов при автозаполнении данных книги по ISBN. При использовании обеих баз лучшие данные из каждого источника объединяются."
+
+#: includes/class-mbcat-settings.php:359
+msgid "A key is saved. Leave empty to keep it."
+msgstr "Ключ сохранён. Оставьте поле пустым, чтобы не менять его."
+
+#: includes/class-mbcat-settings.php:359
+msgid "No key saved"
+msgstr "Ключ не задан"
+
+#: includes/class-mbcat-settings.php:363
+msgid "Remove the saved key"
+msgstr "Удалить сохранённый ключ"
+
+#: includes/class-mbcat-settings.php:366
+msgid "Optional. Google Books works without a key, but a key raises the request quota. Create one in the Google Cloud Console."
+msgstr "Необязательно. Google Books работает без ключа, но ключ увеличивает квоту запросов. Создайте его в Google Cloud Console."
+
+#: includes/class-mbcat-settings.php:377
+msgid "Permanently delete all books, genres and settings when the plugin is uninstalled."
+msgstr "Безвозвратно удалить все книги, жанры и настройки при удалении плагина."
+
+#: includes/class-mbcat-shortcode.php:144
+msgid "Show All Books"
+msgstr "Показать все книги"
+
+#: includes/class-mbcat-shortcode.php:259
+msgid "Authoress:"
+msgstr "Писательница:"
+
+#: includes/class-mbcat-shortcode.php:259
+msgid "Author:"
+msgstr "Автор:"
+
+#. translators: %s: book title
+#: includes/class-mbcat-shortcode.php:283
+#, php-format
+msgid "%s (opens in a new tab)"
+msgstr "%s (откроется в новой вкладке)"
+
+#: includes/class-mbcat-shortcode.php:314
+msgid "Publisher:"
+msgstr "Издательство:"
+
+#: includes/class-mbcat-shortcode.php:321
+msgid "Year:"
+msgstr "Год:"
+
+#: includes/class-mbcat-shortcode.php:328
+msgid "Pages:"
+msgstr "Страниц:"
+
+#: includes/class-mbcat-shortcode.php:335
+msgid "Genre:"
+msgstr "Жанр:"
+
+#: includes/class-mbcat-shortcode.php:342
+msgid "ISBN:"
+msgstr "ISBN:"
+
+#: montecchiani-book-catalog.php:119
+msgid "Could not load the books. Please try again."
+msgstr "Не удалось загрузить книги. Пожалуйста, попробуйте ещё раз."
+
+#: montecchiani-book-catalog.php:120
+msgid "All books are now shown."
+msgstr "Теперь показаны все книги."
+
+#: montecchiani-book-catalog.php:188
+msgid "Please enter an ISBN first."
+msgstr "Сначала введите ISBN."
+
+#: montecchiani-book-catalog.php:189
+msgid "Lookup failed. Please try again."
+msgstr "Не удалось выполнить поиск. Пожалуйста, попробуйте ещё раз."
+
+#: montecchiani-book-catalog.php:190
+msgid "Cover import failed. Please try again."
+msgstr "Не удалось импортировать обложку. Пожалуйста, попробуйте ещё раз."
+
+#: montecchiani-book-catalog.php:191
+msgid "Importing…"
+msgstr "Импорт…"
+
+#: montecchiani-book-catalog.php:192
+msgid "Use as cover"
+msgstr "Использовать как обложку"
+
+#: montecchiani-book-catalog.php:193
+msgid "A cover was found (no preview available)."
+msgstr "Обложка найдена (предпросмотр недоступен)."
+
+#: montecchiani-book-catalog.php:194
+msgid "Cover imported."
+msgstr "Обложка импортирована."
+
+#. translators: %s: comma separated list of field names
+#: montecchiani-book-catalog.php:196
+#, php-format
+msgid "Fields filled: %s"
+msgstr "Заполненные поля: %s"
+
+#: montecchiani-book-catalog.php:197
+msgid "No empty fields to fill. Existing values were kept."
+msgstr "Нет пустых полей для заполнения. Существующие значения сохранены."
+
+#. translators: %s: comma separated list of data sources, e.g. "Google Books, Open Library"
+#: montecchiani-book-catalog.php:199
+#, php-format
+msgid "Source: %s"
+msgstr "Источник: %s"
+
+#. translators: separator between the field names listed in the "Fields filled" notice
+#: montecchiani-book-catalog.php:201
+msgctxt "list item separator"
+msgid ", "
+msgstr ", "
+
+#: montecchiani-book-catalog.php:203
+msgctxt "book field name"
+msgid "author"
+msgstr "автор"
+
+#: montecchiani-book-catalog.php:204
+msgctxt "book field name"
+msgid "publisher"
+msgstr "издательство"
+
+#: montecchiani-book-catalog.php:205
+msgctxt "book field name"
+msgid "year"
+msgstr "год"
+
+#: montecchiani-book-catalog.php:206
+msgctxt "book field name"
+msgid "pages"
+msgstr "количество страниц"
+
+#: montecchiani-book-catalog.php:207
+msgctxt "book field name"
+msgid "language"
+msgstr "язык"
+
+#: montecchiani-book-catalog.php:208
+msgctxt "book field name"
+msgid "title"
+msgstr "название"
+
+#: montecchiani-book-catalog.php:209
+msgctxt "book field name"
+msgid "description"
+msgstr "описание"

@@ -10,8 +10,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-02T15:09:56+00:00\n"
-"PO-Revision-Date: 2026-08-22 14:40+0000\n"
+"POT-Creation-Date: 2026-09-02T15:47:01+00:00\n"
+"PO-Revision-Date: 2026-10-27 08:57+0000\n"
 "Language: it_IT\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Domain: montecchiani-book-catalog\n"
@@ -24,7 +24,7 @@ msgstr "Montecchiani Book Catalog"
 #. Description of the plugin
 #: montecchiani-book-catalog.php
 msgid "Book catalog with a Book post type, genres, a responsive shortcode grid and one-click ISBN autofill from Google Books and Open Library."
-msgstr "Catalogo di libri con un tipo di contenuto Libro, generi, una griglia shortcode responsive e la compilazione automatica da ISBN con un clic tramite Google Books e Open Library."
+msgstr "Catalogo di libri con un tipo di contenuto Libro, generi, una griglia responsive tramite shortcode e la compilazione automatica da ISBN in un clic con Google Books e Open Library."
 
 #. Author of the plugin
 #: montecchiani-book-catalog.php
@@ -39,7 +39,7 @@ msgstr "https://github.com/mirkomontecchiani"
 #: includes/class-mbcat-isbn-lookup.php:71
 #: includes/class-mbcat-isbn-lookup.php:127
 msgid "You are not allowed to do this."
-msgstr "Non sei autorizzato a eseguire questa operazione."
+msgstr "Non hai il permesso di eseguire questa operazione."
 
 #: includes/class-mbcat-isbn-lookup.php:78
 #: includes/class-mbcat-isbn-lookup.php:131
@@ -65,7 +65,7 @@ msgstr "ISBN"
 
 #: includes/class-mbcat-meta-boxes.php:58
 msgid "Enter ISBN (10 or 13 digits)"
-msgstr "Inserisci ISBN (10 o 13 cifre)"
+msgstr "Inserisci l'ISBN (10 o 13 cifre)"
 
 #: includes/class-mbcat-meta-boxes.php:61
 #: includes/class-mbcat-post-type.php:142
@@ -122,7 +122,7 @@ msgstr "Dettagli del libro"
 
 #: includes/class-mbcat-meta-boxes.php:145
 msgid "Autofill from ISBN"
-msgstr "Compila da ISBN"
+msgstr "Compila automaticamente da ISBN"
 
 #: includes/class-mbcat-meta-boxes.php:149
 msgid "Fetches title, author, publisher, year, pages, description and cover from Google Books / Open Library."
@@ -132,7 +132,7 @@ msgstr "Recupera titolo, autore, editore, anno, pagine, descrizione e copertina 
 #: includes/class-mbcat-meta-boxes.php:173
 #, php-format
 msgid "Leave empty to use the default author from the settings: %s"
-msgstr "Lascia vuoto per usare l'autore predefinito delle impostazioni: %s"
+msgstr "Lascia vuoto per usare l'autore predefinito indicato nelle impostazioni: %s"
 
 #: includes/class-mbcat-post-type.php:52
 msgctxt "Post type general name"
@@ -147,7 +147,7 @@ msgstr "Libro"
 #: includes/class-mbcat-post-type.php:54
 msgctxt "Admin Menu text"
 msgid "Book Catalog"
-msgstr "Catalogo Libri"
+msgstr "Catalogo libri"
 
 #: includes/class-mbcat-post-type.php:55
 msgctxt "Add New on Toolbar"
@@ -184,7 +184,7 @@ msgstr "Cerca libri"
 
 #: includes/class-mbcat-post-type.php:63
 msgid "Parent Books:"
-msgstr "Libri genitore:"
+msgstr "Libro genitore:"
 
 #: includes/class-mbcat-post-type.php:64
 #: includes/class-mbcat-shortcode.php:93
@@ -194,7 +194,7 @@ msgstr "Nessun libro trovato."
 
 #: includes/class-mbcat-post-type.php:65
 msgid "No books found in Trash."
-msgstr "Nessun libro trovato nel Cestino."
+msgstr "Nessun libro trovato nel cestino."
 
 #: includes/class-mbcat-post-type.php:66
 msgctxt "Overrides the \"Featured Image\" phrase"
@@ -204,12 +204,12 @@ msgstr "Copertina del libro"
 #: includes/class-mbcat-post-type.php:67
 msgctxt "Overrides the \"Set featured image\" phrase"
 msgid "Set book cover"
-msgstr "Imposta copertina del libro"
+msgstr "Imposta la copertina del libro"
 
 #: includes/class-mbcat-post-type.php:68
 msgctxt "Overrides the \"Remove featured image\" phrase"
 msgid "Remove book cover"
-msgstr "Rimuovi copertina del libro"
+msgstr "Rimuovi la copertina del libro"
 
 #: includes/class-mbcat-post-type.php:69
 msgctxt "Overrides the \"Use as featured image\" phrase"
@@ -234,7 +234,7 @@ msgstr "Caricato in questo libro"
 #: includes/class-mbcat-post-type.php:73
 msgctxt "Screen reader text"
 msgid "Filter books list"
-msgstr "Filtra elenco libri"
+msgstr "Filtra l'elenco dei libri"
 
 #: includes/class-mbcat-post-type.php:74
 msgctxt "Screen reader text"
@@ -302,7 +302,7 @@ msgstr "Anno"
 
 #: includes/class-mbcat-settings.php:52
 msgid "Book Catalog Settings"
-msgstr "Impostazioni Catalogo Libri"
+msgstr "Impostazioni catalogo libri"
 
 #: includes/class-mbcat-settings.php:53
 msgid "Settings"
@@ -318,7 +318,7 @@ msgstr "Autore predefinito"
 
 #: includes/class-mbcat-settings.php:90
 msgid "Author Gender"
-msgstr "Genere dell'autore"
+msgstr "Autore o autrice"
 
 #: includes/class-mbcat-settings.php:99
 msgid "Display Settings"
@@ -370,11 +370,11 @@ msgstr "Mostra tutti i libri del catalogo."
 
 #: includes/class-mbcat-settings.php:248
 msgid "Display Limited Books"
-msgstr "Mostra libri limitati"
+msgstr "Mostra un numero limitato di libri"
 
 #: includes/class-mbcat-settings.php:250
 msgid "Displays 3 books with a \"Show All\" button at the bottom. Replace 3 with any number."
-msgstr "Mostra 3 libri con un pulsante \"Mostra tutti\" in fondo. Sostituisci 3 con qualsiasi numero."
+msgstr "Mostra 3 libri con un pulsante \"Mostra tutti i libri\" in fondo. Sostituisci 3 con qualsiasi numero."
 
 #: includes/class-mbcat-settings.php:252
 msgid "Available Attributes"
@@ -382,11 +382,11 @@ msgstr "Attributi disponibili"
 
 #: includes/class-mbcat-settings.php:254
 msgid "Number of books to display (shows \"Show All\" button)"
-msgstr "Numero di libri da mostrare (mostra il pulsante \"Mostra tutti\")"
+msgstr "Numero di libri da mostrare (aggiunge il pulsante \"Mostra tutti i libri\")"
 
 #: includes/class-mbcat-settings.php:255
 msgid "Override default columns (1-5)"
-msgstr "Sovrascrivi le colonne predefinite (1-5)"
+msgstr "Sostituisce il numero di colonne predefinito (1-5)"
 
 #: includes/class-mbcat-settings.php:256
 msgid "Order by: date, title, year, author, rand, menu_order, modified (default: date)"
@@ -398,7 +398,7 @@ msgstr "Direzione ordinamento: ASC, DESC (predefinito: DESC)"
 
 #: includes/class-mbcat-settings.php:258
 msgid "Filter by genre slug(s), comma separated"
-msgstr "Filtra per slug di genere, separati da virgola"
+msgstr "Filtra per slug di uno o più generi, separati da virgole"
 
 #: includes/class-mbcat-settings.php:261
 msgid "Example with All Attributes"
@@ -434,7 +434,7 @@ msgstr "Femminile (Autrice)"
 
 #: includes/class-mbcat-settings.php:316
 msgid "Select the gender to display the correct label (Author/Authoress)."
-msgstr "Seleziona il genere per mostrare l'etichetta corretta (Autore/Autrice)."
+msgstr "Seleziona maschile o femminile per mostrare l'etichetta corretta (Autore/Autrice)."
 
 #. translators: %d: number of columns
 #: includes/class-mbcat-settings.php:329
@@ -462,11 +462,11 @@ msgstr "Solo Open Library"
 
 #: includes/class-mbcat-settings.php:347
 msgid "Which database to query when autofilling book data from an ISBN. Using both merges the best data from each source."
-msgstr "Quale banca dati interrogare per compilare i dati del libro da un ISBN. Usando entrambe si combinano i dati migliori di ciascuna fonte."
+msgstr "Quale banca dati interrogare per compilare automaticamente i dati del libro da un ISBN. Usandole entrambe si combinano i dati migliori di ciascuna fonte."
 
 #: includes/class-mbcat-settings.php:359
 msgid "A key is saved. Leave empty to keep it."
-msgstr "Una chiave è salvata. Lascia vuoto per mantenerla."
+msgstr "Una chiave è già salvata. Lascia vuoto per mantenerla."
 
 #: includes/class-mbcat-settings.php:359
 msgid "No key saved"
@@ -544,7 +544,7 @@ msgstr "Importazione della copertina non riuscita. Riprova."
 
 #: montecchiani-book-catalog.php:191
 msgid "Importing…"
-msgstr "Importazione…"
+msgstr "Importazione in corso…"
 
 #: montecchiani-book-catalog.php:192
 msgid "Use as cover"
