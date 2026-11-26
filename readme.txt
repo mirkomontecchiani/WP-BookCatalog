@@ -2,9 +2,9 @@
 Contributors: mirkomontecchiani
 Tags: books, book catalog, isbn, library, bookshelf
 Requires at least: 5.8
-Tested up to: 7.1
+Tested up to: 7.2
 Requires PHP: 7.2
-Stable tag: 1.3.1
+Stable tag: 1.3.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -61,7 +61,7 @@ you disabled this source in the settings) and, if the cached result of that look
 in the meantime, again when you click "Use as cover". If you entered an optional Google Books
 API key in the plugin settings, that key is sent with the request too. Every request also
 carries a `User-Agent` header identifying the plugin and its version
-(`Montecchiani-Book-Catalog/1.3.1`); your site URL is not sent.
+(`Montecchiani-Book-Catalog/1.3.2`); your site URL is not sent.
 When the answer includes a cover, your server also downloads its small thumbnail (a few
 kilobytes) from the address returned by the API, on `books.google.com` or its file host
 `books.googleusercontent.com`, and embeds it in the editor as a preview: the editor page itself
@@ -76,7 +76,7 @@ Privacy Policy: https://policies.google.com/privacy
 What is sent, and when: the ISBN you typed, each time you click "Autofill from ISBN" (unless
 you disabled this source in the settings) and, if the cached result of that lookup has expired
 in the meantime, again when you click "Use as cover". Every request also carries a `User-Agent`
-header identifying the plugin and its version (`Montecchiani-Book-Catalog/1.3.1`); your site
+header identifying the plugin and its version (`Montecchiani-Book-Catalog/1.3.2`); your site
 URL is not sent.
 When the answer includes a cover, your server also downloads its small thumbnail (a few
 kilobytes) from the address returned by the API, on `covers.openlibrary.org` (which may redirect
@@ -174,6 +174,15 @@ https://translate.wordpress.org/projects/wp-plugins/montecchiani-book-catalog/
    ISBN autofill, and whether to delete everything on uninstall.
 
 == Changelog ==
+
+= 1.3.2 =
+* Compatibility: tested with WordPress 7.2.
+* Changed: the book editor script no longer calls `jQuery.trim()`, which is deprecated and
+  removed in jQuery 4.0, and uses the native `String.prototype.trim()` instead. WordPress 7.2
+  ships jQuery Migrate 3.6.0, which flags such calls ahead of the move to jQuery 4.
+* Fixed: in the classic editor, a cover imported with "Use as cover" was removed again as
+  soon as the book was saved, because the Featured image box still sent the value it had
+  when the page was loaded. The box is now updated right after the import.
 
 = 1.3.1 =
 * Fixed: the cover preview in the book editor was loaded by the browser straight from
