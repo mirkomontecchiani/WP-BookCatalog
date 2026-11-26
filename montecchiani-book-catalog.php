@@ -3,7 +3,7 @@
  * Plugin Name: Montecchiani Book Catalog
  * Plugin URI: https://github.com/mirkomontecchiani/WP-BookCatalog
  * Description: Book catalog with a Book post type, genres, a responsive shortcode grid and one-click ISBN autofill from Google Books and Open Library.
- * Version: 1.3.1
+ * Version: 1.3.2
  * Author: Mirko Montecchiani
  * Author URI: https://github.com/mirkomontecchiani
  * License: GPLv2 or later
@@ -35,7 +35,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants
-define('MBCAT_VERSION', '1.3.1');
+define('MBCAT_VERSION', '1.3.2');
 define('MBCAT_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('MBCAT_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('MBCAT_PLUGIN_BASENAME', plugin_basename(__FILE__));

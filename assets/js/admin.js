@@ -2,6 +2,7 @@
  * Montecchiani Book Catalog - Admin JavaScript (ISBN lookup / autofill)
  *
  * @package Montecchiani_Book_Catalog
+ * @author  Mirko Montecchiani (mirkomontecchiani.com)
  */
 
 (function($) {
@@ -15,6 +16,21 @@
      */
     function format(template, value) {
         return String(template).replace('%s', value);
+    }
+
+    /**
+     * Trim a value as a string, like the deprecated jQuery.trim() did
+     *
+     * jQuery.trim() is deprecated and removed in jQuery 4.0: WordPress 7.2
+     * ships jQuery Migrate 3.6.0, which flags every call ahead of the move to
+     * jQuery 4. The native String.prototype.trim() strips the same characters
+     * and, as jQuery.trim() did, null and undefined become an empty string.
+     *
+     * @param {*} value Value to trim (usually a field value).
+     * @return {string} The trimmed text.
+     */
+    function trimText(value) {
+        return (null === value || undefined === value) ? '' : String(value).trim();
     }
 
     /**
@@ -37,7 +53,7 @@
         if (!$field.length || !value) {
             return false;
         }
-        if ($.trim(String($field.val())) !== '') {
+        if (trimText($field.val()) !== '') {
             return false;
         }
         $field.val(value).trigger('change');
@@ -67,7 +83,7 @@
             return false;
         }
         var $title = $('#title');
-        if ($title.length && $.trim(String($title.val())) === '') {
+        if ($title.length && trimText($title.val()) === '') {
             $title.val(title);
             $('#title-prompt-text').addClass('screen-reader-text');
             return true;
@@ -84,7 +100,7 @@
         }
         if (isBlockEditor()) {
             var content = wp.data.select('core/editor').getEditedPostAttribute('content');
-            if (!content || $.trim(content) === '') {
+            if (!content || trimText(content) === '') {
                 var paragraphs = description.split(/\n{2,}/).map(function(p) {
                     return '<!-- wp:paragraph --><p>' + escapeHtml(p) + '</p><!-- /wp:paragraph -->';
                 }).join('');
@@ -96,14 +112,14 @@
         // Classic editor: TinyMCE visual mode or the plain textarea.
         if (window.tinymce && tinymce.get('content') && !tinymce.get('content').isHidden()) {
             var editor = tinymce.get('content');
-            if ($.trim(editor.getContent({ format: 'text' })) === '') {
+            if (trimText(editor.getContent({ format: 'text' })) === '') {
                 editor.setContent('<p>' + escapeHtml(description).replace(/\n{2,}/g, '</p><p>').replace(/\n/g, '<br />') + '</p>');
                 return true;
             }
             return false;
         }
         var $content = $('#content');
-        if ($content.length && $.trim(String($content.val())) === '') {
+        if ($content.length && trimText($content.val()) === '') {
             $content.val(description);
             return true;
         }
@@ -121,6 +137,33 @@
             .replace(/"/g, '&quot;')
             .replace(/'/g, '&#039;')
             .replace(/`/g, '&#096;');
+    }
+
+    /**
+     * Show a cover set on the server in the classic editor's Featured image box
+     *
+     * The box keeps the value it had when the page was loaded (-1 for a book
+     * without a cover) in its hidden _thumbnail_id field, and saving the post
+     * submits that field: WordPress would remove the imported cover again.
+     * The field is updated at once, so that a save made right away keeps the
+     * cover, then wp.media.featuredImage.set() refreshes the whole box, as
+     * choosing an image in the media modal does.
+     *
+     * @param {number} attachmentId ID of the imported cover.
+     */
+    function setClassicFeaturedImage(attachmentId) {
+        var id = parseInt(attachmentId, 10);
+
+        if (!id) {
+            return;
+        }
+
+        $('#_thumbnail_id').val(id);
+
+        if (window.wp && wp.media && wp.media.featuredImage && wp.media.view &&
+            wp.media.view.settings && wp.media.view.settings.post) {
+            wp.media.featuredImage.set(id);
+        }
     }
 
     /**
@@ -155,7 +198,7 @@
      */
     $(document).on('click', '#mbcat-isbn-lookup-btn', function() {
         var $btn = $(this);
-        var isbn = $.trim(String($('#mbcat_isbn').val()));
+        var isbn = trimText($('#mbcat_isbn').val());
 
         if (!isbn) {
             showNotice('error', escapeHtml(strings.enter_isbn || 'Please enter an ISBN first.'));
@@ -240,14 +283,16 @@
 
             if (isBlockEditor()) {
                 wp.data.dispatch('core/editor').editPost({ featured_media: response.data.attachment_id });
+            } else {
+                setClassicFeaturedImage(response.data.attachment_id);
             }
 
             showNotice('success', escapeHtml(response.data.message || strings.cover_imported || 'Cover imported.'));
             $btn.remove();
 
             if (!isBlockEditor() && response.data.thumbnail_url) {
-                // Classic editor: the featured image meta box refreshes on the
-                // next save; show the imported (local) thumbnail meanwhile.
+                // Classic editor: also show the imported (local) thumbnail in
+                // the Book Details box, next to the notice.
                 var $preview = $('#mbcat-cover-preview');
                 $preview.find('.mbcat-cover-no-preview').remove();
                 if ($preview.find('img').length) {
